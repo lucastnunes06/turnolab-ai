@@ -9,7 +9,7 @@ from threadpoolctl import threadpool_limits
 from backend.app.config import ARTIFACTS, DATA, REPORTS
 from backend.app.db import session
 from ml.features import FEATURES, make_features, partitions
-from ml.train import conformal_quantile, predict, metrics
+from ml.train import calibrate_open_hours, predict, metrics
 
 def main():
     events = pd.read_csv(DATA / 'synthetic/order_events.csv', parse_dates=['timestamp'])
@@ -23,10 +23,10 @@ def main():
             m = RandomForestRegressor(n_estimators=40, max_depth=12, min_samples_leaf=15, random_state=42, n_jobs=1)
             m.fit(tr[FEATURES], tr.y)
             p = predict(m, 'random_forest', ca)
-            q = {str(k): conformal_quantile(np.abs(ca.y.to_numpy()[ca.peak == k] - p[ca.peak == k])) for k in [0, 1]}
+            q = calibrate_open_hours(ca, p)
             valid.append(metrics(va.y, predict(m, 'random_forest', va))['mae'])
             ncal += len(ca)
-            bundles[h] = dict(model=m, name='random_forest', quantiles=q, features=FEATURES, nominal_coverage=0.9, train_end='2026-07-25', calibration_end='2026-08-12', reference={c: tr[c].quantile([0.1, 0.25, 0.5, 0.75, 0.9]).tolist() for c in ['lag_0', 'rolling_4', 'capacity']})
+            bundles[h] = dict(model=m, name='random_forest', quantiles=q, features=FEATURES, nominal_coverage=0.9, calibration_population='open_hours_by_peak', train_end='2026-07-25', calibration_end='2026-08-12', reference={c: tr[c].quantile([0.1, 0.25, 0.5, 0.75, 0.9]).tolist() for c in ['lag_0', 'rolling_4', 'capacity']})
     path = ARTIFACTS / 'demand-rf-v1.joblib'
     joblib.dump(bundles, path)
     registry = json.loads((ARTIFACTS / 'registry.json').read_text())

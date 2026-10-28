@@ -80,8 +80,27 @@ async def main():
             await page.set_viewport_size({'width': 390, 'height': 844})
             await page.goto('http://turnolab.local/#dashboard', wait_until='networkidle')
             await page.get_by_text('Um olhar para o próximo turno', exact=True).wait_for()
-            overflow = await page.evaluate('document.documentElement.scrollWidth > window.innerWidth')
-            assert not overflow, 'Mobile horizontal overflow'
+            overflow_details = await page.evaluate("""() => {
+              const viewport = window.innerWidth;
+              const scrollWidth = document.documentElement.scrollWidth;
+              const offenders = Array.from(document.querySelectorAll('body *'))
+                .filter(el => {
+                  const box = el.getBoundingClientRect();
+                  const style = getComputedStyle(el);
+                  return style.display !== 'none' && style.visibility !== 'hidden'
+                    && box.width > 0 && (box.right > viewport + 1 || box.left < -1)
+                    && style.position !== 'fixed';
+                })
+                .slice(0, 12).map(el => {
+                  const box = el.getBoundingClientRect();
+                  return {tag: el.tagName.toLowerCase(), className: String(el.className).slice(0, 100),
+                    right: Math.round(box.right), left: Math.round(box.left), width: Math.round(box.width)};
+                });
+              return {viewport, scrollWidth, offenders};
+            }""")
+            if overflow_details['scrollWidth'] > overflow_details['viewport']:
+                print('Mobile overflow diagnostics:', json.dumps(overflow_details, ensure_ascii=False))
+            assert overflow_details['scrollWidth'] <= overflow_details['viewport'], 'Mobile horizontal overflow'
             await page.screenshot(path=str(ROOT / 'docs/media/mobile.png'), full_page=True)
             checks.append('390px responsive dashboard without horizontal overflow')
             assert not errors, errors

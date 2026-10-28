@@ -1990,9 +1990,27 @@ dialog::backdrop {
     max-width:220px
   }
   .kpi-grid {
-    grid-template-columns:repeat(2,1fr);
+    grid-template-columns:repeat(2,minmax(0,1fr));
     gap:12px;
     margin-bottom:18px
+  }
+  .main,.page-content,.kpi,.dashboard-middle>.card,.dashboard-bottom>.card {
+    min-width:0
+  }
+  .card-heading {
+    flex-wrap:wrap;
+    gap:10px
+  }
+  .chart-legend {
+    min-width:0
+  }
+  .breadcrumb {
+    min-width:0;
+    overflow:hidden;
+    white-space:nowrap
+  }
+  .top-right {
+    flex-shrink:0
   }
   .kpi {
     min-height:125px;

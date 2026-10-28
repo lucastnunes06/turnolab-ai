@@ -44,22 +44,59 @@ def conformal_quantile(residuals, alpha=0.1):
         raise ValueError('Insufficient calibration data')
     return float(np.quantile(residuals, min(1, math.ceil((n + 1) * (1 - alpha)) / n), method='higher'))
 
+def calibrate_open_hours(calibration, calibration_prediction, alpha=0.1):
+    """Calibrate each open-hour regime without closed-hour structural zeros.
+
+    The peak split is defined before fitting, and only the calibration period
+    contributes residuals. Closed periods have point/interval 0 in this generator.
+    """
+    observed = calibration.y.to_numpy()
+    pred = np.asarray(calibration_prediction)
+    if len(observed) != len(pred):
+        raise ValueError('Calibration prediction length mismatch')
+    if not np.isfinite(pred).all():
+        raise ValueError('Calibration predictions must be finite')
+    residuals = np.abs(observed - pred)
+    return {str(group): conformal_quantile(residuals[(calibration.open.to_numpy() == 1) & (calibration.peak.to_numpy() == group)], alpha=alpha) for group in (0, 1)}
+
 def interval(point, peak, quantiles, opened):
     q = np.array([quantiles[str(int(p))] for p in peak])
     lower = np.maximum(0, point - q) * np.asarray(opened)
     upper = (point + q) * np.asarray(opened)
     return (lower, upper)
 
+def merge_demand_registry(previous, artifact, digest, validation_mae, calibration_n):
+    """Replace the trained champion without losing unchanged, verified challengers.
+
+    An existing alternate is retained only if its SHA-256 still matches its file;
+    stale or missing files cannot remain selectable after a partial retrain.
+    """
+    kept = {}
+    for version, meta in previous.get('versions', {}).items():
+        if version == 'demand-v1':
+            continue
+        file_name = meta.get('file', '')
+        candidate = artifact.parent / file_name
+        if not file_name or candidate.parent != artifact.parent or (not candidate.is_file()):
+            continue
+        if hashlib.sha256(candidate.read_bytes()).hexdigest() == meta.get('sha256'):
+            kept[version] = meta
+    kept['demand-v1'] = dict(file=artifact.name, sha256=digest, validation_mae=float(validation_mae), features=FEATURES, calibration_n=int(calibration_n))
+    challenger = previous.get('challenger')
+    return dict(champion='demand-v1', challenger=challenger if challenger in kept else None, versions=kept, history=['demand-v1'], promotion_rule='Lower validation MAE; then calibration and frozen final evaluation. Manual registry update; no automatic test-based promotion.')
+
 def train():
     began = time.perf_counter()
     events = pd.read_csv(DATA / 'synthetic/order_events.csv', parse_dates=['timestamp'])
     all_metrics, predictions, bundles, importances = ([], [], {}, {})
     walk = []
+    total_calibration = 0
     with threadpool_limits(limits=1):
         for horizon in [1, 2]:
             f = make_features(events, horizon)
             split = partitions(f)
             tr, va, ca, te = [split[k] for k in ['train', 'validation', 'calibration', 'test']]
+            total_calibration += len(ca)
             candidates = {'last': None, 'moving_average': None, 'seasonal': None, 'ridge': make_pipeline(StandardScaler(), Ridge(alpha=10)), 'random_forest': RandomForestRegressor(n_estimators=40, max_depth=12, min_samples_leaf=15, random_state=42, n_jobs=1), 'gradient_boosting_15': HistGradientBoostingRegressor(max_iter=120, max_leaf_nodes=15, learning_rate=0.08, l2_regularization=5, random_state=42), 'gradient_boosting_31': HistGradientBoostingRegressor(max_iter=120, max_leaf_nodes=31, learning_rate=0.08, l2_regularization=5, random_state=42)}
             validation = {}
             for name, model in candidates.items():
@@ -71,7 +108,7 @@ def train():
             champion = min(validation, key=lambda n: validation[n]['mae'])
             model = candidates[champion]
             calpred = predict(model, champion, ca)
-            q = {str(p): conformal_quantile(np.abs(ca.y.to_numpy()[ca.peak == p] - calpred[ca.peak == p])) for p in [0, 1]}
+            q = calibrate_open_hours(ca, calpred)
             for name, candidate in candidates.items():
                 pred = predict(candidate, name, te)
                 row = dict(horizon_minutes=horizon * 30, model=name, selected=name == champion, validation_mae=validation[name]['mae'], fit_seconds=validation[name]['fit_seconds'], **metrics(te.y, pred))
@@ -97,12 +134,15 @@ def train():
                 importances[str(horizon * 30)] = sorted([dict(feature=n, mae_increase=float(v)) for n, v in zip(FEATURES, importance.importances_mean)], key=lambda x: -x['mae_increase'])
             else:
                 importances[str(horizon * 30)] = []
-            bundles[horizon] = dict(model=model, name=champion, quantiles=q, features=FEATURES, nominal_coverage=0.9, train_end='2026-07-25', calibration_end='2026-08-12', reference={c: tr[c].quantile([0.1, 0.25, 0.5, 0.75, 0.9]).tolist() for c in ['lag_0', 'rolling_4', 'capacity']})
+            bundles[horizon] = dict(model=model, name=champion, quantiles=q, features=FEATURES, nominal_coverage=0.9, calibration_population='open_hours_by_peak', train_end='2026-07-25', calibration_end='2026-08-12', reference={c: tr[c].quantile([0.1, 0.25, 0.5, 0.75, 0.9]).tolist() for c in ['lag_0', 'rolling_4', 'capacity']})
     artifact = ARTIFACTS / 'demand-v1.joblib'
     joblib.dump(bundles, artifact)
     digest = hashlib.sha256(artifact.read_bytes()).hexdigest()
-    registry = dict(champion='demand-v1', challenger=None, versions={'demand-v1': dict(file=artifact.name, sha256=digest)}, promotion_rule='Lower validation MAE; then calibration and frozen final evaluation. Manual registry update; no automatic test-based promotion.')
-    (ARTIFACTS / 'registry.json').write_text(json.dumps(registry, indent=2))
+    registry_path = ARTIFACTS / 'registry.json'
+    previous_registry = json.loads(registry_path.read_text()) if registry_path.exists() else {}
+    champion_mae = float(np.mean([x['validation_mae'] for x in all_metrics if x['selected']]))
+    registry = merge_demand_registry(previous_registry, artifact, digest, champion_mae, total_calibration)
+    registry_path.write_text(json.dumps(registry, indent=2))
     pred = pd.concat(predictions, ignore_index=True)
     pred.to_csv(REPORTS / 'demand_predictions.csv', index=False)
     pd.DataFrame(all_metrics).to_csv(REPORTS / 'demand_comparison.csv', index=False)
@@ -126,7 +166,7 @@ def train():
     axs[1].set(xlabel='MAE (orders / 30 min)', title='Same chronological test, all candidates')
     fig.savefig(REPORTS / 'demand_evaluation.png', dpi=160)
     plt.close(fig)
-    report = dict(seed=42, models=all_metrics, coverage=coverage, walk_forward=walk, feature_importance=importances, split={k: dict(rows=len(v), origin_min=str(v.origin.min()), origin_max=str(v.origin.max()), target_max=str(v.target.max())) for k, v in split.items()}, seconds=time.perf_counter() - began, artifact_sha256=digest, mlflow_available=bool(importlib.util.find_spec('mlflow')), caveat='Synthetic data; conformal exchangeability is not guaranteed under temporal drift. Closed-hour zeros inflate overall coverage.')
+    report = dict(seed=42, models=all_metrics, coverage=coverage, walk_forward=walk, feature_importance=importances, split={k: dict(rows=len(v), origin_min=str(v.origin.min()), origin_max=str(v.origin.max()), target_max=str(v.target.max())) for k, v in split.items()}, seconds=time.perf_counter() - began, artifact_sha256=digest, mlflow_available=bool(importlib.util.find_spec('mlflow')), calibration_population='open_hours_by_peak', caveat='Synthetic data; conformal exchangeability is not guaranteed under temporal drift. Calibration excludes closed-hour zeros; closed hours still inflate aggregate evaluation coverage. Temporal drift can still reduce open-hour coverage.')
     (REPORTS / 'demand.json').write_text(json.dumps(report, indent=2))
     with session() as db:
         db.execute('INSERT OR REPLACE INTO model_versions VALUES(?,?,?,?,?)', ('demand-v1', 'demand', 'champion', json.dumps(report), digest))

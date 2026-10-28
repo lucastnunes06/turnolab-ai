@@ -18,8 +18,8 @@
       "strategy": "simulator",
       "demand_multiplier": 0.8,
       "backlog_cost_multiplier": 0.5,
-      "mean_cost": 193.8191331484273,
-      "mean_backlog": 6.960438798102858
+      "mean_cost": 193.2076927745369,
+      "mean_backlog": 6.97214593896384
     },
     {
       "strategy": "fixed",
@@ -39,8 +39,8 @@
       "strategy": "simulator",
       "demand_multiplier": 0.8,
       "backlog_cost_multiplier": 1.0,
-      "mean_cost": 236.91636894579278,
-      "mean_backlog": 6.960438798102858
+      "mean_cost": 236.52598381356148,
+      "mean_backlog": 6.97214593896384
     },
     {
       "strategy": "fixed",
@@ -60,8 +60,8 @@
       "strategy": "simulator",
       "demand_multiplier": 0.8,
       "backlog_cost_multiplier": 2.0,
-      "mean_cost": 323.11084054052355,
-      "mean_backlog": 6.960438798102858
+      "mean_cost": 323.1625658916107,
+      "mean_backlog": 6.97214593896384
     },
     {
       "strategy": "fixed",
@@ -81,8 +81,8 @@
       "strategy": "simulator",
       "demand_multiplier": 1.0,
       "backlog_cost_multiplier": 0.5,
-      "mean_cost": 232.00905504205667,
-      "mean_backlog": 11.748560007391054
+      "mean_cost": 231.86698621737173,
+      "mean_backlog": 11.91541311523791
     },
     {
       "strategy": "fixed",
@@ -102,8 +102,8 @@
       "strategy": "simulator",
       "demand_multiplier": 1.0,
       "backlog_cost_multiplier": 1.0,
-      "mean_cost": 302.34291772247866,
-      "mean_backlog": 11.748560007391054
+      "mean_cost": 303.30644769582125,
+      "mean_backlog": 11.91541311523791
     },
     {
       "strategy": "fixed",
@@ -123,8 +123,8 @@
       "strategy": "simulator",
       "demand_multiplier": 1.0,
       "backlog_cost_multiplier": 2.0,
-      "mean_cost": 443.01064308332263,
-      "mean_backlog": 11.748560007391054
+      "mean_cost": 446.18537065272017,
+      "mean_backlog": 11.91541311523791
     },
     {
       "strategy": "fixed",
@@ -144,8 +144,8 @@
       "strategy": "simulator",
       "demand_multiplier": 1.2,
       "backlog_cost_multiplier": 0.5,
-      "mean_cost": 279.56560666442573,
-      "mean_backlog": 17.962656057747264
+      "mean_cost": 278.5399732050183,
+      "mean_backlog": 18.23031093508505
     },
     {
       "strategy": "fixed",
@@ -165,8 +165,8 @@
       "strategy": "simulator",
       "demand_multiplier": 1.2,
       "backlog_cost_multiplier": 1.0,
-      "mean_cost": 384.8132389691476,
-      "mean_backlog": 17.962656057747264
+      "mean_cost": 385.46179260612524,
+      "mean_backlog": 18.23031093508505
     },
     {
       "strategy": "fixed",
@@ -186,8 +186,8 @@
       "strategy": "simulator",
       "demand_multiplier": 1.2,
       "backlog_cost_multiplier": 2.0,
-      "mean_cost": 595.3085035785916,
-      "mean_backlog": 17.962656057747264
+      "mean_cost": 599.305431408339,
+      "mean_backlog": 18.23031093508505
     }
   ],
   "seed": 20261028,
@@ -198,7 +198,7 @@
       "label": "Regras fixas",
       "mean_backlog": 13.9809378440867,
       "mean_cost": 367.36905830904027,
-      "mean_regret": 74.69654859810974,
+      "mean_regret": 72.394864265216,
       "policy_compliance": 1.0,
       "document_support": 0.0,
       "paired_cost_delta": 0.0,
@@ -206,14 +206,14 @@
         0.0,
         0.0
       ],
-      "solver_mean_ms": 0.05936975249738907
+      "solver_mean_ms": 0.05183351750105203
     },
     {
       "strategy": "forecast",
       "label": "Regras + previsão",
       "mean_backlog": 11.789503979294157,
       "mean_cost": 329.6650077358396,
-      "mean_regret": 36.992498024909054,
+      "mean_regret": 34.69081369201531,
       "policy_compliance": 1.0,
       "document_support": 0.0,
       "paired_cost_delta": -37.70405057320068,
@@ -221,52 +221,52 @@
         -55.61402699101861,
         -23.347253901052458
       ],
-      "solver_mean_ms": 0.05936975249738907
+      "solver_mean_ms": 0.05183351750105203
     },
     {
       "strategy": "simulator",
       "label": "Previsão + simulador",
-      "mean_backlog": 11.748560007391054,
-      "mean_cost": 302.34291772247866,
-      "mean_regret": 9.670408011548103,
-      "policy_compliance": 0.9775,
+      "mean_backlog": 11.91541311523791,
+      "mean_cost": 303.30644769582125,
+      "mean_regret": 8.33225365199692,
+      "policy_compliance": 1.0,
       "document_support": 0.0,
-      "paired_cost_delta": -65.02614058656164,
+      "paired_cost_delta": -64.06261061321908,
       "bootstrap_95_ci": [
-        -81.91048868996282,
-        -49.0723817593807
+        -81.4079406454947,
+        -48.285523007329445
       ],
-      "solver_mean_ms": 0.05936975249738907
+      "solver_mean_ms": 0.05183351750105203
     },
     {
       "strategy": "rag",
       "label": "Previsão + simulador + RAG",
-      "mean_backlog": 11.748560007391054,
-      "mean_cost": 302.34291772247866,
-      "mean_regret": 9.670408011548103,
-      "policy_compliance": 0.9775,
+      "mean_backlog": 11.91541311523791,
+      "mean_cost": 303.30644769582125,
+      "mean_regret": 8.33225365199692,
+      "policy_compliance": 1.0,
       "document_support": 1.0,
-      "paired_cost_delta": -65.02614058656164,
+      "paired_cost_delta": -64.06261061321908,
       "bootstrap_95_ci": [
-        -81.95384152570642,
-        -48.88019797395821
+        -80.81329856464401,
+        -48.49306972273837
       ],
-      "solver_mean_ms": 0.05936975249738907
+      "solver_mean_ms": 0.05183351750105203
     },
     {
       "strategy": "copilot",
       "label": "Previsão + simulador + copiloto",
-      "mean_backlog": 11.748560007391054,
-      "mean_cost": 302.34291772247866,
-      "mean_regret": 9.670408011548103,
-      "policy_compliance": 0.9775,
+      "mean_backlog": 11.91541311523791,
+      "mean_cost": 303.30644769582125,
+      "mean_regret": 8.33225365199692,
+      "policy_compliance": 1.0,
       "document_support": 1.0,
-      "paired_cost_delta": -65.02614058656164,
+      "paired_cost_delta": -64.06261061321908,
       "bootstrap_95_ci": [
-        -83.64681120506401,
-        -50.145034028001376
+        -82.61154843993043,
+        -49.38672834732093
       ],
-      "solver_mean_ms": 0.05936975249738907
+      "solver_mean_ms": 0.05183351750105203
     }
   ],
   "document_ids": [
@@ -285,8 +285,10 @@
     "Oracle and simulator share structural assumptions.",
     "Bootstrap is scenario-level and ignores restaurant correlation.",
     "Forecast errors are temporally correlated.",
-    "Policy compliance is measured as a separate check; retrieval does not enforce staffing policy in this ablation.",
+    "Additional staff is restricted to <=2 at optimization time for both policy and hindsight oracle; document retrieval is not responsible for enforcing constraints.",
     "No external LLM executed. Offline coordinator is an evidence presentation layer."
   ],
-  "protocol_hash": "e1d780bb8712143872c3b0d1a5e98ec861b2be0677a158bfc772bdaa5e6554ec"
+  "max_additional_staff": 2,
+  "feasible_actions": 6,
+  "protocol_hash": "20aced0ec8329e303b4d1da8e1ea63af0990436f83ae1c9806fff496fa083ad4"
 }

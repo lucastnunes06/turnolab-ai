@@ -13,7 +13,18 @@ from ai.rag import retriever
 from ml.tracking import log_run
 from simulator.engine import Scenario, simulate
 SEED = 20261028
+MAX_ADDITIONAL_STAFF = 2
 STRATEGIES = [('fixed', 'Regras fixas'), ('forecast', 'Regras + previsão'), ('simulator', 'Previsão + simulador'), ('rag', 'Previsão + simulador + RAG'), ('copilot', 'Previsão + simulador + copiloto')]
+
+def admissible_actions(max_additional_staff=MAX_ADDITIONAL_STAFF):
+    """Enumerate only actions allowed by the fictitious staffing policy.
+
+    Both the policy optimizer and its hindsight oracle use this exact space;
+    otherwise their cost/regret would describe different feasible decisions.
+    """
+    if not 0 <= max_additional_staff <= MAX_ADDITIONAL_STAFF:
+        raise ValueError('Staffing constraint cannot exceed the published policy')
+    return list(product(range(max_additional_staff + 1), [0.0, 60.0]))
 
 def experiment(n=400):
     rng = np.random.default_rng(SEED)
@@ -38,7 +49,7 @@ def experiment(n=400):
         expected = [row.prediction_30, row.prediction_60]
         actual = [row.y_30, row.y_60]
         base = dict(staff=staff, kitchen_capacity=physical, stock_orders=stock, initial_backlog=backlog, wage_per_hour=wage, backlog_cost=delay_cost, stockout_cost=stock_cost, replenishment_after=lead)
-        options = list(product(range(4), [0.0, 60.0]))
+        options = admissible_actions()
 
         def run(action, demand):
             extra, replen = action
@@ -79,8 +90,9 @@ def experiment(n=400):
         result = dict(strategy=key, label=label, mean_backlog=float(g.backlog.mean()), mean_cost=float(g.cost.mean()), mean_regret=float(g.regret.mean()), policy_compliance=float(g.policy_compliance.mean()), document_support=float(g.document_support.mean()), paired_cost_delta=float(differences.mean()), bootstrap_95_ci=[float(np.quantile(boot, 0.025)), float(np.quantile(boot, 0.975))], solver_mean_ms=float(g.solver_ms.mean()))
         results.append(result)
         log_run('decision-ablation', dict(strategy=key, seed=SEED, n=n), result, '')
+    assert frame.policy_compliance.all(), 'At least one strategy violated the staffing policy'
     assert frame[frame.strategy == 'simulator'].cost.reset_index(drop=True).equals(frame[frame.strategy == 'rag'].cost.reset_index(drop=True))
-    report = dict(sensitivity=sensitivity, seed=SEED, n_scenarios=n, strategies=results, document_ids=citations, hypotheses=['H1: forecast-informed policies reduce cost vs fixed rules on held-out synthetic outcomes.', 'H2: solver improves chosen objective over a forecast threshold heuristic.', 'H3: RAG improves documentary support; identical numeric outputs are required by design.', 'H4: deterministic role labels do not improve decisions over simple tool calling.'], development='Rules written without reading sampled test outcomes. Test origins start day 72. Seed differs from data generation.', conclusion='RAG e copiloto mantêm o resultado operacional do simulador por construção. Sua contribuição aqui é o suporte documental; não há evidência de ganho operacional adicional por IA generativa.', limitations=['Synthetic outcomes and fluid simulator; no external validity claim.', 'Oracle and simulator share structural assumptions.', 'Bootstrap is scenario-level and ignores restaurant correlation.', 'Forecast errors are temporally correlated.', 'Policy compliance is measured as a separate check; retrieval does not enforce staffing policy in this ablation.', 'No external LLM executed. Offline coordinator is an evidence presentation layer.'], protocol_hash=hashlib.sha256(b'turnolab-fixed-forecast-simulator-same-numerics-rag-v1').hexdigest())
+    report = dict(sensitivity=sensitivity, seed=SEED, n_scenarios=n, strategies=results, document_ids=citations, hypotheses=['H1: forecast-informed policies reduce cost vs fixed rules on held-out synthetic outcomes.', 'H2: solver improves chosen objective over a forecast threshold heuristic.', 'H3: RAG improves documentary support; identical numeric outputs are required by design.', 'H4: deterministic role labels do not improve decisions over simple tool calling.'], development='Rules written without reading sampled test outcomes. Test origins start day 72. Seed differs from data generation.', conclusion='RAG e copiloto mantêm o resultado operacional do simulador por construção. Sua contribuição aqui é o suporte documental; não há evidência de ganho operacional adicional por IA generativa.', limitations=['Synthetic outcomes and fluid simulator; no external validity claim.', 'Oracle and simulator share structural assumptions.', 'Bootstrap is scenario-level and ignores restaurant correlation.', 'Forecast errors are temporally correlated.', 'Additional staff is restricted to <=2 at optimization time for both policy and hindsight oracle; document retrieval is not responsible for enforcing constraints.', 'No external LLM executed. Offline coordinator is an evidence presentation layer.'], max_additional_staff=MAX_ADDITIONAL_STAFF, feasible_actions=len(admissible_actions()), protocol_hash=hashlib.sha256(b'turnolab-fixed-forecast-constrained-simulator-same-numerics-rag-v2').hexdigest())
     frame.to_csv(REPORTS / 'decision_scenarios.csv', index=False)
     (REPORTS / 'experiments.json').write_text(json.dumps(report, indent=2, ensure_ascii=False))
     fig, axes = plt.subplots(1, 2, figsize=(12, 4), layout='constrained')

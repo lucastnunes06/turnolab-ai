@@ -88,6 +88,14 @@ class APIAITests(unittest.IsolatedAsyncioTestCase):
         audits = (await self.client.get('/api/restaurants/1/audit', headers=HEADERS)).json()['items']
         self.assertTrue(any((x['entity_id'] == a['id'] and x['event'] == 'proposal.approved' for x in audits)))
 
+    async def test_out_of_policy_scenario_cannot_be_proposed(self):
+        comparison = await self.client.post('/api/restaurants/1/simulations', headers=HEADERS, json={'staff': 6, 'kitchen_capacity': 70})
+        self.assertEqual(comparison.status_code, 200)
+        self.assertTrue(comparison.json()['policy_warning'])
+        proposal = await self.client.post('/api/restaurants/1/actions', headers=HEADERS, json={'simulation_id': comparison.json()['id']})
+        self.assertEqual(proposal.status_code, 422)
+        self.assertIn('two additional', proposal.json()['detail'])
+
     async def test_database_audit_immutable(self):
         with session(self.path) as db:
             db.execute("INSERT INTO audit_logs(restaurant_id,actor,event,entity_id,details) VALUES(1,'tester','test','x','{}')")

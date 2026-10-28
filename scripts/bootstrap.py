@@ -46,7 +46,7 @@ def main():
         run('ml.train')
     if args.retrain or not (ARTIFACTS / 'inventory-v1.joblib').exists() or (not (REPORTS / 'stock.json').exists()):
         run('ml.stock')
-    if args.retrain or not (ARTIFACTS / 'demand-rf-v1.joblib').exists():
+    if args.retrain or not (ARTIFACTS / 'demand-rf-v1.joblib').exists() or 'demand-rf-v1' not in json.loads((ARTIFACTS / 'registry.json').read_text()).get('versions', {}):
         run('ml.challenger')
     with session() as db:
         register_models(db)

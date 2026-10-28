@@ -13,7 +13,7 @@ com seed fixa e ficam disponíveis ao decisor. Não são operações reais.
 1. Regras fixas: reforço de uma pessoa após 18h.
 2. Regra + previsão: limiar de demanda por produtividade, até duas pessoas extras;
    reposição de 60 pedidos equivalentes quando faltará estoque e lead é um passo.
-3. Previsão + simulador: enumera 0–3 pessoas extras e reposição 0/60; minimiza custo
+3. Previsão + simulador: enumera 0–2 pessoas extras e reposição 0/60; minimiza custo
    previsto de fila, estoque, mão de obra e custo de mobilização/compra.
 4. + RAG: **mesma decisão numérica**; agrega referência recuperada da política.
 5. + copiloto: **mesma decisão numérica**; representa a camada de explicação offline.
@@ -33,8 +33,7 @@ comparar diretamente custos de telas com médias experimentais.
 Regret compara custo realizado com um oracle que conhece os dois alvos futuros e
 usa o mesmo espaço de ações. É um limite dentro do simulador, não um ótimo real.
 São reportados backlog, custo, regret, conformidade com limite de duas pessoas e
-referência documental. Como o solver não impõe essa política na ablação, pode
-escolher três pessoas; o resultado registra as violações (não as esconde).
+referência documental. A regra fictícia de até duas pessoas extras agora é aplicada no espaço de ações, tanto pelo otimizador quanto pelo oracle. A execução corrigida (v2) apresenta 100% de conformidade nos 2.000 registros; a execução v1 permanece no histórico.
 
 Intervalos bootstrap pareados de 95% usam 1.000 reamostragens de cenários para o
 custo contra regras fixas. Eles ignoram correlação entre restaurantes/horários.

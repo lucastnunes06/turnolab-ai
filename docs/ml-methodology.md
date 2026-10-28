@@ -28,14 +28,12 @@ Walk-forward usa janelas expansivas com cortes 40/47/54 e sete dias posteriores,
 configuração fixada de antemão, sem acessar o teste final. Não é uma nova seleção de
 hiperparâmetros pelo teste.
 
-Intervalos: resíduos absolutos de calibração, grupos pico/não pico, quantil
+Intervalos v2: resíduos absolutos de calibração **somente em horários abertos**, grupos pico/não pico, quantil
 `ceil((n+1)*(1-alpha))/n`, arredondado para cima, alpha 0,1. Limite inferior truncado
 em zero; horários fechados têm previsão/intervalo zero. A validade conformal depende
 de hipóteses de estabilidade que séries com drift não satisfazem automaticamente.
 
-A mistura de zeros de fechamento no grupo não pico faz a cobertura agregada parecer
-melhor. A cobertura em funcionamento fica em cerca de 82,4%. Isso é uma falha
-reportada do método atual, não um resultado a corrigir olhando para o teste.
+A versão v1 misturava zeros de fechamento na calibração não pico. A v2 retira esses zeros; no teste sintético original a cobertura aberta foi 90,68% (30 min) e 90,48% (60 min), contra 82,38% e 82,30%. Duas sementes sintéticas adicionais mostraram melhora, mas não constituem validação externa. A largura dos intervalos cresceu. Veja `reports/independent_coverage_study.json` e `docs/ROADMAP_PROGRESS_2026-10-28.md`.
 
 ## Risco de estoque
 

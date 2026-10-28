@@ -4,7 +4,7 @@
   "versions": {
     "demand-v1": {
       "file": "demand-v1.joblib",
-      "sha256": "5cd640dae06b295261d42ffaf4fb1c22f4e8dfa58e103a3af0002483a3b41e01",
+      "sha256": "73cd412169af2b7cadee5b723292c28b06eee9f3b5cd55ef58f8a5b24add660e",
       "validation_mae": 2.9223469531732036,
       "features": [
         "restaurant_id",
@@ -31,7 +31,7 @@
     },
     "demand-rf-v1": {
       "file": "demand-rf-v1.joblib",
-      "sha256": "56c58152314d7af97f620e7d7e0d248f7da0ce1aef7c284480480d44d11ef065",
+      "sha256": "d48a4f9ec8597336b3b58e958977fd036589efec045a399257758336b2aff3cd",
       "validation_mae": 2.967242138482276,
       "features": [
         "restaurant_id",
@@ -57,8 +57,8 @@
       "calibration_n": 13380
     }
   },
-  "promotion_rule": "Lower validation MAE; then calibration and frozen final evaluation. Manual registry update; no automatic test-based promotion.",
   "history": [
     "demand-v1"
-  ]
+  ],
+  "promotion_rule": "Lower validation MAE; then calibration and frozen final evaluation. Manual registry update; no automatic test-based promotion."
 }

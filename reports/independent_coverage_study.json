@@ -1,0 +1,134 @@
+{
+  "design": "Independent synthetic seed evaluation; same generator, not external/real-world validation",
+  "source_seed": 42,
+  "evaluation_seeds": [
+    20261029,
+    20261030
+  ],
+  "horizons": {
+    "30": {
+      "calibration_open_n": 3780,
+      "open_only_quantiles": {
+        "0": 8.593668308617026,
+        "1": 19.352557749868687
+      },
+      "legacy_quantiles": {
+        "0": 5.460646910097838,
+        "1": 19.352557749868687
+      },
+      "by_seed": {
+        "20261029": {
+          "baseline": {
+            "overall_coverage": 0.8904982618771726,
+            "open_coverage": 0.8055555555555556,
+            "closed_coverage": 1.0,
+            "open_peak_coverage": 0.8954861111111111,
+            "open_other_coverage": 0.7676900584795322,
+            "mean_width": 10.417253316868933,
+            "open_mean_width": 18.49812677460471,
+            "n": 17260,
+            "open_n": 9720
+          },
+          "open_only": {
+            "overall_coverage": 0.936558516801854,
+            "open_coverage": 0.8873456790123457,
+            "closed_coverage": 1.0,
+            "open_peak_coverage": 0.8954861111111111,
+            "open_other_coverage": 0.8839181286549708,
+            "mean_width": 12.347453851557693,
+            "open_mean_width": 21.92562278579071,
+            "n": 17260,
+            "open_n": 9720
+          }
+        },
+        "20261030": {
+          "baseline": {
+            "overall_coverage": 0.8974507531865585,
+            "open_coverage": 0.8179012345679012,
+            "closed_coverage": 1.0,
+            "open_peak_coverage": 0.9072916666666667,
+            "open_other_coverage": 0.7802631578947369,
+            "mean_width": 10.35918388845605,
+            "open_mean_width": 18.39501171962463,
+            "n": 17260,
+            "open_n": 9720
+          },
+          "open_only": {
+            "overall_coverage": 0.9444380069524914,
+            "open_coverage": 0.9013374485596708,
+            "closed_coverage": 1.0,
+            "open_peak_coverage": 0.9072916666666667,
+            "open_other_coverage": 0.8988304093567251,
+            "mean_width": 12.26056458678821,
+            "open_mean_width": 21.771331766251492,
+            "n": 17260,
+            "open_n": 9720
+          }
+        }
+      }
+    },
+    "60": {
+      "calibration_open_n": 3780,
+      "open_only_quantiles": {
+        "0": 8.859466611238403,
+        "1": 19.15196422454011
+      },
+      "legacy_quantiles": {
+        "0": 5.536214909489571,
+        "1": 19.15196422454011
+      },
+      "by_seed": {
+        "20261029": {
+          "baseline": {
+            "overall_coverage": 0.8921113689095128,
+            "open_coverage": 0.808641975308642,
+            "closed_coverage": 1.0,
+            "open_peak_coverage": 0.8982638888888889,
+            "open_other_coverage": 0.770906432748538,
+            "mean_width": 10.432845780384367,
+            "open_mean_width": 18.50434786562001,
+            "n": 17240,
+            "open_n": 9720
+          },
+          "open_only": {
+            "overall_coverage": 0.9391531322505801,
+            "open_coverage": 0.8920781893004115,
+            "closed_coverage": 1.0,
+            "open_peak_coverage": 0.8982638888888889,
+            "open_other_coverage": 0.8894736842105263,
+            "mean_width": 12.478908030946288,
+            "open_mean_width": 22.133371857357407,
+            "n": 17240,
+            "open_n": 9720
+          }
+        },
+        "20261030": {
+          "baseline": {
+            "overall_coverage": 0.8962296983758701,
+            "open_coverage": 0.8159465020576132,
+            "closed_coverage": 1.0,
+            "open_peak_coverage": 0.9048611111111111,
+            "open_other_coverage": 0.7785087719298246,
+            "mean_width": 10.371895344020196,
+            "open_mean_width": 18.39624235914693,
+            "n": 17240,
+            "open_n": 9720
+          },
+          "open_only": {
+            "overall_coverage": 0.94292343387471,
+            "open_coverage": 0.8987654320987655,
+            "closed_coverage": 1.0,
+            "open_peak_coverage": 0.9048611111111111,
+            "open_other_coverage": 0.8961988304093568,
+            "mean_width": 12.384602211848172,
+            "open_mean_width": 21.966105157640175,
+            "n": 17240,
+            "open_n": 9720
+          }
+        }
+      }
+    }
+  },
+  "nominal_coverage": 0.9,
+  "caveat": "Seed-shifted synthetic tests were not used to fit quantiles, but share the same simulated mechanism. This is not evidence of coverage on real restaurants; further independent periods or data are needed."
+}

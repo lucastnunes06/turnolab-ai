@@ -74,7 +74,7 @@ No estudo de estoque, o classificador teve **F1 de 0,838** e **PR-AUC de 0,933**
 
 ## Como as peças se conectam
 
-\`\`\`mermaid
+```mermaid
 flowchart LR
     A["Dados sintéticos<br/>validados"] --> B["Previsão + incerteza"]
     B --> C["Simulador<br/>determinístico"]
@@ -85,7 +85,7 @@ flowchart LR
     G --> H["Aprovação humana"]
     H --> I["Histórico de auditoria"]
     B --> J["Avaliação e monitoramento"]
-\`\`\`
+```
 
 As decisões numéricas pertencem ao **modelo e ao simulador**, não à LLM. O copiloto pode consultar informações, simular cenários e propor ações, mas não aprova propostas nem altera estoque diretamente. A aprovação, nesta demonstração, registra uma decisão — não dispara uma operação comercial.
 
@@ -95,7 +95,7 @@ A arquitetura usa Python, **FastAPI**, Pydantic, SQLite, NumPy, pandas, scikit-l
 
 **Pré-requisitos:** Python 3.12 recomendado, Git e um ambiente com CPU. Não exige GPU, provedor externo de IA ou credenciais para a demonstração.
 
-\`\`\`bash
+```bash
 git clone https://github.com/lucastnunes06/turnolab-ai.git
 cd turnolab-ai
 
@@ -105,9 +105,9 @@ pip install -r requirements.txt
 
 python scripts/bootstrap.py
 python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
-\`\`\`
+```
 
-No Windows PowerShell, ative o ambiente com \`.venv\Scripts\Activate.ps1\`.
+No Windows PowerShell, ative o ambiente com `.venv\Scripts\Activate.ps1`.
 
 - **Aplicação:** http://127.0.0.1:8000
 - **Documentação da API:** http://127.0.0.1:8000/docs
@@ -116,32 +116,32 @@ O primeiro bootstrap gera os dados sintéticos, treina os modelos em CPU e prepa
 
 Alternativa com Docker Compose:
 
-\`\`\`bash
+```bash
 docker compose up --build
-\`\`\`
+```
 
 O container foi construído e testado no GitHub Actions, incluindo chamadas HTTP de prontidão. Para opções de configuração e cuidados com volumes, consulte o [guia local](docs/local-run.md) e o [guia Docker](docs/deploy.md).
 
-> **Segurança:** \`turnolab-demo\` e \`turnolab-other\` são tokens públicos de demonstração. Não exponha esse modo como autenticação real. Os arquivos \`.joblib\` devem ser carregados somente de fontes confiáveis.
+> **Segurança:** `turnolab-demo` e `turnolab-other` são tokens públicos de demonstração. Não exponha esse modo como autenticação real. Os arquivos `.joblib` devem ser carregados somente de fontes confiáveis.
 
 ## Testes e reprodutibilidade
 
 Depois do bootstrap:
 
-\`\`\`bash
+```bash
 python scripts/check.py
 python scripts/reproduce_data.py
-\`\`\`
+```
 
-Com Node.js instalado, \`scripts/check.py\` executa os testes de Python e frontend, verificações estáticas e build. Na CI foram aprovados **49 testes Python e 13 testes frontend**, além de lint, análise de segurança e verificação das dependências.
+Com Node.js instalado, `scripts/check.py` executa os testes de Python e frontend, verificações estáticas e build. Na CI foram aprovados **49 testes Python e 13 testes frontend**, além de lint, análise de segurança e verificação das dependências.
 
 Também há verificações específicas:
 
-\`\`\`bash
+```bash
 python scripts/load_check.py       # Carga local via ASGI
 python scripts/browser_check.py    # Fluxos reais no Chromium/Playwright
 python scripts/reproduce.py       # Retreinamento integral; exige mais CPU/tempo
-\`\`\`
+```
 
 Os modelos binários, logs e CSVs extensos de previsões individuais não são mantidos no GitHub: o bootstrap os recria. Dados, artefatos e avaliações agregadas possuem referências e documentação para auditoria.
 
@@ -158,14 +158,14 @@ O MLflow foi executado **no runner da verificação estendida**, com armazenamen
 
 | Se você quer entender… | Comece aqui |
 | --- | --- |
-| Geração e qualidade de dados | [\`ml/data.py\`](ml/data.py), [\`docs/data-and-features.md\`](docs/data-and-features.md) |
-| Treinamento e avaliação | [\`ml/train.py\`](ml/train.py), [\`ml/stock.py\`](ml/stock.py) |
-| Simulador operacional | [\`simulator/engine.py\`](simulator/engine.py) |
-| API, autenticação demonstrativa e propostas | [\`backend/app/\`](backend/app/) |
-| Recuperação de documentos e ferramentas do copiloto | [\`ai/\`](ai/) |
-| Frontend | [\`frontend/\`](frontend/) |
-| Experimentos e ablações | [\`ml/experiments.py\`](ml/experiments.py) |
-| Arquitetura e decisões | [\`docs/architecture/\`](docs/architecture/), [\`docs/decisions/\`](docs/decisions/) |
+| Geração e qualidade de dados | [`ml/data.py`](ml/data.py), [`docs/data-and-features.md`](docs/data-and-features.md) |
+| Treinamento e avaliação | [`ml/train.py`](ml/train.py), [`ml/stock.py`](ml/stock.py) |
+| Simulador operacional | [`simulator/engine.py`](simulator/engine.py) |
+| API, autenticação demonstrativa e propostas | [`backend/app/`](backend/app/) |
+| Recuperação de documentos e ferramentas do copiloto | [`ai/`](ai/) |
+| Frontend | [`frontend/`](frontend/) |
+| Experimentos e ablações | [`ml/experiments.py`](ml/experiments.py) |
+| Arquitetura e decisões | [`docs/architecture/`](docs/architecture/), [`docs/decisions/`](docs/decisions/) |
 
 ## O que ainda não está resolvido
 

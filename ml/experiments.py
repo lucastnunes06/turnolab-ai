@@ -13,15 +13,18 @@ from ai.rag import retriever
 from ml.tracking import log_run
 from simulator.engine import Scenario, simulate
 SEED = 20261028
-MAX_ADDITIONAL_STAFF = 2  # Limit from the fictitious peak-handling policy.
+MAX_ADDITIONAL_STAFF = 2
 STRATEGIES = [('fixed', 'Regras fixas'), ('forecast', 'Regras + previsão'), ('simulator', 'Previsão + simulador'), ('rag', 'Previsão + simulador + RAG'), ('copilot', 'Previsão + simulador + copiloto')]
 
 def admissible_actions(max_additional_staff=MAX_ADDITIONAL_STAFF):
-    """Use the same documented staffing constraint for the policy and the oracle."""
+    """Enumerate only actions allowed by the fictitious staffing policy.
+
+    Both the policy optimizer and its hindsight oracle use this exact space;
+    otherwise their cost/regret would describe different feasible decisions.
+    """
     if not 0 <= max_additional_staff <= MAX_ADDITIONAL_STAFF:
         raise ValueError('Staffing constraint cannot exceed the published policy')
     return list(product(range(max_additional_staff + 1), [0.0, 60.0]))
-
 
 def experiment(n=400):
     rng = np.random.default_rng(SEED)

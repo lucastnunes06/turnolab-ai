@@ -20,8 +20,9 @@ Docker Compose com HTTP de prontidão e rastreamento local com MLflow 3.5.1.
 [Docker e MLflow](https://github.com/lucastnunes06/turnolab-ai/actions/runs/40726836196) ·
 [Evidências e limitações](docs/CI_EVIDENCE_2026-10-28.md).
 
-**Ainda não comprovado:** demonstração em GIF/vídeo de 90 segundos, publicação
-no Hugging Face, automação n8n executada e deploy público de produção.
+**Ainda não comprovado:** publicação no Hugging Face, automação n8n
+executada e deploy público de produção. A demonstração real em GIF foi validada
+separadamente no GitHub Actions.
 Os valores dos experimentos são sintéticos.
 
 ## Um resultado que não favorece a IA por conveniência
@@ -60,8 +61,12 @@ de API fabricadas. O teste também verificou a navegação em viewport de 390 px
 
 A interface inclui Visão geral, Demand Intelligence, Scenario Lab, AI Copilot,
 Inventory Intelligence, Model Observatory, Action Center e Experiments.
-**GIF/vídeo de 90 segundos permanece pendente.** Não foi substituído por animação
-fictícia. [Roteiro](docs/demo-script.md).
+**[Ver demonstração real de aproximadamente 91 segundos (GIF)](docs/media/demo.gif).**
+A captura foi feita pelo Playwright no [GitHub Actions](https://github.com/lucastnunes06/turnolab-ai/actions/runs/40727621782),
+com 88 imagens capturadas do navegador real e salvas num GIF otimizado.
+O arquivo final tem 20 quadros visuais após a fusão automática de imagens repetidas;
+a duração exibida permanece próxima de 91 segundos.
+[Relatório de captura](reports/demo.json) · [Roteiro](docs/demo-script.md).
 
 ## Executar sem credenciais externas
 

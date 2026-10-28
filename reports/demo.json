@@ -1,0 +1,7 @@
+{
+  "path": "docs/media/demo.gif",
+  "frames": 88,
+  "duration_seconds": 91.344,
+  "transport": "actual browser and API via ASGI bridge",
+  "fabricated_frames": false
+}

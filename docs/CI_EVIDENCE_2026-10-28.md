@@ -37,7 +37,7 @@ Dados brutos reais, identificadores pessoais e segredos não integram esta demon
 
 ## Limites que permanecem
 
-- GIF/vídeo contínuo de 90 segundos: não produzido ou publicado.
+- GIF de aproximadamente **91 segundos**: **produzido e publicado** em `docs/media/demo.gif` a partir da execução real com Chromium/ASGI. [Workflow](https://github.com/lucastnunes06/turnolab-ai/actions/runs/40727621782) e `reports/demo.json`. Um vídeo MP4 editado separado não foi produzido.
 - Provedores externos de LLM: implementados como adaptadores, sem validação com credenciais externas.
 - Hugging Face: Model Card e exportador preparados, sem publicação externa efetivada.
 - n8n: workflow exportado, sem execução integrada verificada.

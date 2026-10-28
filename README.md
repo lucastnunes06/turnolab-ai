@@ -1,235 +1,190 @@
 # TurnoLab AI
 
-**O restaurante está prestes a receber mais pedidos do que consegue preparar. O que fazer antes que a fila cresça?**
+**Prever um pico de pedidos é apenas o começo. O que importa é decidir o que fazer antes que a fila cresça.**
 
-TurnoLab AI é um laboratório de decisões operacionais: combina previsão de demanda,
-incerteza, simulação e um copiloto que explica evidências. Permite testar uma hipótese
-antes de propor uma ação e deixa visíveis os modelos, os dados, os custos e os limites.
+O **TurnoLab AI** é um laboratório de inteligência operacional para restaurantes fictícios. Combina previsão de demanda, simulação de cenários, análise de estoque e um copiloto capaz de explicar recomendações com base em dados e documentos. A ideia não é automatizar decisões às cegas: é mostrar **as alternativas, as evidências e os limites** antes de alguém aprovar uma ação.
 
-*Demand Forecasting, Operational Intelligence & AI Copilot for Restaurants*
+> **Escopo:** projeto experimental, com dados e custos sintéticos. Não representa operações reais, não está vinculado a uma plataforma de delivery e não é um serviço em produção.
 
-> Projeto de portfólio com dados sintéticos, sem afiliação com o iFood, sem
-> dados internos e sem operação real. Este repositório não é um serviço em produção.
+[![CI](https://github.com/lucastnunes06/turnolab-ai/actions/workflows/quality.yml/badge.svg)](https://github.com/lucastnunes06/turnolab-ai/actions/workflows/quality.yml)
+![Python](https://img.shields.io/badge/Python-3.12-3776AB?logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-64748B)
 
-[![CI: testes e navegador](https://github.com/lucastnunes06/turnolab-ai/actions/workflows/quality.yml/badge.svg)](https://github.com/lucastnunes06/turnolab-ai/actions/workflows/quality.yml)
+## Conheça o produto
 
-**Verificado no GitHub Actions:** treinamento a partir de um clone limpo; testes
-Python e Node; análise estática, dependências, Playwright com API real,
-Docker Compose com HTTP de prontidão e rastreamento local com MLflow 3.5.1.
-[Execução do navegador](https://github.com/lucastnunes06/turnolab-ai/actions/runs/40726044887) ·
-[Docker e MLflow](https://github.com/lucastnunes06/turnolab-ai/actions/runs/40726836196) ·
-[Evidências e limitações](docs/CI_EVIDENCE_2026-10-28.md).
+[![Painel do TurnoLab AI capturado com Chromium, backend FastAPI e dados sintéticos](docs/media/dashboard.png)](docs/media/dashboard.png)
 
-**Ainda não comprovado:** publicação no Hugging Face, automação n8n
-executada e deploy público de produção. A demonstração real em GIF foi validada
-separadamente no GitHub Actions.
-Os valores dos experimentos são sintéticos.
+**[Assistir à demonstração real (GIF, ~91 s)](docs/media/demo.gif)** · [Simulador de cenários](docs/media/scenario.png) · [Copiloto e referências](docs/media/copilot.png)
 
-## Um resultado que não favorece a IA por conveniência
+O fluxo é simples: escolher um restaurante, consultar a previsão, investigar um risco, comparar cenários, pedir uma explicação ao copiloto e registrar uma decisão. As capturas foram produzidas com **Chromium e a API real**, em testes automatizados no GitHub Actions, com transporte do navegador para a aplicação via ASGI. Não são telas ilustrativas com números inventados.
 
-![Resultados reais da ablação em 400 cenários sintéticos](reports/decision_ablation.png)
+## O que o TurnoLab faz
 
-| Estratégia | Backlog médio | Custo médio hipotético |
-|---|---:|---:|
+| Área | O que foi implementado |
+| --- | --- |
+| **Demand Intelligence** | Previsão de pedidos em horizontes de 30 e 60 minutos, comparação com baselines, intervalos de incerteza e análise de erros. |
+| **Inventory Intelligence** | Risco de ruptura de ingredientes, regras e classificação supervisionada, com métricas e limiares de decisão. |
+| **Scenario Lab** | Simulação determinística de equipe, capacidade, estoque, fila de pedidos e custos hipotéticos. |
+| **AI Copilot** | Perguntas sobre a operação usando ferramentas tipadas, dados estruturados e documentos recuperados. |
+| **Action Center** | Propostas pendentes, aprovação ou rejeição humana e trilha de auditoria. |
+| **Model Observatory** | Comparação de modelos, versões, latência, erros de previsão e indicadores de drift. |
+| **Experiments** | Baselines, experimentos de ablação e análises de sensibilidade reproduzíveis. |
+
+O copiloto tem um **modo offline sem chave de API**. Nesse modo, as respostas usam fatos estruturados, templates e recuperação documental; **não** é uma LLM rodando localmente. Há adaptadores opcionais para provedores externos, ainda não validados com credenciais reais.
+
+## O experimento mais interessante
+
+A pergunta que guiou esta parte do projeto foi: **combinar previsão e simulação produz decisões melhores que uma regra fixa?**
+
+Foram comparadas cinco estratégias em **400 cenários sintéticos**. As hipóteses de custo e capacidade são iguais para cada estratégia; os números abaixo não representam economia real.
+
+![Comparação de estratégias em cenários sintéticos](reports/decision_ablation.png)
+
+| Estratégia | Backlog médio | Custo médio simulado |
+| --- | ---: | ---: |
 | Regras fixas | 13,98 | R$ 367,37 |
-| Regra + previsão | 11,79 | R$ 329,67 |
-| Previsão + simulador | 11,75 | R$ 302,34 |
-| + RAG | 11,75 | R$ 302,34 |
-| + copiloto offline | 11,75 | R$ 302,34 |
+| Regras + previsão | 11,79 | R$ 329,67 |
+| **Previsão + simulador** | **11,75** | **R$ 302,34** |
+| + Recuperação de documentos (RAG) | 11,75 | R$ 302,34 |
+| + Copiloto offline | 11,75 | R$ 302,34 |
 
-O simulador escolhe ações usando previsões e avalia com demanda futura de teste.
-RAG e copiloto usam a mesma decisão numérica: acrescentam suporte documental,
-sem receber crédito pelos cálculos. O solver violou a política fictícia de no
-máximo duas pessoas extras em 2,25% dos cenários; o experimento reporta esse limite.
+**O resultado importa justamente porque não favorece a IA generativa por conveniência.** O ganho numérico veio da previsão e do simulador. RAG e copiloto acrescentam contexto e explicações, mas não melhoraram o custo nem o backlog nesse experimento. Separar papéis de agentes também não mostrou vantagem sobre um fluxo mais simples.
 
-Estes custos são **hipóteses do simulador**, não economia realizada. [Protocolo](docs/experiments/protocol.md),
-[registros por cenário](reports/decision_scenarios.csv), [sensibilidade](reports/decision_sensitivity.csv).
+O teste encontrou um defeito importante: a política fictícia de no máximo duas pessoas extras foi violada em **2,25% dos cenários**. Esse limite não foi escondido e precisa ser resolvido antes de tratar a política como confiável.
 
-## Ver a aplicação
+[Protocolo experimental](docs/experiments/protocol.md) · [Dados por cenário](reports/decision_scenarios.csv) · [Análise técnica](docs/article/turnolab.md)
 
-![Dashboard real do TurnoLab AI capturado com Chromium e a API FastAPI/SQLite no GitHub Actions](docs/media/dashboard.png)
+## Modelos: resultados e limites
 
-[**Simulação de capacidade**](docs/media/scenario.png) ·
-[**Copiloto com referências**](docs/media/copilot.png) ·
-[**Teste automatizado de navegador**](scripts/browser_check.py)
+Os modelos foram treinados e comparados sobre dados gerados com seed documentada: **20 restaurantes, 90 dias e 86.400 intervalos de 30 minutos**. A avaliação usa divisão temporal, seleção na validação e teste posterior, com atenção ao vazamento de informações futuras.
 
-As capturas foram obtidas em um runner do GitHub com **Chromium, backend FastAPI,
-banco SQLite e modelos treinados na CI**. As respostas são calculadas pela aplicação;
-o teste encaminha as requisições do navegador ao backend via ASGI, sem respostas
-de API fabricadas. O teste também verificou a navegação em viewport de 390 px.
-[Execução com capturas](https://github.com/lucastnunes06/turnolab-ai/actions/runs/40726044887).
+| Horizonte | Modelo selecionado | MAE no teste | RMSE | WAPE |
+| --- | --- | ---: | ---: | ---: |
+| 30 minutos | Gradient Boosting · 31 folhas | 2,886 | 5,981 | 29,64% |
+| 60 minutos | Gradient Boosting · 31 folhas | 2,925 | 6,051 | 30,01% |
 
-A interface inclui Visão geral, Demand Intelligence, Scenario Lab, AI Copilot,
-Inventory Intelligence, Model Observatory, Action Center e Experiments.
-**[Ver demonstração real de aproximadamente 91 segundos (GIF)](docs/media/demo.gif).**
-A captura foi feita pelo Playwright no [GitHub Actions](https://github.com/lucastnunes06/turnolab-ai/actions/runs/40727621782),
-com 88 imagens capturadas do navegador real e salvas num GIF otimizado.
-O arquivo final tem 20 quadros visuais após a fusão automática de imagens repetidas;
-a duração exibida permanece próxima de 91 segundos.
-[Relatório de captura](reports/demo.json) · [Roteiro](docs/demo-script.md).
+O melhor modelo foi selecionado com dados de validação; os resultados acima pertencem ao **teste sintético**. A diferença para Random Forest é pequena e não justifica alegar superioridade universal.
 
-## Executar sem credenciais externas
+**Uma limitação particularmente relevante:** os intervalos nominais de 90% alcançam **90,08% de cobertura agregada**, mas apenas **82,38% durante o funcionamento** dos restaurantes. Horários fechados, com demanda zero, favorecem a métrica geral. O problema está documentado; recalibrar usando o mesmo teste invalidaria a comparação.
 
-```bash
+No estudo de estoque, o classificador teve **F1 de 0,838** e **PR-AUC de 0,933** no teste sintético, contra **F1 de 0,736** e **PR-AUC de 0,822** para a regra de referência. Esses resultados não devem ser extrapolados para restaurantes reais.
+
+[Metodologia de ML](docs/ml-methodology.md) · [Model Card](docs/MODEL_CARD.md) · [Relatórios](reports/)
+
+## Como as peças se conectam
+
+\`\`\`mermaid
+flowchart LR
+    A["Dados sintéticos<br/>validados"] --> B["Previsão + incerteza"]
+    B --> C["Simulador<br/>determinístico"]
+    D["Políticas e documentos"] --> E["Recuperação de evidências"]
+    C --> F["Copiloto"]
+    E --> F
+    F --> G["Proposta de ação"]
+    G --> H["Aprovação humana"]
+    H --> I["Histórico de auditoria"]
+    B --> J["Avaliação e monitoramento"]
+\`\`\`
+
+As decisões numéricas pertencem ao **modelo e ao simulador**, não à LLM. O copiloto pode consultar informações, simular cenários e propor ações, mas não aprova propostas nem altera estoque diretamente. A aprovação, nesta demonstração, registra uma decisão — não dispara uma operação comercial.
+
+A arquitetura usa Python, **FastAPI**, Pydantic, SQLite, NumPy, pandas, scikit-learn e interface em **JavaScript/CSS nativos**. Foi escolhida uma estrutura modular com poucas dependências obrigatórias. O frontend **não é React**; o armazenamento local **não é PostgreSQL**. Essas escolhas e seus trade-offs estão nos [registros de decisão](docs/decisions/ADRs.md).
+
+## Rodar no computador
+
+**Pré-requisitos:** Python 3.12 recomendado, Git e um ambiente com CPU. Não exige GPU, provedor externo de IA ou credenciais para a demonstração.
+
+\`\`\`bash
+git clone https://github.com/lucastnunes06/turnolab-ai.git
+cd turnolab-ai
+
 python -m venv .venv
-. .venv/bin/activate
+source .venv/bin/activate
 pip install -r requirements.txt
+
 python scripts/bootstrap.py
 python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
-```
+\`\`\`
 
-Interface: **http://127.0.0.1:8000** · OpenAPI: **http://127.0.0.1:8000/docs**.
-O replay padrão é 29/08/2026, 18:00 UTC. A UI usa `turnolab-demo`; em Configurações,
-`turnolab-other` demonstra escopo restrito ao restaurante 2. Esses tokens são
-públicos e exclusivos da demo. Não exponha a aplicação como serviço autenticado real.
+No Windows PowerShell, ative o ambiente com \`.venv\Scripts\Activate.ps1\`.
 
+- **Aplicação:** http://127.0.0.1:8000
+- **Documentação da API:** http://127.0.0.1:8000/docs
 
-**Nota sobre o clone público:** os modelos binários `.joblib`, os CSVs extensos de previsões por evento e os logs de execução não são versionados. O comando `python scripts/bootstrap.py` recria os modelos e os dados locais. Os resultados agregados e a metodologia permanecem documentados no repositório.
+O primeiro bootstrap gera os dados sintéticos, treina os modelos em CPU e prepara o ambiente. Ele leva mais tempo do que iniciar o servidor, mas funciona sem modelos binários versionados. O estado inicial da demonstração usa um replay fixo de **29/08/2026**, não informações do dia atual.
 
-O bootstrap gera dados se ausentes, treina modelos em CPU e registra avaliações.
-Não sobrescreve um banco povoado nem apaga decisões. [Guia completo](docs/local-run.md).
-Docker/Compose foi preparado, mas o build ainda precisa ser validado: [deploy](docs/deploy.md).
+Alternativa com Docker Compose:
 
-## O caminho de uma decisão
+\`\`\`bash
+docker compose up --build
+\`\`\`
 
-```mermaid
-flowchart LR
-  D[Dados sintéticos validados] --> F[Previsão + intervalo]
-  F --> S[Simulação determinística]
-  K[Políticas fictícias + TF-IDF] --> C[Copiloto fundamentado]
-  S --> C
-  C --> P[Proposta pendente]
-  P --> H[Revisão humana]
-  H --> A[Auditoria]
-  F --> M[Erro, cobertura e drift]
-```
+O container foi construído e testado no GitHub Actions, incluindo chamadas HTTP de prontidão. Para opções de configuração e cuidados com volumes, consulte o [guia local](docs/local-run.md) e o [guia Docker](docs/deploy.md).
 
-A LLM é opcional e nunca é fonte primária de números. O modo offline usa templates,
-fatos estruturados e citações; não é uma LLM local. O agente pode consultar, simular
-e propor. Não altera estoque, executa shell/SQL livre ou aprova recomendações.
-A aprovação apenas registra a decisão nesta demonstração.
+> **Segurança:** \`turnolab-demo\` e \`turnolab-other\` são tokens públicos de demonstração. Não exponha esse modo como autenticação real. Os arquivos \`.joblib\` devem ser carregados somente de fontes confiáveis.
 
-## O que foi implementado e medido
+## Testes e reprodutibilidade
 
-- **Dados:** 20 restaurantes × 90 dias, 86.400 intervalos, 86.240 snapshots; seed e
-  SHA-256. Picos, promoções, ruído, eventos atípicos e mudança de comportamento.
-- **Demanda:** quatro baselines e três candidatos de ML/configuração, +30/+60,
-  separação temporal com purge, walk-forward, resíduos e métricas por segmento.
-- **Estoque:** regra, classificador calibrado e híbrido. Previsões fora da amostra
-  geradas por previsor congelado antes do treino do classificador.
-- **Simulação:** fila fluida, capacidade limitada por equipe/cozinha/estoque,
-  reposição com prazo, custos e sensibilidade. Entradas e resultados persistidos.
-- **Assistência:** ferramentas tipadas, RAG com referências abríveis, abstenção,
-  papéis limitados e adaptadores externos com fallback. Provedor externo não executado.
-- **API:** escopo por restaurante, paginação, request IDs, logs JSON, propostas,
-  aprovação/rejeição, auditoria append-only, métricas e PSI.
-- **MLOps local:** ledger de experimentos, champion/challenger real, checksum,
-  gate por validação e rollback testado. MLflow permanece integração opcional pendente.
+Depois do bootstrap:
 
-## Resultados de ML e uma falha importante
+\`\`\`bash
+python scripts/check.py
+python scripts/reproduce_data.py
+\`\`\`
 
-| Horizonte | Champion | MAE | RMSE | WAPE |
-|---|---|---:|---:|---:|
-| 30 min | Gradient Boosting · 31 folhas | 2,886 | 5,981 | 29,64% |
-| 60 min | Gradient Boosting · 31 folhas | 2,925 | 6,051 | 30,01% |
+Com Node.js instalado, \`scripts/check.py\` executa os testes de Python e frontend, verificações estáticas e build. Na CI foram aprovados **49 testes Python e 13 testes frontend**, além de lint, análise de segurança e verificação das dependências.
 
-No horizonte de 30 min, último intervalo teve MAE 4,362; sazonal 4,435; Ridge
-3,412; Random Forest 2,911. O melhor modelo foi escolhido **pela validação**,
-antes de consultar teste. A diferença contra Random Forest é pequena.
+Também há verificações específicas:
 
-Os intervalos nominais de 90% cobrem 90,08% no agregado, mas só **82,38% durante
-funcionamento**. Os zeros de horários fechados escondem a subcobertura operacional.
-Esse alerta aparece na UI e não foi “corrigido” usando o teste.
+\`\`\`bash
+python scripts/load_check.py       # Carga local via ASGI
+python scripts/browser_check.py    # Fluxos reais no Chromium/Playwright
+python scripts/reproduce.py       # Retreinamento integral; exige mais CPU/tempo
+\`\`\`
 
-No risco de estoque, a regra teve recall 73,63%, F1 0,736 e PR-AUC 0,822; o
-classificador teve recall 92,95%, F1 0,838 e PR-AUC 0,933, no teste sintético.
-Não extrapolar esses resultados para restaurantes reais.
+Os modelos binários, logs e CSVs extensos de previsões individuais não são mantidos no GitHub: o bootstrap os recria. Dados, artefatos e avaliações agregadas possuem referências e documentação para auditoria.
 
-No RAG lexical de desenvolvimento: Hit@3 18/19, precisão documental 77,8% e
-abstenção 4/4 negativas. A primeira versão falhou nas negativas; o relatório foi
-preservado. Separar papéis não trouxe ganho demonstrado sobre tool calling simples.
+**Evidências verificadas remotamente:**
 
-[ML](docs/ml-methodology.md) · [RAG e agentes](docs/rag-and-agents.md) ·
-[relatórios JSON/CSV](reports/) · [Model Card](docs/MODEL_CARD.md).
+- [Testes, frontend e navegação em Chromium](https://github.com/lucastnunes06/turnolab-ai/actions/runs/40726044887)
+- [Docker Compose e registro de experimentos com MLflow 3.5.1](https://github.com/lucastnunes06/turnolab-ai/actions/runs/40726836196)
+- [Geração da demonstração com navegador real](https://github.com/lucastnunes06/turnolab-ai/actions/runs/40727621782)
+- [Relato técnico das verificações e ressalvas](docs/CI_EVIDENCE_2026-10-28.md)
 
-## Stack e escolhas proporcionais
+O MLflow foi executado **no runner da verificação estendida**, com armazenamento local de métricas e artefatos. Isso não significa um servidor MLflow permanente, nem rastreamento de produção. O navegador exercitou o backend real por ASGI; não é um benchmark de latência HTTP de ponta a ponta.
 
-Python 3.12, FastAPI, Pydantic, SQLite (`sqlite3`), NumPy, pandas, scikit-learn,
-joblib e Matplotlib. Interface em JavaScript ESM, CSS e SVG, com contratos `.d.ts`.
-Sem dependências JavaScript de runtime. Testes em unittest e Node; Playwright preparado.
+## Onde olhar no código
 
-React/Vite/Tailwind e SQLAlchemy/Alembic eram preferências; pacotes não disponíveis
-foram substituídos por implementação local mais simples. **Não é uma UI React nem
-uma API SQLAlchemy.** Docker, GitHub Actions, n8n e MLflow têm arquivos/adaptadores;
-execução não comprovada está marcada como pendente. [ADRs](docs/decisions/ADRs.md).
+| Se você quer entender… | Comece aqui |
+| --- | --- |
+| Geração e qualidade de dados | [\`ml/data.py\`](ml/data.py), [\`docs/data-and-features.md\`](docs/data-and-features.md) |
+| Treinamento e avaliação | [\`ml/train.py\`](ml/train.py), [\`ml/stock.py\`](ml/stock.py) |
+| Simulador operacional | [\`simulator/engine.py\`](simulator/engine.py) |
+| API, autenticação demonstrativa e propostas | [\`backend/app/\`](backend/app/) |
+| Recuperação de documentos e ferramentas do copiloto | [\`ai/\`](ai/) |
+| Frontend | [\`frontend/\`](frontend/) |
+| Experimentos e ablações | [\`ml/experiments.py\`](ml/experiments.py) |
+| Arquitetura e decisões | [\`docs/architecture/\`](docs/architecture/), [\`docs/decisions/\`](docs/decisions/) |
 
-## Testar e reproduzir
+## O que ainda não está resolvido
 
-```bash
-python scripts/check.py       # 49 testes Python + 13 de frontend; build e guardrails
-python scripts/load_check.py  # carga medida em ASGI; não mede TCP
-python scripts/reproduce_data.py  # seis CSVs regenerados, SHA-256 e schema
-python scripts/reproduce.py       # re-treinamento integral; requer mais tempo/CPU
-python scripts/browser_check.py  # requer Chromium permitido
-python scripts/capture_demo.py   # GIF real de ~90s; requer Pillow e Chromium
-```
+O TurnoLab é um **ambiente de pesquisa e demonstração**, não uma plataforma pronta para restaurantes reais. Há limitações importantes:
 
-Os testes cobrem dados inválidos, futuro adulterado, fronteiras temporais,
-conservação de pedidos, entrega que não chega antes do prazo, autorização,
-contratos, injeção, fallback, aprovação humana e rollback. Os testes de componentes
-usam uma fixture **produzida pela API real**; não substituem teste de navegador.
-Não foi inventado percentual de cobertura.
+- Os dados, políticas e custos são sintéticos; não existe validação externa nem ganho financeiro comprovado.
+- A cobertura dos intervalos piora justamente durante a operação; é necessário um **novo período de teste** para avaliar recalibração sem contaminar o holdout atual.
+- O simulador ainda possui violações de uma restrição fictícia em parte dos cenários.
+- O RAG foi avaliado com um conjunto pequeno de desenvolvimento; não há avaliação humana independente.
+- A integração com provedores externos de LLM não foi validada com credenciais reais.
+- Hugging Face e n8n têm artefatos ou fluxos preparados, mas **não foram publicados ou executados de ponta a ponta**.
+- Docker, MLflow e GitHub Actions foram verificados nos escopos descritos acima; isso não equivale a deploy público nem a segurança de produção.
 
-Carga registrada: 80 requisições ASGI, concorrência cooperativa 4, zero erros; os números
-exatos e limites estão em [load.json](reports/load.json). [Checks locais](reports/checks.json)
-não são execução remota de GitHub Actions. O workflow está em `.github/workflows/`.
+Os próximos experimentos são melhorar a calibração nos horários abertos, testar políticas sob dados novos, tornar o estado do estoque mais contínuo e avaliar a qualidade das justificativas com um corpus mais amplo.
 
-## Explorar o repositório
+[Limitações e roadmap](docs/limitations-and-roadmap.md) · [Segurança](docs/security/README.md) · [Relatório da auditoria](docs/AUDITORIA_FINAL_2026-10-28.md)
 
-| Área | Onde começar |
-|---|---|
-| Dados, features e modelos | `ml/data.py`, `ml/features.py`, `ml/train.py`, `ml/stock.py` |
-| API e decisões | `backend/app/main.py`, `services.py`, `migrations/` |
-| IA e documentos | `ai/tools.py`, `coordinator.py`, `providers.py`, `rag.py`, `corpus/` |
-| Matemática operacional | `simulator/engine.py` |
-| Produto | `frontend/app.js`, `styles.css`, `contracts.d.ts` |
-| Experimento | `ml/experiments.py`, `reports/decision_scenarios.csv` |
-| Arquitetura e decisões | [arquitetura/ER](docs/architecture/README.md), [ADRs](docs/decisions/ADRs.md) |
-| Portfólio | [artigo](docs/article/turnolab.md), [matriz para a vaga](docs/competency-matrix.md), [entrevista](docs/interview-guide.md) |
-| Model Card e artefato local | `docs/MODEL_CARD.md`, `artifacts/huggingface/` |
+---
 
-## Limites e próximos passos
+**TurnoLab AI** · Projeto experimental e de código aberto · [Licença MIT](LICENSE)
 
-Não há usuários reais, economia de horas comprovada, causalidade de promoções,
-produção, publicação em GitHub/HF, pesquisa com humanos ou dados privados.
-O gerador e o simulador compartilham hipóteses. Tokens são de demo; o dono do
-arquivo SQLite pode alterar a auditoria. Artefatos joblib devem ser confiáveis.
-
-Prioridades: novo holdout para calibração, estoque contínuo, RAG cego, validação
-externa dos adaptadores, browser/containers/MLflow/CI, identidade real e migração
-da stack quando justificável. [Limitações completas](docs/limitations-and-roadmap.md),
-[segurança](docs/security/README.md), [aceitação](docs/acceptance.md).
-
-## Vaga, referências e transparência
-
-A descrição oficial do [Programa de Estágio — GenAI](https://job-boards.greenhouse.io/ifoodcarreiras/jobs/8901054002)
-foi consultada em **28/10/2026**. Integração de software e operacionalização de IA/LLMs
-são o núcleo observado; RAG, conformal, observabilidade e bibliotecas específicas
-são escolhas adicionais deste projeto. [Fonte e separação de competências](docs/job-source.md).
-
-Referências técnicas: [HistGradientBoosting](https://scikit-learn.org/stable/modules/ensemble.html#histogram-based-gradient-boosting),
-[conformal prediction](https://arxiv.org/abs/2107.07511), [FastAPI](https://fastapi.tiangolo.com/),
-[SQLite](https://www.sqlite.org/docs.html). As referências orientam métodos; os
-resultados deste repositório vêm das avaliações locais, não dessas páginas.
-
-**Assistência de IA:** código, testes e documentação foram produzidos com ajuda
-substancial de IA. O candidato precisa revisar, executar, modificar e compreender
-as partes que pretende apresentar. Este artefato não comprova implementação
-individual ou experiências profissionais que o candidato não teve.
-
-Licença MIT · dados sintéticos · execução local.
-
-Verificação final automatizada (inclui bootstrap em extração limpa): `python scripts/release_check.py`. Consulte
-[o guia](docs/final-verification.md) e [o resultado observado](reports/release.json).
-O verificador recusa marcar a entrega como completa enquanto houver requisito
-bloqueado; nenhuma etapa é aprovada apenas porque seu arquivo existe.
+*Uma boa previsão é útil. Uma decisão que pode ser explicada, testada e contestada é melhor.*

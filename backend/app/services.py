@@ -56,6 +56,9 @@ def create_proposal(db, rid, simulation_id, actor):
         raise HTTPException(404, 'Simulation not found in scope')
     result = json.loads(s['results'])
     alt = result['input_alternative']
+    base_staff = result['input_current']['staff']
+    if alt['staff'] > base_staff + 2:
+        raise HTTPException(422, 'Staffing policy allows at most two additional people; compare the scenario without proposing an out-of-policy action')
     title = f"Revisar cenário: {alt['staff']} pessoas · capacidade {alt['kitchen_capacity']:.0f}/30 min"
     aid = str(uuid.uuid4())
     db.execute('INSERT INTO action_proposals(id,restaurant_id,simulation_id,title,created_by) VALUES(?,?,?,?,?)', (aid, rid, simulation_id, title, actor))

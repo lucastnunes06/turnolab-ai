@@ -60,7 +60,7 @@ jobs:
       - name: Install application and MLflow
         run: |
           python -m pip install -r requirements.txt
-          python -m pip install mlflow==3.5.1
+          python -m pip install mlflow==3.5.1 'SQLAlchemy>=2.0.40,<2.1'
       - name: Train / register local artifacts
         run: python scripts/bootstrap.py
       - name: Test actual MLflow tracking and artifact storage

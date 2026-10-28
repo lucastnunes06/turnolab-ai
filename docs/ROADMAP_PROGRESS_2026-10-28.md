@@ -12,7 +12,7 @@ O experimento anterior permitia 0–3 pessoas adicionais, embora a política fic
 | Custo médio do simulador (hipotético) | R$ 302,34 | **R$ 303,31** |
 | Backlog médio do simulador | 11,75 | **11,92** |
 
-O aumento de custo é esperado ao remover escolhas proibidas. A interface de simulação manual continua exploratória e informa quando o cenário excede a regra; esta correção garante conformidade **no experimento de recomendação automatizada**.
+O aumento de custo é esperado ao remover escolhas proibidas. A interface de simulação manual continua exploratória e informa quando o cenário excede a regra. Agora a API também **recusa criar propostas** a partir de cenários com mais de duas pessoas adicionais (HTTP 422), preservando a simulação sem permitir a proposta fora da política. Essa regra foi coberta por teste de integração.
 
 Verificar em [protocolo](experiments/protocol.md), [scripts](../ml/experiments.py) e [relatório](../reports/experiments.json).
 
@@ -49,7 +49,7 @@ A rotina de treinamento antes substituía o registro de modelos e podia esquecer
 
 Na revisão local:
 
-- **55 testes Python**, **13 testes frontend**, lint de estrutura, compilação e build passaram.
+- **56 testes Python**, **13 testes frontend**, lint de estrutura, compilação e build passaram.
 - Retreinamento de demanda e bootstrap sem `--retrain` foram executados.
 - Experimento de 400 cenários × cinco estratégias foi regenerado e validado: zero violações.
 - A CI remota deve ser verificada separadamente na aba Actions; nenhum resultado remoto é presumido.

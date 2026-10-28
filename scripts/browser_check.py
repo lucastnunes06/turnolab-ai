@@ -80,24 +80,7 @@ async def main():
             await page.set_viewport_size({'width': 390, 'height': 844})
             await page.goto('http://turnolab.local/#dashboard', wait_until='networkidle')
             await page.get_by_text('Um olhar para o próximo turno', exact=True).wait_for()
-            overflow_details = await page.evaluate("""() => {
-              const viewport = window.innerWidth;
-              const scrollWidth = document.documentElement.scrollWidth;
-              const offenders = Array.from(document.querySelectorAll('body *'))
-                .filter(el => {
-                  const box = el.getBoundingClientRect();
-                  const style = getComputedStyle(el);
-                  return style.display !== 'none' && style.visibility !== 'hidden'
-                    && box.width > 0 && (box.right > viewport + 1 || box.left < -1)
-                    && style.position !== 'fixed';
-                })
-                .slice(0, 12).map(el => {
-                  const box = el.getBoundingClientRect();
-                  return {tag: el.tagName.toLowerCase(), className: String(el.className).slice(0, 100),
-                    right: Math.round(box.right), left: Math.round(box.left), width: Math.round(box.width)};
-                });
-              return {viewport, scrollWidth, offenders};
-            }""")
+            overflow_details = await page.evaluate("() => {\n              const viewport = window.innerWidth;\n              const scrollWidth = document.documentElement.scrollWidth;\n              const offenders = Array.from(document.querySelectorAll('body *'))\n                .filter(el => {\n                  const box = el.getBoundingClientRect();\n                  const style = getComputedStyle(el);\n                  return style.display !== 'none' && style.visibility !== 'hidden'\n                    && box.width > 0 && (box.right > viewport + 1 || box.left < -1)\n                    && style.position !== 'fixed';\n                })\n                .slice(0, 12).map(el => {\n                  const box = el.getBoundingClientRect();\n                  return {tag: el.tagName.toLowerCase(), className: String(el.className).slice(0, 100),\n                    right: Math.round(box.right), left: Math.round(box.left), width: Math.round(box.width)};\n                });\n              return {viewport, scrollWidth, offenders};\n            }")
             if overflow_details['scrollWidth'] > overflow_details['viewport']:
                 print('Mobile overflow diagnostics:', json.dumps(overflow_details, ensure_ascii=False))
             assert overflow_details['scrollWidth'] <= overflow_details['viewport'], 'Mobile horizontal overflow'

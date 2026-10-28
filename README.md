@@ -45,13 +45,13 @@ Foram comparadas cinco estratégias em **400 cenários sintéticos**. As hipóte
 | --- | ---: | ---: |
 | Regras fixas | 13,98 | R$ 367,37 |
 | Regras + previsão | 11,79 | R$ 329,67 |
-| **Previsão + simulador** | **11,75** | **R$ 302,34** |
-| + Recuperação de documentos (RAG) | 11,75 | R$ 302,34 |
-| + Copiloto offline | 11,75 | R$ 302,34 |
+| **Previsão + simulador** | **11,92** | **R$ 303,31** |
+| + Recuperação de documentos (RAG) | 11,92 | R$ 303,31 |
+| + Copiloto offline | 11,92 | R$ 303,31 |
 
 **O resultado importa justamente porque não favorece a IA generativa por conveniência.** O ganho numérico veio da previsão e do simulador. RAG e copiloto acrescentam contexto e explicações, mas não melhoraram o custo nem o backlog nesse experimento. Separar papéis de agentes também não mostrou vantagem sobre um fluxo mais simples.
 
-O teste encontrou um defeito importante: a política fictícia de no máximo duas pessoas extras foi violada em **2,25% dos cenários**. Esse limite não foi escondido e precisa ser resolvido antes de tratar a política como confiável.
+A primeira versão do otimizador permitia reforços acima da política fictícia. A revisão limita o espaço de busca a **0–2 pessoas adicionais**: a reexecução registrou **0 violações em 2.000 decisões**. Isso eleva ligeiramente o custo estimado, mas evita recomendar ações proibidas. Cenários manuais fora dessa regra ainda podem ser simulados para estudo, porém **não podem virar propostas de ação**. [Evolução e evidências](docs/ROADMAP_PROGRESS_2026-10-28.md).
 
 [Protocolo experimental](docs/experiments/protocol.md) · [Dados por cenário](reports/decision_scenarios.csv) · [Análise técnica](docs/article/turnolab.md)
 
@@ -66,7 +66,7 @@ Os modelos foram treinados e comparados sobre dados gerados com seed documentada
 
 O melhor modelo foi selecionado com dados de validação; os resultados acima pertencem ao **teste sintético**. A diferença para Random Forest é pequena e não justifica alegar superioridade universal.
 
-**Uma limitação particularmente relevante:** os intervalos nominais de 90% alcançam **90,08% de cobertura agregada**, mas apenas **82,38% durante o funcionamento** dos restaurantes. Horários fechados, com demanda zero, favorecem a métrica geral. O problema está documentado; recalibrar usando o mesmo teste invalidaria a comparação.
+**Calibração revisada:** os intervalos agora são estimados com resíduos dos **horários abertos**, separados por pico/não pico. No teste sintético original, a cobertura durante a operação passou de **82,38% para 90,68% (30 min)** e de **82,30% para 90,48% (60 min)**. Duas novas seeds sintéticas ficaram entre **88,73% e 90,13%**; a largura dos intervalos aumentou. Esses resultados mostram uma melhora no gerador, **não garantem cobertura nominal sob drift nem validade em restaurantes reais**. [Estudo independente de seeds](reports/independent_coverage_study.json).
 
 No estudo de estoque, o classificador teve **F1 de 0,838** e **PR-AUC de 0,933** no teste sintético, contra **F1 de 0,736** e **PR-AUC de 0,822** para a regra de referência. Esses resultados não devem ser extrapolados para restaurantes reais.
 
@@ -133,7 +133,7 @@ python scripts/check.py
 python scripts/reproduce_data.py
 ```
 
-Com Node.js instalado, `scripts/check.py` executa os testes de Python e frontend, verificações estáticas e build. Na CI foram aprovados **49 testes Python e 13 testes frontend**, além de lint, análise de segurança e verificação das dependências.
+Com Node.js instalado, `scripts/check.py` executa os testes de Python e frontend, verificações estáticas e build. Na revisão local foram aprovados **56 testes Python e 13 testes frontend**, além de lint, análise de segurança e verificação das dependências.
 
 Também há verificações específicas:
 
@@ -173,7 +173,7 @@ O TurnoLab é um **ambiente de pesquisa e demonstração**, não uma plataforma 
 
 - Os dados, políticas e custos são sintéticos; não existe validação externa nem ganho financeiro comprovado.
 - A cobertura dos intervalos piora justamente durante a operação; é necessário um **novo período de teste** para avaliar recalibração sem contaminar o holdout atual.
-- O simulador ainda possui violações de uma restrição fictícia em parte dos cenários.
+- O otimizador agora respeita a restrição fictícia de equipe, e propostas fora do limite são bloqueadas. Isso não valida a política ou o simulador em operações reais.
 - O RAG foi avaliado com um conjunto pequeno de desenvolvimento; não há avaliação humana independente.
 - A integração com provedores externos de LLM não foi validada com credenciais reais.
 - Hugging Face e n8n têm artefatos ou fluxos preparados, mas **não foram publicados ou executados de ponta a ponta**.
@@ -181,7 +181,7 @@ O TurnoLab é um **ambiente de pesquisa e demonstração**, não uma plataforma 
 
 Os próximos experimentos são melhorar a calibração nos horários abertos, testar políticas sob dados novos, tornar o estado do estoque mais contínuo e avaliar a qualidade das justificativas com um corpus mais amplo.
 
-[Limitações e roadmap](docs/limitations-and-roadmap.md) · [Segurança](docs/security/README.md) · [Relatório da auditoria](docs/AUDITORIA_FINAL_2026-10-28.md)
+[Limitações e roadmap](docs/limitations-and-roadmap.md) · [Correções medidas](docs/ROADMAP_PROGRESS_2026-10-28.md) · [Segurança](docs/security/README.md) · [Auditoria histórica](docs/AUDITORIA_FINAL_2026-10-28.md)
 
 ---
 

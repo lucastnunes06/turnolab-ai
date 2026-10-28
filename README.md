@@ -8,13 +8,21 @@ antes de propor uma ação e deixa visíveis os modelos, os dados, os custos e o
 
 *Demand Forecasting, Operational Intelligence & AI Copilot for Restaurants*
 
-> Projeto de portfólio com dados sintéticos. Sem afiliação com o iFood, sem dados
-> internos, sem operação real e sem publicação externa realizada.
+> Projeto de portfólio com dados sintéticos, sem afiliação com o iFood, sem
+> dados internos e sem operação real. Este repositório não é um serviço em produção.
 
-**Estado verificável:** modelos treinados, API exercitada em ASGI, simulador e
-copiloto offline integrados, oito telas conectadas, testes locais aprovados.
-**Entrega integral ainda pendente:** navegador/capturas/GIF, Docker, MLflow e CI
-remota não foram verificados neste ambiente. A API HTTP/TCP local foi exercitada com sucesso. Consulte [critérios e pendências](docs/acceptance.md).
+[![CI: testes e navegador](https://github.com/lucastnunes06/turnolab-ai/actions/workflows/quality.yml/badge.svg)](https://github.com/lucastnunes06/turnolab-ai/actions/workflows/quality.yml)
+
+**Verificado no GitHub Actions:** treinamento a partir de um clone limpo; testes
+Python e Node; análise estática, dependências, Playwright com API real,
+Docker Compose com HTTP de prontidão e rastreamento local com MLflow 3.5.1.
+[Execução do navegador](https://github.com/lucastnunes06/turnolab-ai/actions/runs/40726044887) ·
+[Docker e MLflow](https://github.com/lucastnunes06/turnolab-ai/actions/runs/40726836196) ·
+[Evidências e limitações](docs/CI_EVIDENCE_2026-10-28.md).
+
+**Ainda não comprovado:** demonstração em GIF/vídeo de 90 segundos, publicação
+no Hugging Face, automação n8n executada e deploy público de produção.
+Os valores dos experimentos são sintéticos.
 
 ## Um resultado que não favorece a IA por conveniência
 
@@ -38,14 +46,22 @@ Estes custos são **hipóteses do simulador**, não economia realizada. [Protoco
 
 ## Ver a aplicação
 
-A UI local tem Visão geral, Demand Intelligence, Scenario Lab, AI Copilot,
-Inventory Intelligence, Model Observatory, Action Center e Experiments.
+![Dashboard real do TurnoLab AI capturado com Chromium e a API FastAPI/SQLite no GitHub Actions](docs/media/dashboard.png)
 
-**Captura real e GIF: pendentes.** O Chromium iniciou nesta auditoria, mas a
-navegação foi bloqueada por uma política do ambiente (`ERR_BLOCKED_BY_ADMINISTRATOR`). Não há imagem de mock apresentada
-como captura. [O teste Playwright](scripts/browser_check.py) e [o roteiro de 90s](docs/demo-script.md)
-estão prontos para gerar evidências a partir da interface e API reais quando o
-navegador puder navegar. A figura acima é um gráfico experimental, não uma screenshot.
+[**Simulação de capacidade**](docs/media/scenario.png) ·
+[**Copiloto com referências**](docs/media/copilot.png) ·
+[**Teste automatizado de navegador**](scripts/browser_check.py)
+
+As capturas foram obtidas em um runner do GitHub com **Chromium, backend FastAPI,
+banco SQLite e modelos treinados na CI**. As respostas são calculadas pela aplicação;
+o teste encaminha as requisições do navegador ao backend via ASGI, sem respostas
+de API fabricadas. O teste também verificou a navegação em viewport de 390 px.
+[Execução com capturas](https://github.com/lucastnunes06/turnolab-ai/actions/runs/40726044887).
+
+A interface inclui Visão geral, Demand Intelligence, Scenario Lab, AI Copilot,
+Inventory Intelligence, Model Observatory, Action Center e Experiments.
+**GIF/vídeo de 90 segundos permanece pendente.** Não foi substituído por animação
+fictícia. [Roteiro](docs/demo-script.md).
 
 ## Executar sem credenciais externas
 

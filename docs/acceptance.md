@@ -1,5 +1,12 @@
 # Estado de aceitação — auditoria de 28/10/2026
 
+> **Atualização posterior à auditoria local:** o projeto foi publicado no GitHub e
+> os bloqueios de Chromium, Docker e MLflow foram superados em runners do GitHub
+> Actions. Consulte [as evidências remotas](CI_EVIDENCE_2026-10-28.md).
+> O quadro histórico abaixo descreve o estado **anterior à publicação**,
+> preservado para demonstrar as etapas e limitações do processo.
+
+
 Não há declaração de conclusão integral. Os resultados abaixo distinguem código
 implementado, execução verificada e dependências que o ambiente não permitiu validar.
 

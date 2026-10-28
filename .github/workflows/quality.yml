@@ -1,0 +1,41 @@
+name: reproducible-local-lab
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      OPENBLAS_NUM_THREADS: 1
+      OMP_NUM_THREADS: 1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - run: pip install -r requirements.txt
+      - run: python scripts/bootstrap.py
+      - run: python scripts/check.py
+      - run: pip install ruff==0.15.1 bandit==1.9.3 pip-audit==2.10.0 playwright==1.62.0
+      - run: ruff check --select E9,F63,F7,F82 .
+      - run: python scripts/style_check.py
+      - run: bandit -r backend/app ai simulator -lll
+      - run: pip-audit -r requirements.txt
+      - run: python -m playwright install --with-deps chromium
+      - run: python scripts/browser_check.py
+        env:
+          CHROMIUM_EXECUTABLE: ''
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: turnolab-evidence
+          path: |
+            reports/
+            docs/media/

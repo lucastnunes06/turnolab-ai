@@ -1,0 +1,23 @@
+[
+  {
+    "restaurant_id": 1.0,
+    "hour_sin": -0.991,
+    "hour_cos": 0.131,
+    "dow_sin": -0.975,
+    "dow_cos": -0.223,
+    "weekend": 1.0,
+    "open": 1.0,
+    "promotion_known": 0.0,
+    "lag_0": 22.0,
+    "lag_1": 12.0,
+    "lag_2": 7.0,
+    "lag_48": 29.0,
+    "rolling_4": 11.75,
+    "rolling_12": 10.833,
+    "rolling_48": 9.771,
+    "seasonal_day": 24.0,
+    "seasonal_week": 37.0,
+    "staff": 3.0,
+    "capacity": 34.2
+  }
+]

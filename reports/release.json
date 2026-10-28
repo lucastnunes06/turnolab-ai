@@ -1,0 +1,119 @@
+{
+  "complete": false,
+  "local_checks_passed": true,
+  "stages": {
+    "bootstrap": {
+      "status": "passed",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "scripts/bootstrap.py"
+      ],
+      "exit_code": 0,
+      "seconds": 9.594782057999964,
+      "output": "{\n  \"lexical\": {\n    \"recall_at_3\": 0.9473684210526315,\n    \"hit_rate_at_3\": 0.9473684210526315,\n    \"reference_relevance_precision\": 0.7777777777777778,\n    \"correct_abstention\": 1.0,\n    \"latency_mean_ms\": 0.9254581739143127,\n    \"n\": 23\n  },\n  \"lsa\": {\n    \"recall_at_3\": 0.9473684210526315,\n    \"hit_rate_at_3\": 0.9473684210526315,\n    \"reference_relevance_precision\": 0.5476190476190477,\n    \"correct_abstention\": 1.0,\n    \"latency_mean_ms\": 0.9933401739129729,\n    \"n\": 23\n  },\n  \"hybrid\": {\n    \"recall_at_3\": 0.9473684210526315,\n    \"hit_rate_at_3\": 0.9473684210526315,\n    \"reference_relevance_precision\": 0.6410256410256411,\n    \"correct_abstention\": 1.0,\n    \"latency_mean_ms\": 1.0348242173687021,\n    \"n\": 23\n  },\n  \"protocol\": {\n    \"questions\": 23,\n    \"answerable\": 19,\n    \"limitation\": \"Small hand-authored set; one gold document per answer. No claim of LLM answer entailment measurement.\",\n    \"unsupported_answers\": \"Measured separately for offline coordinator in adversarial tests; no external LLM executed.\"\n  }\n}\n{\n  \"sensitivity\": [\n    {\n      \"strategy\": \"fixed\",\n      \"demand_multiplier\": 0.8,\n      \"backlog_cost_multiplier\": 0.5,\n      \"mean_cost\": 236.88735214034594,\n      \"mean_backlog\": 8.470318035636172\n    },\n    {\n      \"strategy\": \"forecast\",\n      \"demand_multiplier\": 0.8,\n      \"backlog_cost_multiplier\": 0.5,\n      \"mean_cost\": 214.48942166144917,\n      \"mean_backlog\": 6.914464946098933\n    },\n    {\n      \"strategy\": \"simulator\",\n      \"demand_multiplier\": 0.8,\n      \"backlog_cost_multiplier\": 0.5,\n      \"mean_cost\": 193.8191331484273,\n      \"mean_backlog\": 6.960438798102858\n    },\n    {\n      \"strategy\": \"fixed\",\n      \"demand_multiplier\": 0.8,\n      \"backlog_cost_multiplier\": 1.0,\n      \"mean_cost\": 285.9096822094943,\n      \"mean_backlog\": 8.470318035636172\n    },\n    {\n      \"strategy\": \"forecast\",\n      \"demand_multiplier\": 0.8,\n      \"backlog_cost_multiplier\": 1.0,\n      \"mean_cost\": 256.98537870200585,\n      \"mean_backlog\": 6.914464946098933\n    },\n    {\n      \"strategy\": \"simulator\",\n      \"demand_multiplier\": 0.8,\n      \"backlog_cost_multiplier\": 1.0,\n      \"mean_cost\": 236.91636894579278,\n      \"mean_backlog\": 6.960438798102858\n    },\n    {\n      \"strategy\": \"fixed\",\n      \"demand_multiplier\": 0.8,\n      \"backlog_cost_multiplier\": 2.0,\n      \"mean_cost\": 383.95434234779094,\n      \"mean_backlog\": 8.470318035636172\n    },\n    {\n      \"strategy\": \"forecast\",\n      \"demand_multiplier\": 0.8,\n      \"backlog_cost_multiplier\": 2.0,\n      \"mean_cost\": 341.9772927831193,\n      \"mean_backlog\": 6.914464946098933\n    },\n    {\n      \"strategy\": \"simulator\",\n      \"demand_multiplier\": 0.8,\n      \"backlog_cost_multiplier\": 2.0,\n      \"mean_cost\": 323.11084054052355,\n      \"mean_backlog\": 6.960438798102858\n    },\n    {\n      \"strategy\": \"fixed\",\n      \"demand_multiplier\": 1.0,\n      \"backlog_cost_multiplier\": 0.5,\n      \"mean_cost\": 288.1315698314897,\n      \"mean_backlog\": 13.9809378440867\n    },\n    {\n      \"strategy\": \"forecast\",\n      \"demand_multiplier\": 1.0,\n      \"backlog_cost_multiplier\": 0.5,\n      \"mean_cost\": 259.2111131040132,\n      \"mean_backlog\": 11.789503979294157\n    },\n    {\n      \"strategy\": \"simulator\",\n      \"demand_multiplier\": 1.0,\n      \"backlog_cost_multiplier\": 0.5,\n      \"mean_cost\": 232.00905504205667,\n      \"mean_backlog\": 11.748560007391054\n    },\n    {\n      \"strategy\": \"fixed\",\n      \"demand_multiplier\": 1.0,\n      \"backlog_cost_multiplier\": 1.0,\n      \"mean_cost\": 367.36905830904027,\n      \"mean_backlog\": 13.9809378440867\n    },\n    {\n      \"strategy\": \"forecast\",\n      \"demand_multiplier\": 1.0,\n      \"backlog_cost_multiplier\": 1.0,\n      \"mean_cost\": 329.6650077358396,\n      \"mean_backlog\": 11.789503979294157\n    },\n    {\n      \"strategy\": \"simulator\",\n      \"demand_multiplier\": 1.0,\n      \"backlog_cost_multiplier\": 1.0,\n      \"mean_cost\": 302.34291772247866,\n      \"mean_backlog\": 11.748560007391054\n    },\n    {\n      \"strategy\": \"fixed\",\n      \"demand_multiplier\": 1.0,\n      \"backlog_cost_multiplier\": 2.0,\n      \"mean_cost\": 525.8440352641416,\n      \"mean_backlog\": 13.9809378440867\n    },\n    {\n      \"strategy\": \"forecast\",\n      \"demand_multiplier\": 1.0,\n      \"backlog_cost_multiplier\": 2.0,\n      \"mean_cost\": 470.5727969994925,\n      \"mean_backlog\": 11.789503979294157\n    },\n    {\n      \"strategy\": \"simulator\",\n      \"demand_multiplier\": 1.0,\n      \"backlog_cost_multiplier\": 2.0,\n      \"mean_cost\": 443.01064308332263,\n      \"mean_backlog\": 11.748560007391054\n    },\n    {\n      \"strategy\": \"fixed\",\n      \"demand_multiplier\": 1.2,\n      \"backlog_cost_multiplier\": 0.5,\n      \"mean_cost\": 344.3616125918535,\n      \"mean_backlog\": 20.626511266853385\n    },\n    {\n      \"strategy\": \"forecast\",\n      \"demand_multiplier\": 1.2,\n      \"backlog_cost_multiplier\": 0.5,\n      \"mean_cost\": 309.4155603168783,\n      \"mean_backlog\": 18.19563695068375\n    },\n    {\n      \"strategy\": \"simulator\",\n      \"demand_multiplier\": 1.2,\n      \"backlog_cost_multiplier\": 0.5,\n      \"mean_cost\": 279.56560666442573,\n      \"mean_backlog\": 17.962656057747264\n    },\n    {\n      \"strategy\": \"fixed\",\n      \"demand_multiplier\": 1.2,\n      \"backlog_cost_multiplier\": 1.0,\n      \"mean_cost\": 459.5302192181711,\n      \"mean_backlog\": 20.626511266853385\n    },\n    {\n      \"strategy\": \"forecast\",\n      \"demand_multiplier\": 1.2,\n      \"backlog_cost_multiplier\": 1.0,\n      \"mean_cost\": 415.6693511344238,\n      \"mean_backlog\": 18.19563695068375\n    },\n    {\n      \"strategy\": \"simulator\",\n      \"demand_multiplier\": 1.2,\n      \"backlog_cost_multiplier\": 1.0,\n      \"mean_cost\": 384.8132389691476,\n      \"mean_backlog\": 17.962656057747264\n    },\n    {\n      \"strategy\": \"fixed\",\n      \"demand_multiplier\": 1.2,\n      \"backlog_cost_multiplier\": 2.0,\n      \"mean_cost\": 689.8674324708065,\n      \"mean_backlog\": 20.626511266853385\n    },\n    {\n      \"strategy\": \"forecast\",\n      \"demand_multiplier\": 1.2,\n      \"backlog_cost_multiplier\": 2.0,\n      \"mean_cost\": 628.1769327695147,\n      \"mean_backlog\": 18.19563695068375\n    },\n    {\n      \"strategy\": \"simulator\",\n      \"demand_multiplier\": 1.2,\n      \"backlog_cost_multiplier\": 2.0,\n      \"mean_cost\": 595.3085035785916,\n      \"mean_backlog\": 17.962656057747264\n    }\n  ],\n  \"seed\": 20261028,\n  \"n_scenarios\": 400,\n  \"strategies\": [\n    {\n      \"strategy\": \"fixed\",\n      \"label\": \"Regras fixas\",\n      \"mean_backlog\": 13.9809378440867,\n      \"mean_cost\": 367.36905830904027,\n      \"mean_regret\": 74.69654859810974,\n      \"policy_compliance\": 1.0,\n      \"document_support\": 0.0,\n      \"paired_cost_delta\": 0.0,\n      \"bootstrap_95_ci\": [\n        0.0,\n        0.0\n      ],\n      \"solver_mean_ms\": 0.05904861000175288\n    },\n    {\n      \"strategy\": \"forecast\",\n      \"label\": \"Regras + previs\u00e3o\",\n      \"mean_backlog\": 11.789503979294157,\n      \"mean_cost\": 329.6650077358396,\n      \"mean_regret\": 36.992498024909054,\n      \"policy_compliance\": 1.0,\n      \"document_support\": 0.0,\n      \"paired_cost_delta\": -37.70405057320068,\n      \"bootstrap_95_ci\": [\n        -55.61402699101861,\n        -23.347253901052458\n      ],\n      \"solver_mean_ms\": 0.05904861000175288\n    },\n    {\n      \"strategy\": \"simulator\",\n      \"label\": \"Previs\u00e3o + simulador\",\n      \"mean_backlog\": 11.748560007391054,\n      \"mean_cost\": 302.34291772247866,\n      \"mean_regret\": 9.670408011548103,\n      \"policy_compliance\": 0.9775,\n      \"document_support\": 0.0,\n      \"paired_cost_delta\": -65.02614058656164,\n      \"bootstrap_95_ci\": [\n        -81.91048868996282,\n        -49.0723817593807\n      ],\n      \"solver_mean_ms\": 0.05904861000175288\n    },\n    {\n      \"strategy\": \"rag\",\n      \"label\": \"Previs\u00e3o + simulador + RAG\",\n      \"mean_backlog\": 11.748560007391054,\n      \"mean_cost\": 302.34291772247866,\n      \"mean_regret\": 9.670408011548103,\n      \"policy_compliance\": 0.9775,\n      \"document_support\": 1.0,\n      \"paired_cost_delta\": -65.02614058656164,\n      \"bootstrap_95_ci\": [\n        -81.95384152570642,\n        -48.88019797395821\n      ],\n      \"solver_mean_ms\": 0.05904861000175288\n    },\n    {\n      \"strategy\": \"copilot\",\n      \"label\": \"Previs\u00e3o + simulador + copiloto\",\n      \"mean_backlog\": 11.748560007391054,\n      \"mean_cost\": 302.34291772247866,\n      \"mean_regret\": 9.670408011548103,\n      \"policy_compliance\": 0.9775,\n      \"document_support\": 1.0,\n      \"paired_cost_delta\": -65.02614058656164,\n      \"bootstrap_95_ci\": [\n        -83.64681120506401,\n        -50.145034028001376\n      ],\n      \"solver_mean_ms\": 0.05904861000175288\n    }\n  ],\n  \"document_ids\": [\n    \"peaks\"\n  ],\n  \"hypotheses\": [\n    \"H1: forecast-informed policies reduce cost vs fixed rules on held-out synthetic outcomes.\",\n    \"H2: solver improves chosen objective over a forecast threshold heuristic.\",\n    \"H3: RAG improves documentary support; identical numeric outputs are required by design.\",\n    \"H4: deterministic role labels do not improve decisions over simple tool calling.\"\n  ],\n  \"development\": \"Rules written without reading sampled test outcomes. Test origins start day 72. Seed differs from data generation.\",\n  \"conclusion\": \"RAG e copiloto mant\u00eam o resultado operacional do simulador por constru\u00e7\u00e3o. Sua contribui\u00e7\u00e3o aqui \u00e9 o suporte documental; n\u00e3o h\u00e1 evid\u00eancia de ganho operacional adicional por IA generativa.\",\n  \"limitations\": [\n    \"Synthetic outcomes and fluid simulator; no external validity claim.\",\n    \"Oracle and simulator share structural assumptions.\",\n    \"Bootstrap is scenario-level and ignores restaurant correlation.\",\n    \"Forecast errors are temporally correlated.\",\n    \"Policy compliance is measured as a separate check; retrieval does not enforce staffing policy in this ablation.\",\n    \"No external LLM executed. Offline coordinator is an evidence presentation layer.\"\n  ],\n  \"protocol_hash\": \"e1d780bb8712143872c3b0d1a5e98ec861b2be0677a158bfc772bdaa5e6554ec\"\n}\n{\n  \"simple\": {\n    \"n\": 12,\n    \"median_ms\": 70.31021599999576,\n    \"mean_ms\": 104.10240891666452,\n    \"min_ms\": 64.48586199996953,\n    \"max_ms\": 252.80101100008778\n  },\n  \"roles\": {\n    \"n\": 12,\n    \"median_ms\": 70.18023850008603,\n    \"mean_ms\": 87.52355275001378,\n    \"min_ms\": 64.10893800000395,\n    \"max_ms\": 158.21421099997224\n  },\n  \"identical_structured_facts\": true,\n  \"conclusion\": \"Pap\u00e9is determin\u00edsticos e tool calling simples produziram os mesmos fatos. N\u00e3o foi demonstrada vantagem de m\u00faltiplos agentes; a interface usa o caminho simples.\",\n  \"limitation\": \"Single CPU/process, warm cache, 12 prompts per mode; role modes share the same implementation. This is an overhead/null ablation, not evidence about autonomous LLM agents.\"\n}\nBootstrap complete. Start: python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000\n"
+    },
+    "local_ci": {
+      "status": "passed",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "scripts/check.py"
+      ],
+      "exit_code": 0,
+      "seconds": 10.826560169999993,
+      "output": "PASS /opt/pyvenv/bin/python scripts/style_check.py\nPASS /opt/pyvenv/bin/python -m compileall -q backend ml ai simulator scripts\nPASS /opt/pyvenv/bin/python -m unittest discover -s backend/tests -v\nPASS /opt/pyvenv/bin/python scripts/ui_fixture.py\nPASS npm --prefix frontend run check\nPASS npm --prefix frontend test\nPASS npm --prefix frontend run build\nPASS /opt/pyvenv/bin/python scripts/security_check.py\n"
+    },
+    "http_tcp": {
+      "status": "passed",
+      "live_http_executed": true,
+      "port": 52435,
+      "requests": [
+        {
+          "path": "/health",
+          "status": 200,
+          "milliseconds": 1.4184589999786112
+        },
+        {
+          "path": "/ready",
+          "status": 200,
+          "milliseconds": 1.4894800000320174
+        },
+        {
+          "path": "/api/restaurants",
+          "status": 200,
+          "milliseconds": 1.9755550000581934
+        },
+        {
+          "path": "/api/restaurants/1/history",
+          "status": 200,
+          "milliseconds": 2.2507349999614235
+        },
+        {
+          "path": "/api/restaurants/1/forecast",
+          "status": 200,
+          "milliseconds": 57.85658699994656
+        },
+        {
+          "path": "/api/restaurants/1/inventory",
+          "status": 200,
+          "milliseconds": 55.89845700001206
+        },
+        {
+          "path": "/openapi.json",
+          "status": 200,
+          "milliseconds": 18.450035999990178
+        },
+        {
+          "path": "/docs",
+          "status": 200,
+          "milliseconds": 3.9429049999171184
+        },
+        {
+          "path": "/",
+          "status": 200,
+          "milliseconds": 1.8350430000282358
+        }
+      ],
+      "seconds": 2.0062576510000554
+    },
+    "browser": {
+      "status": "blocked",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "scripts/browser_check.py"
+      ],
+      "exit_code": 2,
+      "seconds": 2.825895360000004,
+      "output": "{\n  \"status\": \"blocked\",\n  \"scope\": \"Real Chromium navigation through the local FastAPI/SQLite ASGI bridge\",\n  \"reason\": \"Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://turnolab.local/\\nCall log:\\n  - navigating to \\\"http://turnolab.local/\\\", waiting until \\\"networkidle\\\"\\n\",\n  \"screenshots_verified\": false\n}\n"
+    },
+    "demo": {
+      "status": "blocked",
+      "reason": "Browser not verified or demo explicitly skipped"
+    },
+    "mlflow": {
+      "status": "blocked",
+      "command": [
+        "/opt/pyvenv/bin/python",
+        "scripts/mlflow_check.py"
+      ],
+      "exit_code": 2,
+      "seconds": 0.6725779070000044,
+      "output": "{\"status\": \"blocked\", \"reason\": \"mlflow package is not installed in this Python environment. Install the documented optional tracking dependencies, then rerun the check\", \"live_tracking_executed\": false}\n"
+    },
+    "docker": {
+      "status": "blocked",
+      "reason": "Docker CLI not installed"
+    },
+    "github_actions": {
+      "status": "blocked",
+      "reason": "No workflow run URL supplied; code has not been published by this script."
+    },
+    "external_llm": {
+      "status": "not_configured",
+      "required": false,
+      "reason": "Provider optional; contract tests use MockTransport and are not live-provider validation."
+    }
+  },
+  "executed_at": "2026-10-28T16:08:18.720234+00:00",
+  "seconds": 26.14101521500004,
+  "external_publication_performed": false
+}

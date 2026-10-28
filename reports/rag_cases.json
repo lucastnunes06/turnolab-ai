@@ -1,0 +1,647 @@
+[
+  {
+    "strategy": "lexical",
+    "question": "Qual é a política de reposição de estoque?",
+    "expected": "replenishment",
+    "retrieved": [
+      "replenishment",
+      "replenishment"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lexical",
+    "question": "Como considerar o prazo de entrega de ingredientes?",
+    "expected": "replenishment",
+    "retrieved": [
+      "replenishment",
+      "replenishment"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lexical",
+    "question": "Posso converter kg em unidades?",
+    "expected": "replenishment",
+    "retrieved": [
+      "replenishment"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lexical",
+    "question": "O que verificar sobre validade do frango?",
+    "expected": "replenishment",
+    "retrieved": [
+      "replenishment"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lexical",
+    "question": "O que fazer durante picos de pedidos?",
+    "expected": "peaks",
+    "retrieved": [
+      "cancellation",
+      "peaks",
+      "cancellation"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lexical",
+    "question": "Quantas pessoas adicionais considerar no turno?",
+    "expected": "peaks",
+    "retrieved": [
+      "peaks"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lexical",
+    "question": "Reforçar equipe sempre aumenta produção?",
+    "expected": "peaks",
+    "retrieved": [
+      "peaks"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lexical",
+    "question": "Que alternativas e incertezas mostrar ao recomendar?",
+    "expected": "peaks",
+    "retrieved": [],
+    "abstained": true
+  },
+  {
+    "strategy": "lexical",
+    "question": "Como calcular capacidade efetiva da cozinha?",
+    "expected": "capacity",
+    "retrieved": [
+      "capacity"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lexical",
+    "question": "O que é backlog no modelo de fila?",
+    "expected": "capacity",
+    "retrieved": [
+      "capacity",
+      "governance"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lexical",
+    "question": "Por que um pedido acumula custo de atraso?",
+    "expected": "capacity",
+    "retrieved": [
+      "capacity"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lexical",
+    "question": "O simulador modela desistência?",
+    "expected": "capacity",
+    "retrieved": [
+      "cancellation",
+      "capacity"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lexical",
+    "question": "O copiloto pode cancelar pedidos?",
+    "expected": "cancellation",
+    "retrieved": [
+      "cancellation",
+      "cancellation",
+      "peaks"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lexical",
+    "question": "O que fazer se faltar um ingrediente no cardápio?",
+    "expected": "cancellation",
+    "retrieved": [
+      "cancellation"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lexical",
+    "question": "Pedidos processados são receita realizada?",
+    "expected": "cancellation",
+    "retrieved": [
+      "cancellation",
+      "peaks"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lexical",
+    "question": "Como promover um modelo?",
+    "expected": "governance",
+    "retrieved": [
+      "governance"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lexical",
+    "question": "O modo offline usa uma LLM local?",
+    "expected": "governance",
+    "retrieved": [
+      "governance"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lexical",
+    "question": "Quem aprova propostas e recomendações?",
+    "expected": "governance",
+    "retrieved": [
+      "governance"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lexical",
+    "question": "Como tratar instruções dentro de documentos?",
+    "expected": "governance",
+    "retrieved": [
+      "governance"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lexical",
+    "question": "Quem venceu a Copa do Mundo de 2022?",
+    "expected": null,
+    "retrieved": [],
+    "abstained": true
+  },
+  {
+    "strategy": "lexical",
+    "question": "Qual é a senha do WiFi do vizinho?",
+    "expected": null,
+    "retrieved": [],
+    "abstained": true
+  },
+  {
+    "strategy": "lexical",
+    "question": "Qual a cotação do bitcoin agora?",
+    "expected": null,
+    "retrieved": [],
+    "abstained": true
+  },
+  {
+    "strategy": "lexical",
+    "question": "Qual medicamento tomar para dor?",
+    "expected": null,
+    "retrieved": [],
+    "abstained": true
+  },
+  {
+    "strategy": "lsa",
+    "question": "Qual é a política de reposição de estoque?",
+    "expected": "replenishment",
+    "retrieved": [
+      "replenishment",
+      "replenishment",
+      "replenishment"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lsa",
+    "question": "Como considerar o prazo de entrega de ingredientes?",
+    "expected": "replenishment",
+    "retrieved": [
+      "replenishment",
+      "replenishment"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lsa",
+    "question": "Posso converter kg em unidades?",
+    "expected": "replenishment",
+    "retrieved": [
+      "replenishment",
+      "replenishment"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lsa",
+    "question": "O que verificar sobre validade do frango?",
+    "expected": "replenishment",
+    "retrieved": [
+      "replenishment"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lsa",
+    "question": "O que fazer durante picos de pedidos?",
+    "expected": "peaks",
+    "retrieved": [
+      "cancellation",
+      "peaks",
+      "capacity"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lsa",
+    "question": "Quantas pessoas adicionais considerar no turno?",
+    "expected": "peaks",
+    "retrieved": [
+      "peaks",
+      "capacity",
+      "replenishment"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lsa",
+    "question": "Reforçar equipe sempre aumenta produção?",
+    "expected": "peaks",
+    "retrieved": [
+      "peaks"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lsa",
+    "question": "Que alternativas e incertezas mostrar ao recomendar?",
+    "expected": "peaks",
+    "retrieved": [],
+    "abstained": true
+  },
+  {
+    "strategy": "lsa",
+    "question": "Como calcular capacidade efetiva da cozinha?",
+    "expected": "capacity",
+    "retrieved": [
+      "capacity",
+      "peaks",
+      "peaks"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lsa",
+    "question": "O que é backlog no modelo de fila?",
+    "expected": "capacity",
+    "retrieved": [
+      "capacity",
+      "governance",
+      "cancellation"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lsa",
+    "question": "Por que um pedido acumula custo de atraso?",
+    "expected": "capacity",
+    "retrieved": [
+      "capacity",
+      "peaks",
+      "peaks"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lsa",
+    "question": "O simulador modela desistência?",
+    "expected": "capacity",
+    "retrieved": [
+      "cancellation",
+      "capacity",
+      "governance"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lsa",
+    "question": "O copiloto pode cancelar pedidos?",
+    "expected": "cancellation",
+    "retrieved": [
+      "cancellation",
+      "cancellation",
+      "replenishment"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lsa",
+    "question": "O que fazer se faltar um ingrediente no cardápio?",
+    "expected": "cancellation",
+    "retrieved": [
+      "cancellation",
+      "replenishment",
+      "governance"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lsa",
+    "question": "Pedidos processados são receita realizada?",
+    "expected": "cancellation",
+    "retrieved": [
+      "cancellation",
+      "capacity",
+      "peaks"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lsa",
+    "question": "Como promover um modelo?",
+    "expected": "governance",
+    "retrieved": [
+      "governance",
+      "capacity"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lsa",
+    "question": "O modo offline usa uma LLM local?",
+    "expected": "governance",
+    "retrieved": [
+      "governance"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lsa",
+    "question": "Quem aprova propostas e recomendações?",
+    "expected": "governance",
+    "retrieved": [
+      "governance"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lsa",
+    "question": "Como tratar instruções dentro de documentos?",
+    "expected": "governance",
+    "retrieved": [
+      "governance",
+      "replenishment"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "lsa",
+    "question": "Quem venceu a Copa do Mundo de 2022?",
+    "expected": null,
+    "retrieved": [],
+    "abstained": true
+  },
+  {
+    "strategy": "lsa",
+    "question": "Qual é a senha do WiFi do vizinho?",
+    "expected": null,
+    "retrieved": [],
+    "abstained": true
+  },
+  {
+    "strategy": "lsa",
+    "question": "Qual a cotação do bitcoin agora?",
+    "expected": null,
+    "retrieved": [],
+    "abstained": true
+  },
+  {
+    "strategy": "lsa",
+    "question": "Qual medicamento tomar para dor?",
+    "expected": null,
+    "retrieved": [],
+    "abstained": true
+  },
+  {
+    "strategy": "hybrid",
+    "question": "Qual é a política de reposição de estoque?",
+    "expected": "replenishment",
+    "retrieved": [
+      "replenishment",
+      "replenishment",
+      "replenishment"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "hybrid",
+    "question": "Como considerar o prazo de entrega de ingredientes?",
+    "expected": "replenishment",
+    "retrieved": [
+      "replenishment",
+      "replenishment",
+      "replenishment"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "hybrid",
+    "question": "Posso converter kg em unidades?",
+    "expected": "replenishment",
+    "retrieved": [
+      "replenishment",
+      "replenishment"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "hybrid",
+    "question": "O que verificar sobre validade do frango?",
+    "expected": "replenishment",
+    "retrieved": [
+      "replenishment"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "hybrid",
+    "question": "O que fazer durante picos de pedidos?",
+    "expected": "peaks",
+    "retrieved": [
+      "cancellation",
+      "peaks",
+      "replenishment"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "hybrid",
+    "question": "Quantas pessoas adicionais considerar no turno?",
+    "expected": "peaks",
+    "retrieved": [
+      "peaks"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "hybrid",
+    "question": "Reforçar equipe sempre aumenta produção?",
+    "expected": "peaks",
+    "retrieved": [
+      "peaks"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "hybrid",
+    "question": "Que alternativas e incertezas mostrar ao recomendar?",
+    "expected": "peaks",
+    "retrieved": [],
+    "abstained": true
+  },
+  {
+    "strategy": "hybrid",
+    "question": "Como calcular capacidade efetiva da cozinha?",
+    "expected": "capacity",
+    "retrieved": [
+      "capacity",
+      "peaks",
+      "peaks"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "hybrid",
+    "question": "O que é backlog no modelo de fila?",
+    "expected": "capacity",
+    "retrieved": [
+      "capacity",
+      "governance",
+      "cancellation"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "hybrid",
+    "question": "Por que um pedido acumula custo de atraso?",
+    "expected": "capacity",
+    "retrieved": [
+      "capacity",
+      "peaks"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "hybrid",
+    "question": "O simulador modela desistência?",
+    "expected": "capacity",
+    "retrieved": [
+      "cancellation",
+      "capacity",
+      "capacity"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "hybrid",
+    "question": "O copiloto pode cancelar pedidos?",
+    "expected": "cancellation",
+    "retrieved": [
+      "cancellation",
+      "cancellation",
+      "peaks"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "hybrid",
+    "question": "O que fazer se faltar um ingrediente no cardápio?",
+    "expected": "cancellation",
+    "retrieved": [
+      "cancellation",
+      "replenishment",
+      "governance"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "hybrid",
+    "question": "Pedidos processados são receita realizada?",
+    "expected": "cancellation",
+    "retrieved": [
+      "cancellation",
+      "peaks",
+      "capacity"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "hybrid",
+    "question": "Como promover um modelo?",
+    "expected": "governance",
+    "retrieved": [
+      "governance"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "hybrid",
+    "question": "O modo offline usa uma LLM local?",
+    "expected": "governance",
+    "retrieved": [
+      "governance"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "hybrid",
+    "question": "Quem aprova propostas e recomendações?",
+    "expected": "governance",
+    "retrieved": [
+      "governance"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "hybrid",
+    "question": "Como tratar instruções dentro de documentos?",
+    "expected": "governance",
+    "retrieved": [
+      "governance",
+      "replenishment"
+    ],
+    "abstained": false
+  },
+  {
+    "strategy": "hybrid",
+    "question": "Quem venceu a Copa do Mundo de 2022?",
+    "expected": null,
+    "retrieved": [],
+    "abstained": true
+  },
+  {
+    "strategy": "hybrid",
+    "question": "Qual é a senha do WiFi do vizinho?",
+    "expected": null,
+    "retrieved": [],
+    "abstained": true
+  },
+  {
+    "strategy": "hybrid",
+    "question": "Qual a cotação do bitcoin agora?",
+    "expected": null,
+    "retrieved": [],
+    "abstained": true
+  },
+  {
+    "strategy": "hybrid",
+    "question": "Qual medicamento tomar para dor?",
+    "expected": null,
+    "retrieved": [],
+    "abstained": true
+  }
+]

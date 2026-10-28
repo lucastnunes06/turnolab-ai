@@ -1,0 +1,64 @@
+{
+  "champion": "demand-v1",
+  "challenger": "demand-rf-v1",
+  "versions": {
+    "demand-v1": {
+      "file": "demand-v1.joblib",
+      "sha256": "5cd640dae06b295261d42ffaf4fb1c22f4e8dfa58e103a3af0002483a3b41e01",
+      "validation_mae": 2.9223469531732036,
+      "features": [
+        "restaurant_id",
+        "hour_sin",
+        "hour_cos",
+        "dow_sin",
+        "dow_cos",
+        "weekend",
+        "open",
+        "promotion_known",
+        "lag_0",
+        "lag_1",
+        "lag_2",
+        "lag_48",
+        "rolling_4",
+        "rolling_12",
+        "rolling_48",
+        "seasonal_day",
+        "seasonal_week",
+        "staff",
+        "capacity"
+      ],
+      "calibration_n": 13380
+    },
+    "demand-rf-v1": {
+      "file": "demand-rf-v1.joblib",
+      "sha256": "56c58152314d7af97f620e7d7e0d248f7da0ce1aef7c284480480d44d11ef065",
+      "validation_mae": 2.967242138482276,
+      "features": [
+        "restaurant_id",
+        "hour_sin",
+        "hour_cos",
+        "dow_sin",
+        "dow_cos",
+        "weekend",
+        "open",
+        "promotion_known",
+        "lag_0",
+        "lag_1",
+        "lag_2",
+        "lag_48",
+        "rolling_4",
+        "rolling_12",
+        "rolling_48",
+        "seasonal_day",
+        "seasonal_week",
+        "staff",
+        "capacity"
+      ],
+      "calibration_n": 13380
+    }
+  },
+  "promotion_rule": "Lower validation MAE; then calibration and frozen final evaluation. Manual registry update; no automatic test-based promotion.",
+  "history": [
+    "demand-v1"
+  ]
+}

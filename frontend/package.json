@@ -1,0 +1,12 @@
+{
+  "name": "turnolab-interface",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "check": "node --check app.js && node --check utils.js && node --check docs.js && node --check build.mjs",
+    "test": "node tests/utils.test.js && node tests/components.test.js",
+    "build": "node build.mjs"
+  },
+  "description": "Dependency-free local interface, served by FastAPI. React/TypeScript migration is documented as deferred."
+}

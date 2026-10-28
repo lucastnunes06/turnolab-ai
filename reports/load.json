@@ -1,0 +1,12 @@
+{
+  "requests": 80,
+  "concurrency": 4,
+  "errors": 0,
+  "elapsed_seconds": 1.8717755559999887,
+  "requests_per_second": 42.74016708016059,
+  "median_ms": 83.54031950000262,
+  "p95_ms": 126.55941100001655,
+  "max_ms": 168.46645099997204,
+  "transport": "in-process httpx ASGITransport, warm caches, no TCP overhead",
+  "limitation": "Synchronous ML/SQLite work runs inside the event loop for this local demo. Concurrency is cooperative, not parallel CPU inference."
+}

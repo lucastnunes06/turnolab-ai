@@ -1,0 +1,16 @@
+{
+  "status": "passed",
+  "rows": {
+    "restaurants": 20,
+    "products": 3,
+    "ingredients": 4,
+    "recipes": 6,
+    "order_events": 86400,
+    "inventory_snapshots": 86240
+  },
+  "schema_valid": true,
+  "dataset_hashes_match": true,
+  "fresh_training_reproduced": false,
+  "scope": "Independent regeneration of all six synthetic CSVs; compares SHA-256 with recorded baseline",
+  "seconds": 12.109
+}

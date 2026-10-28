@@ -1,0 +1,11 @@
+{
+  "name":"TurnoLab · periodic operational risk (demo)","active":false,
+  "nodes":[
+    {"id":"schedule","name":"Every 30 minutes","type":"n8n-nodes-base.scheduleTrigger","typeVersion":1.2,"position":[0,0],"parameters":{"rule":{"interval":[{"field":"minutes","minutesInterval":30}]}}},
+    {"id":"evaluate","name":"Evaluate restaurant","type":"n8n-nodes-base.httpRequest","typeVersion":4.2,"position":[240,0],"parameters":{"method":"POST","url":"={{ $env.TURNOLAB_API_URL + '/api/restaurants/1/evaluate' }}","authentication":"genericCredentialType","genericAuthType":"httpHeaderAuth","options":{"timeout":10000}}},
+    {"id":"webhook","name":"Authenticated inbound demo event","type":"n8n-nodes-base.webhook","typeVersion":2,"position":[240,240],"parameters":{"httpMethod":"POST","path":"turnolab-operational-demo","authentication":"headerAuth","responseMode":"onReceived","options":{}}},
+    {"id":"record","name":"Keep demo alert in execution history","type":"n8n-nodes-base.set","typeVersion":3.4,"position":[500,0],"parameters":{"mode":"manual","assignments":{"assignments":[{"id":"origin","name":"source","type":"string","value":"turnolab-demo"},{"id":"event","name":"event","type":"object","value":"={{ $json }}"}]},"includeOtherFields":true,"options":{}}}
+  ],
+  "connections":{"Every 30 minutes":{"main":[[{"node":"Evaluate restaurant","type":"main","index":0}]]},"Evaluate restaurant":{"main":[[{"node":"Keep demo alert in execution history","type":"main","index":0}]]},"Authenticated inbound demo event":{"main":[[{"node":"Keep demo alert in execution history","type":"main","index":0}]]}},
+  "settings":{"executionOrder":"v1"},"tags":[],"pinData":{}
+}

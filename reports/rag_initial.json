@@ -1,0 +1,32 @@
+{
+  "lexical": {
+    "recall_at_3": 0.9473684210526315,
+    "hit_rate_at_3": 0.9473684210526315,
+    "reference_relevance_precision": 0.6470588235294118,
+    "correct_abstention": 0.0,
+    "latency_mean_ms": 0.8780089132335928,
+    "n": 23
+  },
+  "lsa": {
+    "recall_at_3": 1.0,
+    "hit_rate_at_3": 1.0,
+    "reference_relevance_precision": 0.5208333333333334,
+    "correct_abstention": 0.0,
+    "latency_mean_ms": 0.7992297817153208,
+    "n": 23
+  },
+  "hybrid": {
+    "recall_at_3": 1.0,
+    "hit_rate_at_3": 1.0,
+    "reference_relevance_precision": 0.6190476190476191,
+    "correct_abstention": 0.0,
+    "latency_mean_ms": 0.8192105220666196,
+    "n": 23
+  },
+  "protocol": {
+    "questions": 23,
+    "answerable": 19,
+    "limitation": "Small hand-authored set; one gold document per answer. No claim of LLM answer entailment measurement.",
+    "unsupported_answers": "Measured separately for offline coordinator in adversarial tests; no external LLM executed."
+  }
+}

@@ -1,0 +1,4 @@
+export interface ForecastItem {horizon_minutes: number;target:string;point:number;lower:number;upper:number;model:string;model_version:string;nominal_coverage:number;source_max:string;feature_values:Record<string,number>;empirical_coverage:{empirical:number;open_coverage:number;peak_coverage:number}}
+export interface Restaurant {id:number;name:string;cuisine:string;city:string;staff:number;kitchen_capacity:number}
+export interface ScenarioChanges {staff:number;kitchen_capacity:number;demand_multiplier:number;promotion:number;stock_multiplier:number;replenishment_orders:number;replenishment_after:number;wage_per_hour:number;backlog_cost:number;stockout_cost:number}
+export interface Action {id:string;restaurant_id:number;simulation_id:string;status:'pending'|'approved'|'rejected';title:string;created_by:string;decided_by:string|null}

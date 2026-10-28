@@ -1,0 +1,413 @@
+{
+  "seed": 42,
+  "models": [
+    {
+      "horizon_minutes": 30,
+      "model": "last",
+      "selected": false,
+      "validation_mae": 4.3894686907020875,
+      "fit_seconds": 0.0003091550024691969,
+      "mae": 4.361877172653534,
+      "rmse": 8.678311694023941,
+      "wape": 0.44796563173114684,
+      "n": 17260
+    },
+    {
+      "horizon_minutes": 30,
+      "model": "moving_average",
+      "selected": false,
+      "validation_mae": 6.662571157495256,
+      "fit_seconds": 0.00011480200191726908,
+      "mae": 6.586022595596756,
+      "rmse": 11.864780319163781,
+      "wape": 0.6763857980983209,
+      "n": 17260
+    },
+    {
+      "horizon_minutes": 30,
+      "model": "seasonal",
+      "selected": false,
+      "validation_mae": 4.700379506641366,
+      "fit_seconds": 8.722100028535351e-05,
+      "mae": 4.434675550405562,
+      "rmse": 10.175656686027136,
+      "wape": 0.4554420392474206,
+      "n": 17260
+    },
+    {
+      "horizon_minutes": 30,
+      "model": "ridge",
+      "selected": false,
+      "validation_mae": 3.4190982945386663,
+      "fit_seconds": 0.013559594997786917,
+      "mae": 3.41241321412376,
+      "rmse": 7.022778230346501,
+      "wape": 0.35045549901688716,
+      "n": 17260
+    },
+    {
+      "horizon_minutes": 30,
+      "model": "random_forest",
+      "selected": false,
+      "validation_mae": 2.9372775301921683,
+      "fit_seconds": 4.429094213999633,
+      "mae": 2.9114401813812227,
+      "rmse": 6.0734197626232955,
+      "wape": 0.2990054713774673,
+      "n": 17260
+    },
+    {
+      "horizon_minutes": 30,
+      "model": "gradient_boosting_15",
+      "selected": false,
+      "validation_mae": 2.9588032906407427,
+      "fit_seconds": 0.33398198500071885,
+      "mae": 2.935584870915514,
+      "rmse": 6.057592652361644,
+      "wape": 0.30148513567613006,
+      "n": 17260
+    },
+    {
+      "horizon_minutes": 30,
+      "model": "gradient_boosting_31",
+      "selected": true,
+      "validation_mae": 2.9103733908570457,
+      "fit_seconds": 0.42611927099642344,
+      "mae": 2.8861433491217126,
+      "rmse": 5.980984937216599,
+      "wape": 0.2964074817974364,
+      "n": 17260
+    },
+    {
+      "horizon_minutes": 60,
+      "model": "last",
+      "selected": false,
+      "validation_mae": 6.250855513307985,
+      "fit_seconds": 0.0002969659981317818,
+      "mae": 6.200754060324826,
+      "rmse": 11.686034360377594,
+      "wape": 0.6360807321107687,
+      "n": 17240
+    },
+    {
+      "horizon_minutes": 60,
+      "model": "moving_average",
+      "selected": false,
+      "validation_mae": 8.522623574144486,
+      "fit_seconds": 0.00010771199595183134,
+      "mae": 8.365385730858469,
+      "rmse": 14.768317232525527,
+      "wape": 0.8581312253811093,
+      "n": 17240
+    },
+    {
+      "horizon_minutes": 60,
+      "model": "seasonal",
+      "selected": false,
+      "validation_mae": 4.709315589353612,
+      "fit_seconds": 0.00012300500384299085,
+      "mae": 4.439820185614849,
+      "rmse": 10.181557328266157,
+      "wape": 0.4554420392474206,
+      "n": 17240
+    },
+    {
+      "horizon_minutes": 60,
+      "model": "ridge",
+      "selected": false,
+      "validation_mae": 3.6951666651429997,
+      "fit_seconds": 0.01092297399736708,
+      "mae": 3.6955174824602883,
+      "rmse": 7.715474783049653,
+      "wape": 0.3790905820329127,
+      "n": 17240
+    },
+    {
+      "horizon_minutes": 60,
+      "model": "random_forest",
+      "selected": false,
+      "validation_mae": 2.9972067467723837,
+      "fit_seconds": 4.878942543997255,
+      "mae": 3.0259897688152733,
+      "rmse": 6.350610130393854,
+      "wape": 0.3104096322450959,
+      "n": 17240
+    },
+    {
+      "horizon_minutes": 60,
+      "model": "gradient_boosting_15",
+      "selected": false,
+      "validation_mae": 2.9536990056031605,
+      "fit_seconds": 0.5259309969987953,
+      "mae": 2.9577211836975477,
+      "rmse": 6.0843975089714055,
+      "wape": 0.3034065595253283,
+      "n": 17240
+    },
+    {
+      "horizon_minutes": 60,
+      "model": "gradient_boosting_31",
+      "selected": true,
+      "validation_mae": 2.9343205154893615,
+      "fit_seconds": 0.4522924359989702,
+      "mae": 2.9252898288732494,
+      "rmse": 6.050771216144196,
+      "wape": 0.3000797125452203,
+      "n": 17240
+    }
+  ],
+  "coverage": {
+    "30": {
+      "nominal": 0.9,
+      "empirical": 0.9007531865585168,
+      "mean_width": 10.357907582930178,
+      "peak_coverage": 0.9173611111111111,
+      "open_coverage": 0.8237654320987654
+    },
+    "60": {
+      "nominal": 0.9,
+      "empirical": 0.9002320185614849,
+      "mean_width": 10.369618307128599,
+      "peak_coverage": 0.9131944444444444,
+      "open_coverage": 0.823045267489712
+    }
+  },
+  "walk_forward": [
+    {
+      "horizon_minutes": 30,
+      "train_end_day": 40,
+      "mae": 3.022494539540598,
+      "rmse": 6.435960272171366,
+      "wape": 0.29791413629896296,
+      "n": 6700
+    },
+    {
+      "horizon_minutes": 30,
+      "train_end_day": 47,
+      "mae": 3.075171902540668,
+      "rmse": 6.56315929582919,
+      "wape": 0.3009194196939122,
+      "n": 6700
+    },
+    {
+      "horizon_minutes": 30,
+      "train_end_day": 54,
+      "mae": 2.924159157898933,
+      "rmse": 5.932497026939408,
+      "wape": 0.29553892412241073,
+      "n": 6700
+    },
+    {
+      "horizon_minutes": 60,
+      "train_end_day": 40,
+      "mae": 3.0679877634276522,
+      "rmse": 6.745105256200216,
+      "wape": 0.30149552423239007,
+      "n": 6680
+    },
+    {
+      "horizon_minutes": 60,
+      "train_end_day": 47,
+      "mae": 3.141572536392538,
+      "rmse": 6.603135184874724,
+      "wape": 0.3064993580029233,
+      "n": 6680
+    },
+    {
+      "horizon_minutes": 60,
+      "train_end_day": 54,
+      "mae": 2.983225281274348,
+      "rmse": 6.050433758860774,
+      "wape": 0.3006085934790419,
+      "n": 6680
+    }
+  ],
+  "feature_importance": {
+    "30": [
+      {
+        "feature": "lag_0",
+        "mae_increase": 2.4716492522713036
+      },
+      {
+        "feature": "hour_sin",
+        "mae_increase": 2.1162156339325904
+      },
+      {
+        "feature": "seasonal_week",
+        "mae_increase": 1.450659199061736
+      },
+      {
+        "feature": "hour_cos",
+        "mae_increase": 0.783069259250901
+      },
+      {
+        "feature": "lag_1",
+        "mae_increase": 0.3900061682513787
+      },
+      {
+        "feature": "rolling_12",
+        "mae_increase": 0.3560343275417628
+      },
+      {
+        "feature": "lag_2",
+        "mae_increase": 0.20238849155962946
+      },
+      {
+        "feature": "seasonal_day",
+        "mae_increase": 0.12088114392575733
+      },
+      {
+        "feature": "rolling_48",
+        "mae_increase": 0.10276273334873753
+      },
+      {
+        "feature": "rolling_4",
+        "mae_increase": 0.07390297588500028
+      },
+      {
+        "feature": "promotion_known",
+        "mae_increase": 0.054348084037337596
+      },
+      {
+        "feature": "capacity",
+        "mae_increase": 0.0027147680956858267
+      },
+      {
+        "feature": "restaurant_id",
+        "mae_increase": 0.00019078303812225528
+      },
+      {
+        "feature": "open",
+        "mae_increase": 0.0
+      },
+      {
+        "feature": "weekend",
+        "mae_increase": -0.0012518959383300832
+      },
+      {
+        "feature": "dow_cos",
+        "mae_increase": -0.001861409134478631
+      },
+      {
+        "feature": "staff",
+        "mae_increase": -0.003180597872634028
+      },
+      {
+        "feature": "dow_sin",
+        "mae_increase": -0.006147158055865631
+      },
+      {
+        "feature": "lag_48",
+        "mae_increase": -0.023564557074913228
+      }
+    ],
+    "60": [
+      {
+        "feature": "hour_sin",
+        "mae_increase": 2.6873425921456304
+      },
+      {
+        "feature": "seasonal_week",
+        "mae_increase": 2.300443878059845
+      },
+      {
+        "feature": "hour_cos",
+        "mae_increase": 1.8089473886616818
+      },
+      {
+        "feature": "lag_0",
+        "mae_increase": 1.472865006078484
+      },
+      {
+        "feature": "rolling_12",
+        "mae_increase": 1.0602302417978975
+      },
+      {
+        "feature": "lag_1",
+        "mae_increase": 0.5013130572055524
+      },
+      {
+        "feature": "rolling_4",
+        "mae_increase": 0.3748473039930884
+      },
+      {
+        "feature": "seasonal_day",
+        "mae_increase": 0.2985373595148153
+      },
+      {
+        "feature": "lag_2",
+        "mae_increase": 0.20635192395542346
+      },
+      {
+        "feature": "promotion_known",
+        "mae_increase": 0.1284437722822971
+      },
+      {
+        "feature": "rolling_48",
+        "mae_increase": 0.0725709153295484
+      },
+      {
+        "feature": "lag_48",
+        "mae_increase": 0.0294645454906437
+      },
+      {
+        "feature": "capacity",
+        "mae_increase": 0.022441518125098536
+      },
+      {
+        "feature": "dow_cos",
+        "mae_increase": 0.016815304991600666
+      },
+      {
+        "feature": "dow_sin",
+        "mae_increase": 0.013786278412184494
+      },
+      {
+        "feature": "weekend",
+        "mae_increase": 0.008260796571298634
+      },
+      {
+        "feature": "restaurant_id",
+        "mae_increase": 0.0027227717769569004
+      },
+      {
+        "feature": "open",
+        "mae_increase": 0.0
+      },
+      {
+        "feature": "staff",
+        "mae_increase": -0.008087448129614927
+      }
+    ]
+  },
+  "split": {
+    "train": {
+      "rows": 38400,
+      "origin_min": "2026-06-14 23:00:00",
+      "origin_max": "2026-07-24 22:30:00",
+      "target_max": "2026-07-24 23:30:00"
+    },
+    "validation": {
+      "rows": 10520,
+      "origin_min": "2026-07-25 00:00:00",
+      "origin_max": "2026-08-04 22:30:00",
+      "target_max": "2026-08-04 23:30:00"
+    },
+    "calibration": {
+      "rows": 6680,
+      "origin_min": "2026-08-05 00:00:00",
+      "origin_max": "2026-08-11 22:30:00",
+      "target_max": "2026-08-11 23:30:00"
+    },
+    "test": {
+      "rows": 17240,
+      "origin_min": "2026-08-12 00:00:00",
+      "origin_max": "2026-08-29 22:30:00",
+      "target_max": "2026-08-29 23:30:00"
+    }
+  },
+  "seconds": 15.363792836003995,
+  "artifact_sha256": "5cd640dae06b295261d42ffaf4fb1c22f4e8dfa58e103a3af0002483a3b41e01",
+  "mlflow_available": false,
+  "caveat": "Synthetic data; conformal exchangeability is not guaranteed under temporal drift. Closed-hour zeros inflate overall coverage."
+}

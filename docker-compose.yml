@@ -1,0 +1,25 @@
+services:
+  turnolab:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "127.0.0.1:8000:8000"
+    environment:
+      DEMO_TOKEN: ${DEMO_TOKEN:-turnolab-demo}
+      DEMO_OTHER_TOKEN: ${DEMO_OTHER_TOKEN:-turnolab-other}
+      ADMIN_TOKEN: ${ADMIN_TOKEN:-turnolab-reviewer}
+      LLM_PROVIDER: offline
+    volumes:
+      - turnolab-data:/app/.data
+      - turnolab-models:/app/artifacts
+      - turnolab-reports:/app/reports
+    read_only: false
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+volumes:
+  turnolab-data:
+  turnolab-models:
+  turnolab-reports:

@@ -1,0 +1,19 @@
+{
+  "simple": {
+    "n": 12,
+    "median_ms": 71.18195050003351,
+    "mean_ms": 92.83075641665543,
+    "min_ms": 66.80957800006126,
+    "max_ms": 144.24128199993902
+  },
+  "roles": {
+    "n": 12,
+    "median_ms": 69.82440799998813,
+    "mean_ms": 86.15312666665886,
+    "min_ms": 63.66435399991133,
+    "max_ms": 140.24170999994112
+  },
+  "identical_structured_facts": true,
+  "conclusion": "Papéis determinísticos e tool calling simples produziram os mesmos fatos. Não foi demonstrada vantagem de múltiplos agentes; a interface usa o caminho simples.",
+  "limitation": "Single CPU/process, warm cache, 12 prompts per mode; role modes share the same implementation. This is an overhead/null ablation, not evidence about autonomous LLM agents."
+}

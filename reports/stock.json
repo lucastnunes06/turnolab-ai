@@ -1,0 +1,139 @@
+{
+  "models": {
+    "rule": {
+      "precision": 0.7350490196078432,
+      "recall": 0.7363123005155905,
+      "f1": 0.7356801177480682,
+      "pr_auc": 0.8216360226706731,
+      "brier": 0.09520391395848836,
+      "confusion_matrix": [
+        [
+          12076,
+          1081
+        ],
+        [
+          1074,
+          2999
+        ]
+      ],
+      "hypothetical_error_cost": 77412,
+      "n": 17230
+    },
+    "classifier": {
+      "precision": 0.7623842126459928,
+      "recall": 0.929535968573533,
+      "f1": 0.8377032857616993,
+      "pr_auc": 0.9333983511749468,
+      "brier": 0.05305278611876194,
+      "confusion_matrix": [
+        [
+          11977,
+          1180
+        ],
+        [
+          287,
+          3786
+        ]
+      ],
+      "hypothetical_error_cost": 31380,
+      "n": 17230
+    },
+    "hybrid": {
+      "precision": 0.6956287101996762,
+      "recall": 0.9494230297078321,
+      "f1": 0.8029485049833887,
+      "pr_auc": 0.9198713094678319,
+      "brier": 0.07027194819178298,
+      "confusion_matrix": [
+        [
+          11465,
+          1692
+        ],
+        [
+          206,
+          3867
+        ]
+      ],
+      "hypothetical_error_cost": 32664,
+      "n": 17230
+    }
+  },
+  "selected_leaf_nodes": 15,
+  "validation_pr_auc": {
+    "7": 0.9265791783397455,
+    "15": 0.9377070464784543
+  },
+  "threshold": 0.15,
+  "calibration": [
+    {
+      "lower": 0.0,
+      "mean_probability": 0.02151861240388537,
+      "observed": 0.01698478096359203,
+      "n": 11893
+    },
+    {
+      "lower": 0.1,
+      "mean_probability": 0.1420771672835672,
+      "observed": 0.26533996683250416,
+      "n": 603
+    },
+    {
+      "lower": 0.2,
+      "mean_probability": 0.24614133629432533,
+      "observed": 0.37966101694915255,
+      "n": 295
+    },
+    {
+      "lower": 0.30000000000000004,
+      "mean_probability": 0.34856427722402017,
+      "observed": 0.3644067796610169,
+      "n": 236
+    },
+    {
+      "lower": 0.4,
+      "mean_probability": 0.44783541537305366,
+      "observed": 0.44680851063829785,
+      "n": 188
+    },
+    {
+      "lower": 0.5,
+      "mean_probability": 0.552068997091583,
+      "observed": 0.5346534653465347,
+      "n": 202
+    },
+    {
+      "lower": 0.6000000000000001,
+      "mean_probability": 0.6539327291273874,
+      "observed": 0.6065573770491803,
+      "n": 244
+    },
+    {
+      "lower": 0.7000000000000001,
+      "mean_probability": 0.7525438868391741,
+      "observed": 0.6363636363636364,
+      "n": 341
+    },
+    {
+      "lower": 0.8,
+      "mean_probability": 0.8590807643014623,
+      "observed": 0.75049115913556,
+      "n": 509
+    },
+    {
+      "lower": 0.9,
+      "mean_probability": 0.9595908542338031,
+      "observed": 0.9466715704303053,
+      "n": 2719
+    }
+  ],
+  "positive_rate": 0.23639001741149157,
+  "splits": {
+    "train": 26880,
+    "validation": 6720,
+    "calibration": 3840,
+    "threshold": 2880,
+    "test": 17230
+  },
+  "feature_contract": "Frozen demand model trained on days <30. Stock features at origin; future orders used only as labels.",
+  "label_limit": "Snapshots are synthetic independent operational states, not a continuous replenishment policy evaluation."
+}

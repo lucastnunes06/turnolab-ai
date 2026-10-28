@@ -1,0 +1,22 @@
+{
+  "valid": true,
+  "errors": [],
+  "rows": {
+    "restaurants": 20,
+    "products": 3,
+    "ingredients": 4,
+    "recipes": 6,
+    "order_events": 86400,
+    "inventory_snapshots": 86240
+  },
+  "seed": 42,
+  "temporal_policy": "Features must have source_timestamp <= origin; targets are separate.",
+  "sha256": {
+    "restaurants": "5ddb370e081b4344fdf3ac5c2813b7c88ca4d50b14cf5ef46b6f681762a18055",
+    "products": "e4774847b0a316ef3df73930f2b5dd6665c7b70f982be4ded4e5c82b0e4e334d",
+    "ingredients": "f9441a2b62d177018c11e0ade534b14fdbb41590e3cc16e389e99b311cf1231f",
+    "recipes": "8ad483bd2b35f2706622f3f39f858b0198dc4e28faba85e89ef9a3cbb620ac25",
+    "order_events": "3a4cfc26bd5cb6f078ff6a2248ac108e2dfe82cc2614f60ebc9b52bbc9d61a3e",
+    "inventory_snapshots": "c309f1a78a4ff5b08742c8ac7d0f2d6ba4cd7a3ec078e904c771d311d3bcd1f5"
+  }
+}

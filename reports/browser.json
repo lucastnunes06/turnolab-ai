@@ -1,0 +1,6 @@
+{
+  "status": "blocked",
+  "scope": "Real Chromium navigation through the local FastAPI/SQLite ASGI bridge",
+  "reason": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://turnolab.local/\nCall log:\n  - navigating to \"http://turnolab.local/\", waiting until \"networkidle\"\n",
+  "screenshots_verified": false
+}

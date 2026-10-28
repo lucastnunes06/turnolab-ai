@@ -1,0 +1,154 @@
+{
+  "audit_date": "2026-10-28",
+  "uploaded_source_sha256": "afbf8cace22dd3452dbd4510a5a7a608b8643e8ef27c18efe1c9182471ad578c",
+  "python_runtime": "3.13.5 (audit runtime; project targets 3.12 in CI)",
+  "local_checks": {
+    "status": "passed",
+    "python_unit_tests": 49,
+    "frontend_node_tests": 13,
+    "lint_build_security_scripts": "passed",
+    "first_run_without_bootstrap": "failed due to intentionally absent generated database/CSVs; recovered by documented bootstrap"
+  },
+  "bootstrap": {
+    "status": "passed",
+    "scope": "local seed generation, database setup, loading bundled models, evaluations"
+  },
+  "reproducibility": {
+    "generated_data": {
+      "status": "passed",
+      "rows": {
+        "restaurants": 20,
+        "products": 3,
+        "ingredients": 4,
+        "recipes": 6,
+        "order_events": 86400,
+        "inventory_snapshots": 86240
+      },
+      "schema_valid": true,
+      "dataset_hashes_match": true,
+      "fresh_training_reproduced": false,
+      "scope": "Independent regeneration of all six synthetic CSVs; compares SHA-256 with recorded baseline",
+      "seconds": 12.109
+    },
+    "source_artifact_integrity": {
+      "reports/data_quality.json": {
+        "same_sha256_as_uploaded_zip": true,
+        "sha256": "dc529ba67422d6d0fa2e0ce887c3f66a19384e13eb450ecbf5b53ab5ed74c005"
+      },
+      "reports/demand.json": {
+        "same_sha256_as_uploaded_zip": true,
+        "sha256": "e165b0f0626e36854db59ce51e87a880f9444c92cd4b34c3db697d63869dea16"
+      },
+      "reports/stock.json": {
+        "same_sha256_as_uploaded_zip": true,
+        "sha256": "c61a0d3900b30d68f9267ce3979031dbb006516994ec26ac1e25cff0430b813e"
+      },
+      "artifacts/demand-v1.joblib": {
+        "same_sha256_as_uploaded_zip": true,
+        "sha256": "5cd640dae06b295261d42ffaf4fb1c22f4e8dfa58e103a3af0002483a3b41e01"
+      },
+      "artifacts/inventory-v1.joblib": {
+        "same_sha256_as_uploaded_zip": true,
+        "sha256": "b86202f1e6e377eda1d1af9eb815a1f30a9cb13ef6714bf513108f6ec3e0af04"
+      },
+      "artifacts/registry.json": {
+        "same_sha256_as_uploaded_zip": true,
+        "sha256": "7e43c0495548777ce7f516c5fb8f67ea22752e5ae095f867272dc4b4d12f39df"
+      }
+    },
+    "entire_fresh_model_retraining": "not reconfirmed in this audit: a clean training attempt exceeded execution time",
+    "old_submitted_reproduction_json": "retained, but not treated as a fresh audit result"
+  },
+  "http_tcp": {
+    "status": "passed",
+    "method": "Real localhost Uvicorn server and httpx HTTP requests",
+    "checked_routes": [
+      {
+        "path": "/health",
+        "status": 200
+      },
+      {
+        "path": "/ready",
+        "status": 200
+      },
+      {
+        "path": "/api/restaurants",
+        "status": 200
+      },
+      {
+        "path": "/api/restaurants/1/history",
+        "status": 200
+      },
+      {
+        "path": "/api/restaurants/1/forecast",
+        "status": 200
+      },
+      {
+        "path": "/api/restaurants/1/inventory",
+        "status": 200
+      },
+      {
+        "path": "/openapi.json",
+        "status": 200
+      },
+      {
+        "path": "/docs",
+        "status": 200
+      },
+      {
+        "path": "/",
+        "status": 200
+      }
+    ],
+    "unauthenticated_protected_request": "401 verified"
+  },
+  "performance": {
+    "requests": 80,
+    "concurrency": 4,
+    "errors": 0,
+    "elapsed_seconds": 1.8717755559999887,
+    "requests_per_second": 42.74016708016059,
+    "median_ms": 83.54031950000262,
+    "p95_ms": 126.55941100001655,
+    "max_ms": 168.46645099997204,
+    "transport": "in-process httpx ASGITransport, warm caches, no TCP overhead",
+    "limitation": "Synchronous ML/SQLite work runs inside the event loop for this local demo. Concurrency is cooperative, not parallel CPU inference."
+  },
+  "browser": {
+    "status": "blocked",
+    "scope": "Real Chromium navigation through the local FastAPI/SQLite ASGI bridge",
+    "reason": "Page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at http://turnolab.local/\nCall log:\n  - navigating to \"http://turnolab.local/\", waiting until \"networkidle\"\n",
+    "screenshots_verified": false
+  },
+  "demo": {
+    "status": "blocked",
+    "reason": "Browser navigation blocked by administrator policy; no screenshot or GIF created"
+  },
+  "mlflow": {
+    "status": "blocked",
+    "reason": "mlflow-skinny dependency absent; package-index DNS unavailable for installation",
+    "real_sdk_tracking_executed": false
+  },
+  "docker": {
+    "status": "blocked",
+    "reason": "Docker CLI not installed in audit container",
+    "build_executed": false
+  },
+  "github_actions": {
+    "status": "blocked",
+    "reason": "No TurnoLab repository authorized for GitHub connector; no remote workflow run exists for these files",
+    "remote_ci_executed": false
+  },
+  "external_llm": {
+    "status": "not_configured",
+    "reason": "Optional; provider contract tests use mocks and are not live quality evaluation"
+  },
+  "security_note": "Public demo Bearer tokens are not appropriate for deployment accessible from the internet.",
+  "modeling_limitations": [
+    "Synthetic data do not represent production results",
+    "Operational interval coverage below nominal 90% in the supplied evaluation",
+    "Simulated staffing constraint breached in 2.25% of evaluated scenarios",
+    "RAG evaluation set is small and non-blind"
+  ],
+  "overall": "PARTIALLY VERIFIED — no claim of full release completion"
+}

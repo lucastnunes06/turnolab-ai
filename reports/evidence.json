@@ -1,0 +1,275 @@
+{
+  "release": {
+    "complete": false,
+    "local_checks_passed": true,
+    "stages": {
+      "local_ci": {
+        "status": "passed",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "scripts/check.py"
+        ],
+        "exit_code": 0,
+        "seconds": 7.066889944006107,
+        "output": "PASS /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python scripts/style_check.py\nPASS /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python -m compileall -q backend ml ai simulator scripts\nPASS /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python -m unittest discover -s backend/tests -v\nPASS /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python scripts/ui_fixture.py\nPASS npm --prefix frontend run check\nPASS npm --prefix frontend test\nPASS npm --prefix frontend run build\nPASS /opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python scripts/security_check.py\n"
+      },
+      "http_tcp": {
+        "status": "blocked",
+        "reason": "[Errno 1] Operation not permitted",
+        "live_http_executed": false
+      },
+      "browser": {
+        "status": "blocked",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "scripts/browser_check.py"
+        ],
+        "exit_code": 1,
+        "seconds": 2.3339271360018756,
+        "output": "Traceback (most recent call last):\n  File \"/workspace/turnolab-ai/scripts/browser_check.py\", line 94, in <module>\n    asyncio.run(main())\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py\", line 195, in run\n    return runner.run(main)\n           ^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py\", line 118, in run\n    return self._loop.run_until_complete(task)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py\", line 691, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/workspace/turnolab-ai/scripts/browser_check.py\", line 23, in main\n    browser = await p.chromium.launch(executable_path=os.getenv('CHROMIUM_EXECUTABLE', '/usr/bin/chromium') or None, headless=True, args=['--no-sandbox', '--disable-dev-shm-usage', '--disable-gpu'])\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/async_api/_generated.py\", line 16731, in launch\n    await self._impl_obj.launch(\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_browser_type.py\", line 97, in launch\n    await self._channel.send(\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_connection.py\", line 76, in send\n    return await self._connection.wrap_api_call(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/playwright/_impl/_connection.py\", line 632, in wrap_api_call\n    raise rewrite_error(error, f\"{parsed_st['apiName']}: {error}\") from None\nplaywright._impl._errors.TargetClosedError: BrowserType.launch: Target page, context or browser has been closed\nBrowser logs:\n\n<launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --disable-dev-shm-usage --disable-gpu --user-data-dir=/tmp/playwright_chromiumdev_profile-p7bIqK --remote-debugging-pipe --no-startup-window\n<launched> pid=4775\n[pid=4775][err] [4775:4775:1028/154922.391512:ERROR:third_party/crashpad/crashpad/util/linux/socket.cc:45] setsockopt: Operation not permitted (1)\nCall log:\n  - <launching> /usr/bin/chromium --disable-field-trial-config --disable-background-networking --disable-background-timer-throttling --disable-backgrounding-occluded-windows --disable-back-forward-cache --disable-breakpad --disable-client-side-phishing-detection --disable-component-extensions-with-background-pages --disable-component-update --no-default-browser-check --disable-default-apps --disable-dev-shm-usage --disable-edgeupdater --disable-extensions --disable-features=AvoidUnnecessaryBeforeUnloadCheckSync,BoundaryEventDispatchTracksNodeRemoval,DestroyProfileOnBrowserClose,DialMediaRouteProvider,GlobalMediaControls,HttpsUpgrades,LensOverlay,MediaRouter,PaintHolding,ThirdPartyStoragePartitioning,BlockOriginHeaderModificationOnRedirect,Translate,AutoDeElevate,OptimizationHints,msForceBrowserSignIn,msEdgeUpdateLaunchServicesPreferredVersion --enable-features=CDPScreenshotNewSurface --allow-pre-commit-input --disable-hang-monitor --disable-ipc-flooding-protection --disable-popup-blocking --disable-prompt-on-repost --disable-renderer-backgrounding --disable-updater-scheduler --force-color-profile=srgb --metrics-recording-only --no-first-run --password-store=basic --use-mock-keychain --no-service-autorun --export-tagged-pdf --disable-search-engine-choice-screen --unsafely-disable-devtools-self-xss-warnings --edge-skip-compat-layer-relaunch --disable-infobars --disable-search-engine-choice-screen --disable-sync --enable-unsafe-swiftshader --headless --hide-scrollbars --mute-audio --blink-settings=primaryHoverType=2,availableHoverTypes=2,primaryPointerType=4,availablePointerTypes=4 --no-sandbox --no-sandbox --disable-dev-shm-usage --disable-gpu --user-data-dir=/tmp/playwright_chromiumdev_profile-p7bIqK --remote-debugging-pipe --no-startup-window\n  - <launched> pid=4775\n  - [pid=4775][err] [4775:4775:1028/154922.391512:ERROR:third_party/crashpad/crashpad/util/linux/socket.cc:45] setsockopt: Operation not permitted (1)\n  - [pid=4775] <gracefully close start>\n  - [pid=4775] <kill>\n  - [pid=4775] <will force kill>\n  - [pid=4775] <process did exit: exitCode=null, signal=SIGTRAP>\n  - [pid=4775] starting temporary directories cleanup\n  - [pid=4775] finished temporary directories cleanup\n  - [pid=4775] <gracefully close end>\n\n"
+      },
+      "demo": {
+        "status": "blocked",
+        "reason": "Browser not verified or demo explicitly skipped"
+      },
+      "mlflow": {
+        "status": "blocked",
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "scripts/mlflow_check.py"
+        ],
+        "exit_code": 2,
+        "seconds": 0.023252140999829862,
+        "output": "{\"status\": \"blocked\", \"reason\": \"mlflow package is not installed; dependency download requires terminal network permission\", \"live_tracking_executed\": false}\n"
+      },
+      "docker": {
+        "status": "blocked",
+        "reason": "Managed Docker socket check failed",
+        "preflight": {
+          "status": "blocked",
+          "command": [
+            "/usr/local/bin/docker",
+            "--host=unix:///var/run/docker.sock",
+            "info",
+            "--format",
+            "{{.ServerVersion}}"
+          ],
+          "exit_code": 1,
+          "seconds": 0.04545474799670046,
+          "output": "\npermission denied while trying to connect to the Docker daemon socket at unix:///var/run/docker.sock: Get \"http://%2Fvar%2Frun%2Fdocker.sock/v1.51/info\": dial unix /var/run/docker.sock: connect: operation not permitted\n"
+        }
+      },
+      "github_actions": {
+        "status": "blocked",
+        "reason": "No workflow run URL supplied; code has not been published by this script."
+      },
+      "external_llm": {
+        "status": "not_configured",
+        "required": false,
+        "reason": "Provider optional; contract tests use MockTransport and are not live-provider validation."
+      }
+    },
+    "executed_at": "2026-10-28T15:49:22.918689+00:00",
+    "seconds": 9.469945632001327,
+    "external_publication_performed": false
+  },
+  "source_sha256": {
+    "backend/__init__.py": "3487b0711102204eec01a97109d30e08fb39760dc4546691d978b5ac116dbe45",
+    "backend/Dockerfile": "a143d791cb7af27925c37092e0b998b23f3302c45261db265cefa0b44579ff04",
+    "backend/migrations/002_promotion_calendar.sql": "2ffc8963f451c41069d9a2907fb804cbbb73f05fc5d8f1bfb8ba0bddd9fe5933",
+    "backend/migrations/001_initial.sql": "904658e7ff50b249be0239d9f3cb2f65266451abcd3c193bb92cd2dd65d4ad95",
+    "backend/tests/test_registry.py": "d01543d7bfb0a794d8f2e8a1530707761b7208ca660b6f01ca2fd4d21eeed534",
+    "backend/tests/test_provider_contracts.py": "5f88f385a4965af58da39cc5c129ff936c4214539a0539e986f962fd138f277e",
+    "backend/tests/test_release_evidence.py": "0b8990ac1154cd0b13f3f5501b403e75d7fc1fe21db3f82adbc00771eb7ac26e",
+    "backend/tests/test_models_simulator.py": "703f896f87e48e9a648939466c4368ca0faa00bc8975ed34debf4eb30f270031",
+    "backend/tests/test_foundation.py": "7dfee7f4a03714cbcad4caa09fe20ae3beef756c96111369d12024d81abb7ec7",
+    "backend/tests/test_api_ai.py": "ad3f7434ae3d8e0f3ce19ff469a689e02734319e6d7988d52ccacbb0a56d2f72",
+    "backend/app/services.py": "d993bedd24d69d0c65026f8e6db832eb6aed2fefe4d5e0d19b6a57a99e080e68",
+    "backend/app/__init__.py": "dff0675495d9981547b44260f2b10d20d58984596a676f09b1274ca266247f31",
+    "backend/app/main.py": "b058d01b43545c109f2865bdd3b76549291e9c7207ef8359b461fdb1235812db",
+    "backend/app/db.py": "25c883d1b02e1a2f9bda0255acd50354197f70ac746497b9621e3058ad3f7b7f",
+    "backend/app/auth.py": "8a0a5b9683d07a5a5b2e4ee40bd78a836b200d19669ecacde4f2cf684f73fbcf",
+    "backend/app/config.py": "1031c3e94b162f3d077804812688103517f65ac78e34be70c399300597005ea4",
+    "ml/challenger.py": "5149873c401ae332fb468ef51fa0b142b7c0035af8dbbabccfe63a4fb91ef740",
+    "ml/features.py": "80181f4b8c670be32e10261e806dd06d5fd05d5e38318dcbccce23345cc94247",
+    "ml/registry.py": "639422e6007d51dddd7539f71fc92de46e150b19e5f38f82d92b6aea1851b4d8",
+    "ml/__init__.py": "b5e75a55f3d54130ae3bfc9b1e6ec9bb1829b984d29318799aaf0aa3527d193d",
+    "ml/experiments.py": "2422238679c11e500e73dda7ff0b2f16436af75f8e55f8ba0d0e4d115a8cb6fb",
+    "ml/train.py": "7258e2fee912c8d6b7f671dd2cd2e959bd526020a4c19be6bf25b2d3b49ee223",
+    "ml/data.py": "3ba092758f68c13447418ac637b960508ea325dcd079dbd29354477b159ab33c",
+    "ml/inference.py": "e5a2ccda2efa9415aaece2a30b61ba63485cba8b58bd67a4a32f6596e68dd985",
+    "ml/stock.py": "dac80f638750fae38680639bbee665ab54c8bad9d65a936d6e63c0a51d103d58",
+    "ml/tracking.py": "bf45f2c4d2d2eed0799a2ec66b4de0e87dafe5d9c0458ae4da471b31851d63a6",
+    "ai/evaluate_agents.py": "9668bf31167e8a27b869a14afcb529b51174756c35365888c63a7995665fc923",
+    "ai/coordinator.py": "80fc5240961338dc6e3c8757c203e59b611453dd52ffe567c8376653573ea118",
+    "ai/tools.py": "9276f4fb4eba492bdae0f0be967a6dd0daebe49bddd9a6a1800d7e6ef9ec703c",
+    "ai/__init__.py": "383c4105a02963b7cfbbe3e8493267bb80038b1d9caa78b92f21c6b51be0dc0f",
+    "ai/providers.py": "f34e13b8e351fcd4fcc01676dd1805fe7f549424022c30083173a2c1156edf23",
+    "ai/rag.py": "d1cc79a39a9cb8f8d5c38d07f96d1ddf2ae24d6ca4c06f3ba925ddbe48fb8fad",
+    "ai/corpus/replenishment.md": "3d06ae5e41ea76d39527877cdd913d4d66e75b193062cb1e47792313273a529a",
+    "ai/corpus/capacity.md": "c19656c374a5b93c11781dc3fd2d9c3537a1a70d240fda3186857cf48daa2f6a",
+    "ai/corpus/peaks.md": "7cff3200ff20e2c8b7d6e3f8fda34ac6bdfff7ede4b6d4c4077318ab9e6aaa5a",
+    "ai/corpus/cancellation.md": "225a977e65592a795b4a3c0b9a32e2fb21020b75b5dfad0c47f2add79dbb45dd",
+    "ai/corpus/governance.md": "97369edff66ebf2c047a327d4425aed65df67583a1e8062e526213875ead15b3",
+    "ai/prompts/coordinator-v1.txt": "5dcb8f1ba0bd0b89ecfc164475fac80522eb0fb70dc5b82cacd7b997a3a16600",
+    "simulator/__init__.py": "8222399aa224722b0d52718db909088573beca2f63be61bfb71ed70a94b4ab9f",
+    "simulator/engine.py": "674a17e87f7508875cdc411920fb563d1c067b5056aa649c0ce66dc16fcdd650",
+    "scripts/release_check.py": "32f397957eb9c75bb9c8fb6457d33048551685272712dda85947ca01b7efdce0",
+    "scripts/style_check.py": "e0e7beca7ef5f5edeb508045b75f4c34a0cf3e3dfd140639d8b2e8de936a2302",
+    "scripts/mlflow_check.py": "57d3b3b40a65f103a91bcf5ea4cf29e2ca57e5acee7fcc8bb20db9653304702a",
+    "scripts/entrypoint.py": "b6e2271bec6f50ffab45fe3588c565222b23f2aee8e2e2babe05c25b04dd9007",
+    "scripts/security_check.py": "9e02a24f3cc4e871339dc3ffd09101b03416b1c869240ba075e932e585436df8",
+    "scripts/load_check.py": "ed63fe6d2057939e55ec84e3b0670e87dae2711ae7e7144001a938f45ae968f2",
+    "scripts/reproduce.py": "a4280c15c9cd81fcebfb2234bfaef6700dcb2ecac88ea5694b18de2e53285ae5",
+    "scripts/capture_demo.py": "1ce1902de380ea5dfbefedbb9143768ba2df4c444835ec0ff836457efe4a1a5f",
+    "scripts/export_hf.py": "e7320c6c82b6556b11eb989a2ee03a260d0a205ccc9faa6343064414a2f7cbce",
+    "scripts/ui_fixture.py": "80a2297c2b0285000411afb73b29799bdb11ec843790cfb9f182537d92050c1a",
+    "scripts/check.py": "418f3d62a06e7f68b6cb532668d55d7e96b102f8f838edba82bca666c4d4828b",
+    "scripts/finalize_evidence.py": "9a3a023b3b75a1d79c0b69bcef250cb09a665885a3c9ef069347d76f06e90264",
+    "scripts/browser_check.py": "f84eb6de00199296c222957f0d3554199a70fad82704411d32a482871deb2dbd",
+    "scripts/bootstrap.py": "b8d34fadcca0b361a31b5ba128af2f6263d1e28b9fd37ebd0099d6e8e7271207",
+    "frontend/utils.js": "ce6477d7c75826ca84f8b0dd3f98ec364185b97ba58557e0f9a547835888b326",
+    "frontend/docs.js": "b4b6227e13fa4ab03fbd2f62c043afacfeb5031db9e6989939d7a0b0461279de",
+    "frontend/contracts.d.ts": "e7d08aaa2f9f9dd8afca95bee2fd16460e9e8bdfce2d898f5693214b787339b6",
+    "frontend/styles.css": "096f3dd9c14272ea0bbe9ceac3c27c3c956dca5be7d9eb2aaf1d52d26b19dc81",
+    "frontend/app.js": "ad92e49ae357e428f5d476fe9ac4d77188e4a8bcace89776da11fdfe94c8a4a9",
+    "frontend/build.mjs": "f1fcacdbe793a35e9ffe1c4b8812bec33216d6abf097e30f30b65aa1ec0ef597",
+    "frontend/api-docs.html": "327121e79b180954a6b1fdf31432546f31f5abd135467cc74fdac96e8face1fd",
+    "frontend/index.html": "6869fb62000a97bbd13e18fdf0d09e5a97e9bbe9931042168806a8d7795ee2f1",
+    "frontend/package.json": "1a6fc0a07259503e72d512c73234602cd82594a8428083bce4b5481f5ea0fa75",
+    "frontend/tests/utils.test.js": "2d7681550a38f1c78ec359f0edc041d58a85467b68fd43d85b9dabd691eee1b6",
+    "frontend/tests/components.test.js": "f5ab6111561bb801aabe8fb2b8bf897ca4659356eed823b662bd0076db76832f",
+    "frontend/assets/mark.svg": "b9235088e4806c8669434d0ce42de8c929cdf8d35a2b0b9507446046abcb892b",
+    "docs/ml-methodology.md": "3b2053eb08c51b88f4c51289b20da23d1181afa4271d4ee5dff58381fc7a652e",
+    "docs/local-run.md": "8f59c1aaae80766c917b4f614408eb0c545a15b86f699b821e2b3c8aae99f616",
+    "docs/final-verification.md": "5c7546c5a719b7c2f83bd053d3cb528612197e2c1570de5c6e30c5a0cbb2ef82",
+    "docs/acceptance.md": "7cc61f0353b69ad15c7d29b13733052feccd7caac9453abc149a7ace01615125",
+    "docs/job-source.md": "1a3593b84ba54be86556ec9486aa7a7570ff45c64c65c4fbce1327156fb8bebd",
+    "docs/MODEL_CARD.md": "8feff39a4fd9b2a324205c5b0688e936a2f15384a1bbd4613e5e2f04777dbd40",
+    "docs/data-and-features.md": "7abd3b65f77f0cee45236a4b7e407e7c009ea28136d11c200a974c49e7aeb1c2",
+    "docs/demo-script.md": "32cc03a805ab5a755fd5d832e3c7f893117d0c5ef69920ef5ce1d18caa9e7378",
+    "docs/competency-matrix.md": "e861c6f330d49aae6af67071a06fe065498b81b68fc02e469aaef7e9de032b24",
+    "docs/limitations-and-roadmap.md": "9b5eac73c47ef7f58866465f83895857048f1507f8a8e31b763173162c01b7ea",
+    "docs/deploy.md": "364567b54d7031d893f10e9cda602c6ec1fc21c1cc39095e1a32b68812cc5d6a",
+    "docs/rag-and-agents.md": "f73363115a966029fd3923eb7cc08624d307585fb21d36c13522acd5d03cc14e",
+    "docs/interview-guide.md": "dc6d858098c0dbbcf952ab059ca4a8eeea105401c890c171a664fdd986da8c20",
+    "docs/article/turnolab.md": "0156aba59ddbbb3c99b2804cff21007aa0ce009a4c47a07e68148eee5e8701af",
+    "docs/decisions/ADRs.md": "13ff2018139003bb036ba265e17e3b6e9d89701405b52b7270d5b24acb5c540b",
+    "docs/architecture/README.md": "f46c80084f66a728f75076be05f1d422a1776e19d91739f888622e6c2ac51ffb",
+    "docs/experiments/protocol.md": "5502499f6265a08ae55169e7f8416ac758f62df86b201844519689ece9685ded",
+    "docs/security/README.md": "b40a6892e0236817d5f9929fadbd9ef9942aa5c4a092124f7954c1d16dfbe413",
+    "docs/media/README.md": "8a2c954ad1b660e0920be77925711c028a7c24d2f311ddcd0cd7e6a762a93228"
+  },
+  "checks": {
+    "passed": true,
+    "checks": [
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "scripts/style_check.py"
+        ],
+        "exit_code": 0,
+        "seconds": 0.11581496199505636,
+        "output": "AST formatting consistent\n"
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "-m",
+          "compileall",
+          "-q",
+          "backend",
+          "ml",
+          "ai",
+          "simulator",
+          "scripts"
+        ],
+        "exit_code": 0,
+        "seconds": 0.03488800599734532,
+        "output": ""
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "-m",
+          "unittest",
+          "discover",
+          "-s",
+          "backend/tests",
+          "-v"
+        ],
+        "exit_code": 0,
+        "seconds": 3.9416558439988876,
+        "output": "api/restaurants\", \"method\": \"GET\", \"status\": 200, \"latency_ms\": 1.334}\nHTTP Request: GET http://test/api/restaurants \"HTTP/1.1 200 OK\"\n{\"event\": \"http\", \"request_id\": \"ae7e074a-7468-4b33-81d7-a0a6028f3ca6\", \"path\": \"/api/restaurants/1/history\", \"method\": \"GET\", \"status\": 403, \"latency_ms\": 1.308}\nHTTP Request: GET http://test/api/restaurants/1/history \"HTTP/1.1 403 Forbidden\"\n{\"event\": \"http\", \"request_id\": \"44560ca9-c613-4219-be1d-c2af8a47e4ed\", \"path\": \"/api/restaurants/1/forecast\", \"method\": \"GET\", \"status\": 403, \"latency_ms\": 1.31}\nHTTP Request: GET http://test/api/restaurants/1/forecast \"HTTP/1.1 403 Forbidden\"\n{\"event\": \"http\", \"request_id\": \"71ae32fe-e49d-4a03-89e8-8616f2bedb86\", \"path\": \"/api/restaurants/1/inventory\", \"method\": \"GET\", \"status\": 403, \"latency_ms\": 1.3}\nHTTP Request: GET http://test/api/restaurants/1/inventory \"HTTP/1.1 403 Forbidden\"\n{\"event\": \"http\", \"request_id\": \"9507f646-7255-4712-b94a-5f369f845b61\", \"path\": \"/api/restaurants/1/actions\", \"method\": \"GET\", \"status\": 403, \"latency_ms\": 1.573}\nHTTP Request: GET http://test/api/restaurants/1/actions \"HTTP/1.1 403 Forbidden\"\n{\"event\": \"http\", \"request_id\": \"16df0fa6-4cdc-4269-a8f2-fd6250375d84\", \"path\": \"/api/restaurants/1/monitoring\", \"method\": \"GET\", \"status\": 403, \"latency_ms\": 1.499}\nHTTP Request: GET http://test/api/restaurants/1/monitoring \"HTTP/1.1 403 Forbidden\"\n{\"event\": \"http\", \"request_id\": \"3c933088-d61d-40d4-a623-5611479df669\", \"path\": \"/api/restaurants/1/audit\", \"method\": \"GET\", \"status\": 403, \"latency_ms\": 1.456}\nHTTP Request: GET http://test/api/restaurants/1/audit \"HTTP/1.1 403 Forbidden\"\n{\"event\": \"http\", \"request_id\": \"6b4c8833-5f5c-4d89-86a3-30bffc8f574c\", \"path\": \"/api/restaurants/1/alerts\", \"method\": \"GET\", \"status\": 403, \"latency_ms\": 1.418}\nHTTP Request: GET http://test/api/restaurants/1/alerts \"HTTP/1.1 403 Forbidden\"\n{\"event\": \"http\", \"request_id\": \"0474c0ab-8412-4198-b10d-d1de27f7e585\", \"path\": \"/api/restaurants\", \"method\": \"GET\", \"status\": 200, \"latency_ms\": 1.324}\nHTTP Request: GET http://test/api/restaurants?offset=5&limit=3 \"HTTP/1.1 200 OK\"\n{\"event\": \"http\", \"request_id\": \"ef389f78-012b-4b5c-aed4-587963ce4f43\", \"path\": \"/api/restaurants\", \"method\": \"GET\", \"status\": 422, \"latency_ms\": 1.385}\nHTTP Request: GET http://test/api/restaurants?limit=10000 \"HTTP/1.1 422 Unprocessable Entity\"\nok\ntest_tools_schema_and_scope (test_api_ai.APIAITests.test_tools_schema_and_scope) ... ok\ntest_unexpected_errors_do_not_expose_secrets (test_api_ai.APIAITests.test_unexpected_errors_do_not_expose_secrets) ... {\"event\": \"unexpected_error\", \"request_id\": \"5cc7a0c2-7442-4565-a5a3-10085b307558\", \"kind\": \"RuntimeError\"}\n{\"event\": \"http\", \"request_id\": \"5cc7a0c2-7442-4565-a5a3-10085b307558\", \"path\": \"/api/restaurants/1/forecast\", \"method\": \"GET\", \"status\": 500, \"latency_ms\": 1.412}\nHTTP Request: GET http://test/api/restaurants/1/forecast \"HTTP/1.1 500 Internal Server Error\"\nok\ntest_migration_and_ingest (test_foundation.FoundationTests.test_migration_and_ingest) ... ok\ntest_quality_failures (test_foundation.FoundationTests.test_quality_failures) ... ok\ntest_reproducible (test_foundation.FoundationTests.test_reproducible) ... ok\ntest_conservation_and_capacity (test_models_simulator.SimulationTests.test_conservation_and_capacity) ... ok\ntest_delivery_cannot_arrive_early (test_models_simulator.SimulationTests.test_delivery_cannot_arrive_early) ... ok\ntest_invalid_input (test_models_simulator.SimulationTests.test_invalid_input) ... ok\ntest_more_staff_cannot_overcome_physical_limit (test_models_simulator.SimulationTests.test_more_staff_cannot_overcome_physical_limit) ... ok\ntest_stock_is_limiting (test_models_simulator.SimulationTests.test_stock_is_limiting) ... ok\ntest_conformal_finite_sample (test_models_simulator.TemporalTests.test_conformal_finite_sample) ... ok\ntest_evaluation_artifacts (test_models_simulator.TemporalTests.test_evaluation_artifacts) ... ok\ntest_future_orders_do_not_change_features (test_models_simulator.TemporalTests.test_future_orders_do_not_change_features) ... ok\ntest_partition_purge (test_models_simulator.TemporalTests.test_partition_purge) ... ok\ntest_zero_denominator (test_models_simulator.TemporalTests.test_zero_denominator) ... ok\ntest_extra_schema_fields_rejected (test_provider_contracts.ProviderContractTests.test_extra_schema_fields_rejected) ... HTTP Request: POST https://api.groq.com/openai/v1/chat/completions \"HTTP/1.1 200 OK\"\nHTTP Request: POST https://api.groq.com/openai/v1/chat/completions \"HTTP/1.1 200 OK\"\nok\ntest_gemini_request_and_structured_success (test_provider_contracts.ProviderContractTests.test_gemini_request_and_structured_success) ... HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent \"HTTP/1.1 200 OK\"\nok\ntest_groq_request_and_structured_success (test_provider_contracts.ProviderContractTests.test_groq_request_and_structured_success) ... HTTP Request: POST https://api.groq.com/openai/v1/chat/completions \"HTTP/1.1 200 OK\"\nok\ntest_http_failure_has_two_attempt_limit (test_provider_contracts.ProviderContractTests.test_http_failure_has_two_attempt_limit) ... HTTP Request: POST https://api.groq.com/openai/v1/chat/completions \"HTTP/1.1 503 Service Unavailable\"\nHTTP Request: POST https://api.groq.com/openai/v1/chat/completions \"HTTP/1.1 503 Service Unavailable\"\nok\ntest_invalid_gemini_model_cannot_change_request_destination (test_provider_contracts.ProviderContractTests.test_invalid_gemini_model_cannot_change_request_destination) ... ok\ntest_new_operational_numbers_rejected (test_provider_contracts.ProviderContractTests.test_new_operational_numbers_rejected) ... HTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent \"HTTP/1.1 200 OK\"\nHTTP Request: POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent \"HTTP/1.1 200 OK\"\nok\ntest_timeout_falls_back_without_leaking_exception_text (test_provider_contracts.ProviderContractTests.test_timeout_falls_back_without_leaking_exception_text) ... ok\ntest_unknown_provider_never_opens_http (test_provider_contracts.ProviderContractTests.test_unknown_provider_never_opens_http) ... ok\ntest_unsupported_citation_rejected_after_bounded_retry (test_provider_contracts.ProviderContractTests.test_unsupported_citation_rejected_after_bounded_retry) ... HTTP Request: POST https://api.groq.com/openai/v1/chat/completions \"HTTP/1.1 200 OK\"\nHTTP Request: POST https://api.groq.com/openai/v1/chat/completions \"HTTP/1.1 200 OK\"\nok\ntest_no_rollback_to_never_promoted (test_registry.RegistryTests.test_no_rollback_to_never_promoted) ... ok\ntest_promotion_then_rollback (test_registry.RegistryTests.test_promotion_then_rollback) ... ok\ntest_reject_changed_feature_contract (test_registry.RegistryTests.test_reject_changed_feature_contract) ... ok\ntest_reject_unverified_checksum (test_registry.RegistryTests.test_reject_unverified_checksum) ... ok\ntest_reject_worse_validation (test_registry.RegistryTests.test_reject_worse_validation) ... ok\ntest_arbitrary_url_is_rejected (test_release_evidence.ReleaseEvidenceTests.test_arbitrary_url_is_rejected) ... ok\ntest_matching_commit_and_successful_run_are_required (test_release_evidence.ReleaseEvidenceTests.test_matching_commit_and_successful_run_are_required) ... HTTP Request: GET https://api.github.com/repos/example/turnolab/actions/runs/1 \"HTTP/1.1 200 OK\"\nHTTP Request: GET https://api.github.com/repos/example/turnolab/actions/runs/1 \"HTTP/1.1 200 OK\"\nok\ntest_unconfigured_ci_is_never_marked_passed (test_release_evidence.ReleaseEvidenceTests.test_unconfigured_ci_is_never_marked_passed) ... ok\ntest_unrelated_successful_workflow_does_not_verify_source (test_release_evidence.ReleaseEvidenceTests.test_unrelated_successful_workflow_does_not_verify_source) ... HTTP Request: GET https://api.github.com/repos/example/turnolab/actions/runs/1 \"HTTP/1.1 200 OK\"\nok\n\n----------------------------------------------------------------------\nRan 49 tests in 2.072s\n\nOK\n"
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "scripts/ui_fixture.py"
+        ],
+        "exit_code": 0,
+        "seconds": 1.9825798489982844,
+        "output": "{\"event\": \"http\", \"request_id\": \"171f995b-0dd3-4631-94e6-6fe60048d0be\", \"path\": \"/api/restaurants/1/overview\", \"method\": \"GET\", \"status\": 200, \"latency_ms\": 93.66}\nHTTP Request: GET http://test/api/restaurants/1/overview \"HTTP/1.1 200 OK\"\n{\"event\": \"http\", \"request_id\": \"b59ae9f6-5acd-4689-8054-074476d7d47b\", \"path\": \"/api/models\", \"method\": \"GET\", \"status\": 200, \"latency_ms\": 1.306}\nHTTP Request: GET http://test/api/models \"HTTP/1.1 200 OK\"\n{\"event\": \"http\", \"request_id\": \"08caa7ea-8ac3-4dc0-a341-7629b834a896\", \"path\": \"/api/experiments\", \"method\": \"GET\", \"status\": 200, \"latency_ms\": 0.845}\nHTTP Request: GET http://test/api/experiments \"HTTP/1.1 200 OK\"\n{\"event\": \"http\", \"request_id\": \"58f5cc1a-0cf5-474c-9fb8-e6411575cfc0\", \"path\": \"/api/restaurants/1/monitoring\", \"method\": \"GET\", \"status\": 200, \"latency_ms\": 30.001}\nHTTP Request: GET http://test/api/restaurants/1/monitoring \"HTTP/1.1 200 OK\"\n{\"event\": \"http\", \"request_id\": \"8d8f1f98-2547-4b6d-ba6b-5c7c861b7bac\", \"path\": \"/api/restaurants/1/actions\", \"method\": \"GET\", \"status\": 200, \"latency_ms\": 1.103}\nHTTP Request: GET http://test/api/restaurants/1/actions \"HTTP/1.1 200 OK\"\n{\"event\": \"http\", \"request_id\": \"d7f3398c-495c-46e2-9b7e-0f39c65fa5d4\", \"path\": \"/api/restaurants/1/audit\", \"method\": \"GET\", \"status\": 200, \"latency_ms\": 0.853}\nHTTP Request: GET http://test/api/restaurants/1/audit \"HTTP/1.1 200 OK\"\n{\"event\": \"http\", \"request_id\": \"94b7e47b-ffbb-4327-b402-161c3dc5125d\", \"path\": \"/api/restaurants\", \"method\": \"GET\", \"status\": 200, \"latency_ms\": 0.832}\nHTTP Request: GET http://test/api/restaurants \"HTTP/1.1 200 OK\"\n{\"event\": \"http\", \"request_id\": \"8fa9dd5e-4ab0-4209-a64d-06db758c775a\", \"path\": \"/api/restaurants/1/simulations\", \"method\": \"POST\", \"status\": 200, \"latency_ms\": 55.245}\nHTTP Request: POST http://test/api/restaurants/1/simulations \"HTTP/1.1 200 OK\"\n"
+      },
+      {
+        "command": [
+          "npm",
+          "--prefix",
+          "frontend",
+          "run",
+          "check"
+        ],
+        "exit_code": 0,
+        "seconds": 0.32117778300016653,
+        "output": "\n> turnolab-interface@0.1.0 check\n> node --check app.js && node --check utils.js && node --check docs.js && node --check build.mjs\n\n"
+      },
+      {
+        "command": [
+          "npm",
+          "--prefix",
+          "frontend",
+          "test"
+        ],
+        "exit_code": 0,
+        "seconds": 0.3279935780010419,
+        "output": "\n> turnolab-interface@0.1.0 test\n> node tests/utils.test.js && node tests/components.test.js\n\n\u2714 untrusted text is escaped before interpolation (0.81135ms)\n\u2714 numbers and percentages follow the Portuguese locale (14.517213ms)\n\u2714 chart coordinates remain finite and rounded (0.316185ms)\n\u2139 tests 3\n\u2139 suites 0\n\u2139 pass 3\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 23.785529\n\u2714 component renders dashboard from measured API fixture (15.579048ms)\n\u2714 component renders demandPage from measured API fixture (1.033603ms)\n\u2714 component renders scenarioPage from measured API fixture (1.011119ms)\n\u2714 component renders copilotPage from measured API fixture (0.337917ms)\n\u2714 component renders inventoryPage from measured API fixture (1.088846ms)\n\u2714 component renders modelsPage from measured API fixture (1.234895ms)\n\u2714 component renders actionsPage from measured API fixture (0.392911ms)\n\u2714 component renders experimentsPage from measured API fixture (0.963037ms)\n\u2714 component renders settingsPage from measured API fixture (0.200802ms)\n\u2714 backend-originated names are escaped in overview (0.351959ms)\n\u2139 tests 10\n\u2139 suites 0\n\u2139 pass 10\n\u2139 fail 0\n\u2139 cancelled 0\n\u2139 skipped 0\n\u2139 todo 0\n\u2139 duration_ms 27.912591\n"
+      },
+      {
+        "command": [
+          "npm",
+          "--prefix",
+          "frontend",
+          "run",
+          "build"
+        ],
+        "exit_code": 0,
+        "seconds": 0.25852534800651483,
+        "output": "\n> turnolab-interface@0.1.0 build\n> node build.mjs\n\nStatic production bundle created in frontend/dist\n"
+      },
+      {
+        "command": [
+          "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+          "scripts/security_check.py"
+        ],
+        "exit_code": 0,
+        "seconds": 0.05383802000142168,
+        "output": "Application guardrails passed: no dynamic eval/exec/shell, no TLS bypass. Dependency CVE audit not executed offline.\n"
+      }
+    ],
+    "remote_ci_executed": false,
+    "scope": "Local execution of checks corresponding to workflow steps"
+  },
+  "reproduction": {
+    "passed": true,
+    "data_hashes_equal": true,
+    "demand_metrics_equal": true,
+    "seconds": 84.1451173930036,
+    "scope": "Source-only copy, empty data/artifacts, current installed Python packages. No fresh pip/container verification."
+  },
+  "browser_verified": false,
+  "docker_verified": false,
+  "remote_ci_executed": false,
+  "external_llm_executed": false,
+  "mlflow_executed": false,
+  "note": "Source hashes bind the evidence index to this delivered snapshot. No remote publication or production claim."
+}

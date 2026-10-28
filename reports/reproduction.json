@@ -1,0 +1,7 @@
+{
+  "passed": true,
+  "data_hashes_equal": true,
+  "demand_metrics_equal": true,
+  "seconds": 84.1451173930036,
+  "scope": "Source-only copy, empty data/artifacts, current installed Python packages. No fresh pip/container verification."
+}

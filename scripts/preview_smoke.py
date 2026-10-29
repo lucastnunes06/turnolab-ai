@@ -2,7 +2,6 @@
 import asyncio
 from pathlib import Path
 from playwright.async_api import async_playwright
-
 ROOT = Path(__file__).resolve().parents[1]
 PAGE = (ROOT / 'docs/preview/index.html').as_uri()
 
@@ -28,6 +27,5 @@ async def main():
             print('Static portfolio preview: desktop, interactions, images, and mobile 390px OK')
         finally:
             await browser.close()
-
 if __name__ == '__main__':
     asyncio.run(main())

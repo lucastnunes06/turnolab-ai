@@ -41,6 +41,18 @@ def main():
     required = {'README.md', 'model.joblib', 'evaluation.json', 'manifest.json', 'predict.py'}
     if not required.issubset(published):
         raise SystemExit('Upload returned but required files not all visible on Hugging Face')
+    card = FOLDER / 'README.md'
+    old_note = '**Estado:** artefato local treinado, preparado para possível publicação.\nNenhum modelo foi publicado e nenhum URL do Hugging Face foi criado.'
+    new_note = '**Estado:** modelo experimental publicado em https://huggingface.co/' + repo_id
+    card_text = card.read_text(encoding='utf-8')
+    if old_note not in card_text:
+        raise ValueError('Model Card publication status did not match expected template')
+    card.write_text(card_text.replace(old_note, new_note), encoding='utf-8')
+    manifest['published'] = True
+    manifest['repo_id'] = repo_id
+    (FOLDER / 'manifest.json').write_text(json.dumps(manifest, indent=2) + '\n', encoding='utf-8')
+    api.upload_file(path_or_fileobj=str(card), path_in_repo='README.md', repo_id=repo_id, repo_type='model')
+    api.upload_file(path_or_fileobj=str(FOLDER / 'manifest.json'), path_in_repo='manifest.json', repo_id=repo_id, repo_type='model')
     print(json.dumps({'published': True, 'model_url': 'https://huggingface.co/' + repo_id, 'sha256': manifest['sha256'], 'commit_url': str(getattr(info, 'commit_url', ''))}, indent=2, ensure_ascii=False))
 if __name__ == '__main__':
     main()

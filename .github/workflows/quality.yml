@@ -24,6 +24,7 @@ jobs:
       - run: python scripts/bootstrap.py
       - run: python scripts/independent_coverage_study.py
       - run: python scripts/check.py
+      - run: python scripts/llm_benchmark.py --provider offline
       - run: pip install ruff==0.15.1 bandit==1.9.3 pip-audit==2.10.0 playwright==1.62.0
       - run: ruff check --select E9,F63,F7,F82 .
       - run: python scripts/style_check.py

@@ -43,8 +43,12 @@ dia 54. Não houve fine-tuning de LLM.
 | 30 min | 2,8861 | 5,9810 | 29,64% | 17.260 |
 | 60 min | 2,9253 | 6,0508 | 30,01% | 17.240 |
 
-Intervalos conformais nominais de 90%: cobertura agregada 90,08% / 90,02%; em
-funcionamento, 82,38% / 82,30%. Os zeros em horários fechados inflam o agregado.
+Intervalos conformais nominais de 90%, recalibrados somente em horários abertos:
+no teste sintético original, cobertura operacional de 90,68% em 30 minutos
+e de 90,48% em 60 minutos. Em duas seeds sintéticas adicionais, as coberturas
+operacionais ficaram entre 88,73% e 90,13%, com intervalos mais largos.
+O teste original já havia orientado a mudança; esses valores são exploratórios e
+não equivalem a um novo holdout independente de gerador.
 Não há garantia de cobertura condicional nem estabilidade sob drift. Intervalos
 marginais dos horizontes não dão cobertura conjunta à soma das previsões.
 
@@ -66,5 +70,5 @@ Demand-v1 é a versão local, com challenger RF não promovido por validação.
 Desempenho não implica impacto real, generalização para restaurantes novos,
 acurácia causal ou adequação a decisão automática. Dados longos, externos,
 intervenções reais e validação humana seriam necessários para outra finalidade.
-Assistência de IA foi usada no código e documentação; o candidato deve revisar e
-reproduzir antes de apresentar o projeto como evidência de compreensão pessoal.
+Para atualizações futuras, avaliar em um novo período e publicar a largura dos
+intervalos e a cobertura nos horários efetivamente abertos.

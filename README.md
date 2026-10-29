@@ -19,6 +19,10 @@ O **TurnoLab AI** é um laboratório de inteligência operacional para restauran
 
 O fluxo é simples: escolher um restaurante, consultar a previsão, investigar um risco, comparar cenários, pedir uma explicação ao copiloto e registrar uma decisão. As capturas foram produzidas com **Chromium e a API real**, em testes automatizados no GitHub Actions, com transporte do navegador para a aplicação via ASGI. Não são telas ilustrativas com números inventados.
 
+## Explore os resultados sem instalar
+
+Preparei uma [prévia interativa estática](docs/preview/index.html), com cinco estratégias e métricas publicadas. Ela **não executa backend, treinamento nem LLM**. As capturas reais e o GIF continuam disponíveis acima. [Como ativar a publicação no GitHub Pages](docs/PAGES_PREVIEW.md).
+
 ## O que o TurnoLab faz
 
 | Área | O que foi implementado |
@@ -166,6 +170,12 @@ O MLflow foi executado **no runner da verificação estendida**, com armazenamen
 | Frontend | [`frontend/`](frontend/) |
 | Experimentos e ablações | [`ml/experiments.py`](ml/experiments.py) |
 | Arquitetura e decisões | [`docs/architecture/`](docs/architecture/), [`docs/decisions/`](docs/decisions/) |
+
+## Evidência adicional de IA e pesquisa
+
+O [benchmark de LLMs](docs/LLM_EVALUATION.md) registra recuperação de evidências, referências, falhas e latência. O modo offline é um **baseline de templates, não uma LLM**. Para testar Groq ou Gemini de verdade, é necessária uma chave e a execução explícita do modo `--live`.
+
+O [workflow de publicação no Hugging Face](docs/HUGGINGFACE_PUBLICATION.md) treina, prepara o Model Card e valida o hash do modelo antes de qualquer upload. **O modelo ainda não está publicado no Hub** até que a execução com token seja concluída. Leia também o [artigo técnico atualizado](docs/article/turnolab-publicacao.md).
 
 ## O que ainda não está resolvido
 

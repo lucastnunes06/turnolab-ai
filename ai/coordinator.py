@@ -47,7 +47,7 @@ async def respond(db, user, rid, question):
     facts = [dict(label='Demanda · próximo intervalo', value=f['point'], unit='pedidos', source=f['model_version'], interval=[f['lower'], f['upper']]), dict(label='Capacidade física', value=capacity['kitchen_capacity'], unit='pedidos/30 min', source='restaurants'), dict(label='Ingredientes em risco', value=', '.join(critical) or 'Nenhum acima do limiar', unit='', source='inventory-v1')]
     if sim:
         facts.extend([dict(label='Backlog atual', value=round(sim['current']['backlog'], 2), unit='pedidos', source=sim['id']), dict(label='Backlog alternativo', value=round(sim['alternative']['backlog'], 2), unit='pedidos', source=sim['id'])])
-    evidence = dict(documents=docs['hits'], facts=facts, limitations=demand['limitations'])
+    evidence = dict(question=question.message, documents=docs['hits'], facts=facts, limitations=demand['limitations'])
     external = await explain(evidence)
     if docs['hits']:
         answer = 'A recomendação considera previsão, capacidade e estoque. ' + docs['hits'][0]['text']

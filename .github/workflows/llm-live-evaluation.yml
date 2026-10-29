@@ -1,0 +1,36 @@
+name: Optional live LLM evidence (manual)
+on:
+  workflow_dispatch:
+    inputs:
+      provider:
+        description: 'Provider to evaluate with real API calls'
+        required: true
+        type: choice
+        options:
+          - groq
+          - gemini
+permissions:
+  contents: read
+jobs:
+  evaluate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: llm-evaluation
+    env:
+      LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - name: Live benchmark (fails without actual API evidence)
+        run: python scripts/llm_benchmark.py --provider "${{ inputs.provider }}" --live
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: llm-evaluation-${{ inputs.provider }}
+          path: reports/llm_benchmark_*.json

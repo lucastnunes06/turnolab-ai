@@ -1,0 +1,46 @@
+name: Publish synthetic model to Hugging Face (manual)
+on:
+  workflow_dispatch:
+    inputs:
+      repo_id:
+        description: 'Your own Hugging Face namespace/model (e.g. myname/turnolab-demand)'
+        required: true
+        type: string
+      confirm:
+        description: 'Type publish to authorize making the model public'
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  publish:
+    if: ${{ inputs.confirm == 'publish' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    environment: huggingface-publication
+    env:
+      HF_TOKEN: ${{ secrets.HF_TOKEN }}
+      HF_REPO_ID: ${{ inputs.repo_id }}
+      HF_PUBLISH_CONFIRM: publish
+      OPENBLAS_NUM_THREADS: '1'
+      OMP_NUM_THREADS: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install application dependencies
+        run: python -m pip install -r requirements.txt
+      - name: Install Hugging Face SDK
+        run: python -m pip install 'huggingface_hub>=0.34,<2'
+      - name: Train and evaluate reproducibly
+        run: python scripts/bootstrap.py
+      - name: Generate a real API feature example
+        run: python scripts/ui_fixture.py
+      - name: Export and check synthetic model artifact
+        run: |
+          python scripts/export_hf.py
+          python -c "from scripts.publish_hf import check_manifest; print(check_manifest())"
+      - name: Upload to Hugging Face and verify files
+        run: python scripts/publish_hf.py

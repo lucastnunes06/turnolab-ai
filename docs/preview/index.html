@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TurnoLab AI · Experimentos interativos</title><meta name="description" content="Comparação de estratégias operacionais em dados sintéticos do TurnoLab AI">
+<style>
+:root{font-family:Inter,system-ui,-apple-system,sans-serif;color:#eaf5f6;background:#09131d;line-height:1.5}
+*{box-sizing:border-box}body{margin:0}a{color:inherit}button{font:inherit}
+button:focus-visible,a:focus-visible{outline:3px solid #77edd0;outline-offset:3px}
+.wrap{max-width:1060px;margin:auto;padding:0 22px}
+header{border-bottom:1px solid #2b4551;background:#0e1d28}header .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;min-height:68px}
+header a{text-decoration:none}header b{font-size:1.2rem}header nav{display:flex;gap:18px;font-size:.85rem;color:#b9cfd3}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;padding:76px 0 45px}
+.eyebrow{text-transform:uppercase;letter-spacing:.17em;color:#75edc8;font-size:.72rem;font-weight:750}
+h1{font-size:clamp(2.5rem,6vw,4.6rem);line-height:1.05;letter-spacing:-.065em;margin:16px 0;font-weight:800}
+h1 em{font-style:normal;color:#78edc4}
+p{color:#b8cbd0}h2{letter-spacing:-.045em;font-size:clamp(1.6rem,4vw,2.4rem);margin:0}
+.btn{display:inline-block;text-decoration:none;background:#69eabd;color:#09251e;border-radius:9px;padding:12px 17px;font-weight:750;margin:12px 8px 0 0}
+.btn.secondary{background:transparent;border:1px solid #41606a;color:#e4f4f6}
+.hero figure{margin:0;background:#102631;border:1px solid #31505c;padding:10px;border-radius:15px;box-shadow:0 24px 65px #0007}
+.hero img,.gallery img{width:100%;object-fit:cover;object-position:top;display:block;border-radius:8px;aspect-ratio:16/10}
+figcaption{font-size:.76rem;color:#abc5cc;padding:12px 5px 3px}
+.notice{padding:15px 18px;border-left:3px solid #70edc1;background:#142c32;border-radius:0 12px 12px 0;color:#c2d6dc;font-size:.85rem}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:25px 0 65px}
+.metric{background:#12232e;border:1px solid #2c4751;border-radius:12px;padding:22px}
+.metric strong{display:block;font-size:2rem;color:#9af1d2;letter-spacing:-.05em}.metric small{color:#b2c5cc}
+section{margin:60px 0}
+.lab{background:#12232e;border:1px solid #2c4952;border-radius:15px;padding:25px;margin-top:22px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.tabs button{border:1px solid #3c5965;border-radius:8px;background:#1a3240;color:#d5e5e8;padding:9px 13px;cursor:pointer;font-weight:700}
+.tabs button[aria-selected=true]{background:#75eec6;color:#08271f}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.num{font-size:2rem;font-weight:800;letter-spacing:-.05em;color:#f1fff9;margin:5px 0}
+.caption{font-size:.83rem;color:#b0c6cc}.bar{height:12px;background:#2a4550;border-radius:50px;overflow:hidden;margin:6px 0 17px}
+.fill{height:100%;background:linear-gradient(90deg,#1e9c9b,#8af5c5);transition:width .2s}
+.gallery{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
+.gallery figure{margin:0;background:#12232e;padding:10px;border:1px solid #2c4952;border-radius:13px}
+footer{border-top:1px solid #284450;padding:28px 0;margin-top:70px;font-size:.84rem;color:#a3bdc5}
+.small{font-size:.8rem;color:#9eb3bd}
+@media(max-width:780px){.hero,.grid{grid-template-columns:1fr}.hero{padding:42px 0}.gallery{grid-template-columns:1fr}}
+@media(max-width:520px){header nav{gap:8px;font-size:.75rem}.metrics{grid-template-columns:1fr}.lab{padding:16px}}
+</style></head>
+<body>
+<header><div class="wrap"><a href="#inicio"><b>◈ TurnoLab AI</b></a><nav aria-label="Navegação"><a href="#resultados">Resultados</a><a href="#produto">Produto</a><a href="https://github.com/lucastnunes06/turnolab-ai">GitHub ↗</a></nav></div></header>
+<main class="wrap">
+<div class="hero" id="inicio"><div><div class="eyebrow">ML · Simulação · Decisão assistida</div><h1>Previsões não decidem. <em>Pessoas decidem.</em></h1>
+<p>Explore um experimento reproduzível de previsão de demanda, capacidade e custos operacionais hipotéticos. O objetivo é tornar recomendações examináveis, não automatizar decisões às cegas.</p>
+<a class="btn" href="#resultados">Explorar resultados</a><a class="btn secondary" href="../media/demo.gif">Ver demo real ↗</a></div>
+<figure><img src="../media/dashboard.png" alt="Captura da aplicação TurnoLab no Chromium"><figcaption>Captura real da aplicação e da API em teste automatizado.</figcaption></figure></div>
+<div class="notice"><strong>Prévia estática, não sistema em produção:</strong> os controles abaixo apresentam resultados experimentais já medidos. Não treinam modelos, não chamam LLMs nem executam simulação em tempo real. Todos os dados e custos são sintéticos.</div>
+<div class="metrics"><div class="metric"><strong>400</strong><small>Cenários sintéticos</small></div><div class="metric"><strong>0 / 2.000</strong><small>Violações do limite de equipe na versão revisada</small></div><div class="metric"><strong>90,68%</strong><small>Cobertura no teste sintético aberto, horizonte +30 min</small></div></div>
+<section id="resultados"><div class="eyebrow">Experimento de ablação</div><h2>O que realmente mudou a decisão?</h2><p>Escolha uma estratégia para consultar custo e backlog médios publicados em 400 cenários.</p>
+<div class="lab"><div class="tabs" role="tablist" aria-label="Selecionar estratégia"><button role="tab" data-i="0" aria-selected="true">Regras fixas</button><button role="tab" data-i="1" aria-selected="false">+ Previsão</button><button role="tab" data-i="2" aria-selected="false">+ Simulação</button><button role="tab" data-i="3" aria-selected="false">+ RAG</button><button role="tab" data-i="4" aria-selected="false">+ Copiloto</button></div>
+<div class="grid"><div role="tabpanel" aria-live="polite">
+<div class="caption">Custo médio hipotético</div><div class="num" id="cost">R$ 367,37</div>
+<div class="caption">Backlog médio em pedidos</div><div class="num" id="backlog">13,98</div>
+<div class="caption">Custo relativo à referência: <b id="pct-cost">100%</b></div><div class="bar"><div class="fill" id="bar-cost" style="width:100%"></div></div>
+<div class="caption">Backlog relativo à referência: <b id="pct-backlog">100%</b></div><div class="bar"><div class="fill" id="bar-backlog" style="width:100%"></div></div>
+</div><div><h3 id="strategy">Regras fixas</h3><p id="explanation">Referência sem modelo preditivo para selecionar ações.</p>
+<p class="small">A redução numérica veio da previsão e do simulador. Os componentes RAG e copiloto offline acrescentam contexto, mas não alteram os cálculos deste experimento.</p>
+<a href="../../reports/decision_scenarios.csv">Consultar os dados por cenário ↗</a></div></div></div>
+<p class="small">Protocolo: <a href="../../docs/experiments/protocol.md">metodologia</a> · <a href="../../docs/ROADMAP_PROGRESS_2026-10-28.md">correções</a>.</p></section>
+<section id="produto"><div class="eyebrow">Código aberto</div><h2>Experimentos e aplicação completa</h2>
+<p>Além dos relatórios, o repositório contém a API FastAPI, modelos de previsão, simulação, recuperação de documentos, aprovação humana e testes automatizados.</p>
+<div class="gallery"><figure><img src="../media/scenario.png" alt="Cenários do TurnoLab"><figcaption>Scenario Lab — comparação de cenários</figcaption></figure><figure><img src="../media/copilot.png" alt="Copiloto do TurnoLab com citações"><figcaption>AI Copilot — evidências e documentos</figcaption></figure></div>
+<a class="btn" href="https://github.com/lucastnunes06/turnolab-ai">Explorar código e testes ↗</a></section>
+</main><footer><div class="wrap">TurnoLab AI · pesquisa com dados sintéticos · <a href="https://github.com/lucastnunes06/turnolab-ai">Repositório GitHub</a></div></footer>
+<script>
+"use strict";
+const rows=[
+{label:"Regras fixas",cost:367.37,backlog:13.98,desc:"Referência sem modelo preditivo para selecionar ações."},
+{label:"Regras + previsão",cost:329.67,backlog:11.79,desc:"Regras combinadas a uma previsão, sem busca de cenários de capacidade."},
+{label:"Previsão + simulador",cost:303.31,backlog:11.92,desc:"Busca de ações com capacidade e estoque, respeitando o limite de duas pessoas extras."},
+{label:"Previsão + RAG",cost:303.31,backlog:11.92,desc:"Recuperação de políticas fictícias adiciona contexto, mas não altera o motor de decisão."},
+{label:"Previsão + copiloto offline",cost:303.31,backlog:11.92,desc:"Templates e documentos explicam o cenário; não há uma LLM local e a ação numérica é idêntica."}
+];
+const tabs=[...document.querySelectorAll('[role="tab"]')];
+const money=new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL"});
+const decimal=new Intl.NumberFormat("pt-BR",{minimumFractionDigits:2,maximumFractionDigits:2});
+function select(i){const r=rows[i];tabs.forEach((b,j)=>{b.setAttribute("aria-selected",String(i===j));b.tabIndex=i===j?0:-1;});
+document.getElementById("cost").textContent=money.format(r.cost);
+document.getElementById("backlog").textContent=decimal.format(r.backlog);
+document.getElementById("pct-cost").textContent=Math.round(100*r.cost/rows[0].cost)+"%";
+document.getElementById("pct-backlog").textContent=Math.round(100*r.backlog/rows[0].backlog)+"%";
+document.getElementById("bar-cost").style.width=(100*r.cost/rows[0].cost)+"%";
+document.getElementById("bar-backlog").style.width=(100*r.backlog/rows[0].backlog)+"%";
+document.getElementById("strategy").textContent=r.label;document.getElementById("explanation").textContent=r.desc;}
+tabs.forEach((b,i)=>{b.addEventListener("click",()=>select(i));b.addEventListener("keydown",e=>{if(e.key==="ArrowRight"||e.key==="ArrowLeft"){e.preventDefault();const j=(i+(e.key==="ArrowRight"?1:tabs.length-1))%tabs.length;select(j);tabs[j].focus();}});});
+select(0);
+</script></body></html>

@@ -1,0 +1,33 @@
+name: Publish static portfolio preview to GitHub Pages (manual)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - name: Assemble static preview
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p _site/docs/preview _site/docs/media _site/docs/experiments _site/docs/article _site/reports
+          cp docs/preview/index.html _site/docs/preview/index.html
+          cp docs/media/dashboard.png docs/media/scenario.png docs/media/copilot.png docs/media/demo.gif _site/docs/media/
+          cp reports/decision_scenarios.csv _site/reports/
+          cp docs/experiments/protocol.md _site/docs/experiments/
+          cp docs/ROADMAP_PROGRESS_2026-10-28.md _site/docs/
+          cp docs/article/turnolab-publicacao.md _site/docs/article/
+          printf '<!doctype html><html lang="pt-BR"><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=docs/preview/"><title>TurnoLab AI</title><a href="docs/preview/">Abrir prévia</a></html>' > _site/index.html
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+      - uses: actions/deploy-pages@v4
+        id: deployment
